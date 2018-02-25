@@ -7,8 +7,24 @@
 #include <glm/gtc/type_ptr.hpp>;
 #include <SHADER.h>;
 #include <SOIL/SOIL.h>;
+#include <CAMERA.h>;
 
-void key_Callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+bool firstFrame = true;
+bool ClickDown = false;
+
+Camera camera(glm::vec3(0, 0, 3));
+float deletaTime = 0.0f;
+float lastFrameTime = 0.0f;
+
+double lastMousePositionX=-1;
+double lastMousePositionY=-1;
+
+void ProcessKeyInput(GLFWwindow *window);
+void CalculateDeletaTime();
+void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void mouse_button_Callback(GLFWwindow* window, int key, int action, int mode);
+
 int main() 
 {
 	glfwInit();
@@ -19,6 +35,9 @@ int main()
 
 	GLFWwindow *window = glfwCreateWindow(800, 600, "Camera_3", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
+	glfwSetCursorPosCallback(window, mouse_move_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_Callback);
+	glfwSetScrollCallback(window, scroll_callback);
 
 	if (glewInit()!=GLEW_OK)
 	{
@@ -74,6 +93,20 @@ int main()
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
+	glm::vec3 cubePositions[] =
+	{
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
+
 	GLuint VAO, VBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -89,6 +122,7 @@ int main()
 
 	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Camera_3/Camera_3.vert"
 		, "E:/Learn/LearnOpenGL/SourceCode/Camera_3/Camera_3.frag");
+
 
 	GLuint texture1, texture2;
 	glGenTextures(1, &texture1);
@@ -112,37 +146,126 @@ int main()
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 
-	glfwSetKeyCallback(window, key_Callback);
+	glEnable(GL_DEPTH_TEST);
+
+	shader.Use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	glUniform1i(glGetUniformLocation(shader.Program, "ourtexture1"), 0);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	glUniform1i(glGetUniformLocation(shader.Program, "ourtexture2"), 1);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
+
+		CalculateDeletaTime();
+		ProcessKeyInput(window);
+
 		glClearColor(0.2f, 0.2f, 0.5f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader.Use();
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture1);
-		glUniform1i(glGetUniformLocation(shader.Program, "ourtexture1"), 0);
-
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texture2);
-		glUniform1i(glGetUniformLocation(shader.Program, "ourtexture2"), 1);
-
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
 		
+		glm::mat4 view=camera.GetViewMatrix();
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
+		glm::mat4 projection;
+		glfwGetFramebufferSize(window, &width, &height);
+		projection = glm::perspective(glm::radians(camera.Zoom), (GLfloat)width / height, 0.1f, 100.0f);
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+		for (GLint index = 0; index != 10; ++index)
+		{
+			glm::mat4 model;
+			model = glm::translate(model, cubePositions[index]);
+			model = glm::rotate(model, glm::radians(20.0f)*index, glm::vec3(0, 1, 0));
+			glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+		glBindVertexArray(0);
 		glfwSwapBuffers(window);
 	}
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glfwTerminate();
+	return 0;
 }
 
-void key_Callback(GLFWwindow* window,int key,int scancode,int action,int mode) 
+void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	if (key==GLFW_KEY_ESCAPE && action==GLFW_PRESS)
+	if (!ClickDown)
 	{
-		glfwSetWindowShouldClose(window, GL_TRUE);
+		firstFrame = true;
+		return;
+	}
+
+	if (firstFrame)
+	{
+		lastMousePositionX = xpos;
+		lastMousePositionY = ypos;
+		firstFrame = false;
+	}
+
+	float xOffset = xpos - lastMousePositionX;
+	float yOffset = ypos - lastMousePositionY;
+	
+	lastMousePositionX = xpos;
+	lastMousePositionY = ypos;
+	camera.ProcessMouseMovement(xOffset, yOffset);
+
+}
+
+void mouse_button_Callback(GLFWwindow* window, int key, int action, int mode)
+{
+	if (key == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		if (action == GLFW_PRESS)
+		{
+			ClickDown = GL_TRUE;
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			ClickDown = GL_FALSE;
+		}
 	}
 }
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	camera.ProcessMouseScroll(yoffset);
+}
+
+void ProcessKeyInput(GLFWwindow *window)
+{
+	if (glfwGetKey(window,GLFW_KEY_ESCAPE)==GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, true);
+	}
+	if (glfwGetKey(window,GLFW_KEY_W)==GLFW_PRESS)
+	{
+		camera.ProcessKeyboard(FORWARD, deletaTime);
+	}
+	if (glfwGetKey(window,GLFW_KEY_S)==GLFW_PRESS)
+	{
+		camera.ProcessKeyboard(BACKWARD, deletaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		camera.ProcessKeyboard(LEFT, deletaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		camera.ProcessKeyboard(RIGHT, deletaTime);
+	}
+}
+
+void CalculateDeletaTime()
+{
+	float currentFrameTime = glfwGetTime();
+	deletaTime = currentFrameTime - lastFrameTime;
+	lastFrameTime = currentFrameTime;
+}
+
