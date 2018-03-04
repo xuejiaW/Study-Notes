@@ -21,7 +21,7 @@ double lastMousePositionY=-1;
 
 void ProcessKeyInput(GLFWwindow *window);
 void CalculateDeletaTime();
-void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
+void Cursor_move_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_button_Callback(GLFWwindow* window, int key, int action, int mode);
 
@@ -35,7 +35,7 @@ int main()
 
 	GLFWwindow *window = glfwCreateWindow(800, 600, "Camera_3", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
-	glfwSetCursorPosCallback(window, mouse_move_callback);
+	glfwSetCursorPosCallback(window, Cursor_move_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_Callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
@@ -194,7 +194,7 @@ int main()
 	return 0;
 }
 
-void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
+void Cursor_move_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	if (!ClickDown)
 	{

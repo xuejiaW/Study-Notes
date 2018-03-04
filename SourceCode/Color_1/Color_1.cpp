@@ -23,7 +23,7 @@ double lastMousePositionY = -1;
 
 void ProcessKeyInput(GLFWwindow *window);
 void CalculateDeletaTime();
-void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
+void Cursor_move_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_button_Callback(GLFWwindow* window, int key, int action, int mode);
 
@@ -37,7 +37,7 @@ int main()
 
 	GLFWwindow *window = glfwCreateWindow(800, 600, "Color_1", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
-	glfwSetCursorPosCallback(window, mouse_move_callback);
+	glfwSetCursorPosCallback(window, Cursor_move_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_Callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
@@ -125,6 +125,8 @@ int main()
 	Shader shader_Lamp("E:/Learn/LearnOpenGL/SourceCode/Color_1/Lamp.vert",
 		"E:/Learn/LearnOpenGL/SourceCode/Color_1/Lamp.frag");
 
+	glEnable(GL_DEPTH_TEST);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
@@ -176,7 +178,7 @@ int main()
 	return 0;
 }
 
-void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
+void Cursor_move_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	if (!ClickDown)
 	{
