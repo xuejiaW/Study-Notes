@@ -51,6 +51,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Color_1", "Color_1\Color_1.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicLighting_1", "BasicLighting_1\BasicLighting_1.vcxproj", "{02AA7585-A2C0-4511-BA58-AA498C13ABA6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Materials", "Materials\Materials.vcxproj", "{D332F1BF-C13F-47EB-A50B-1E6F250D9932}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -251,6 +253,14 @@ Global
 		{02AA7585-A2C0-4511-BA58-AA498C13ABA6}.Release|x64.Build.0 = Release|x64
 		{02AA7585-A2C0-4511-BA58-AA498C13ABA6}.Release|x86.ActiveCfg = Release|Win32
 		{02AA7585-A2C0-4511-BA58-AA498C13ABA6}.Release|x86.Build.0 = Release|Win32
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Debug|x64.ActiveCfg = Debug|x64
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Debug|x64.Build.0 = Debug|x64
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Debug|x86.ActiveCfg = Debug|Win32
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Debug|x86.Build.0 = Debug|Win32
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Release|x64.ActiveCfg = Release|x64
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Release|x64.Build.0 = Release|x64
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Release|x86.ActiveCfg = Release|Win32
+		{D332F1BF-C13F-47EB-A50B-1E6F250D9932}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
