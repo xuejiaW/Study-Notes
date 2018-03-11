@@ -43,6 +43,8 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
 
+	glewInit();//Must be init after context set
+
 	float vertics[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -92,7 +94,6 @@ int main()
 		vec3(1,1,-2)
 	};
 
-	glewInit();
 
 	Shader shader_Cube("E:/Learn/LearnOpenGL/SourceCode/Materials/Cube.vert",
 		"E:/Learn/LearnOpenGL/SourceCode/Materials/Cube.frag");
