@@ -1,0 +1,43 @@
+#ifndef Utils_H
+#define Utils_H
+#include <iostream>;
+#include <GL/glew.h>;
+#include <GLFW/glfw3.h>;
+#include <SOIL/SOIL.h>;
+#include <glm/gtc/matrix_transform.hpp>;
+#include <glm/glm.hpp>;
+#include <glm/gtc/type_ptr.hpp>;
+
+void UpdateTexture(GLuint &tid, string TexPath, GLint clmapMethod)
+{
+	int width, height;
+	glGenTextures(1, &tid);
+	glBindTexture(GL_TEXTURE_2D, tid);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clmapMethod);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, clmapMethod);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	unsigned char* image = SOIL_load_image(TexPath.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+}
+
+void UpdateVAOVBO_3Pos2Normal(GLuint &VAO, GLuint &VBO, float data[], int dataSize)
+{
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, dataSize, data, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), (GLvoid*)(3 * sizeof(GL_FLOAT)));
+	glEnableVertexAttribArray(1);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+
+
+#endif // !Utils_H
