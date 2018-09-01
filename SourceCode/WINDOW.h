@@ -1,13 +1,19 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 #include <iostream>;
+#define GLEW_STATIC
 #include <GL/glew.h>;
 #include <GLFW/glfw3.h>;
 #include <SOIL/SOIL.h>;
 #include <glm/gtc/matrix_transform.hpp>;
 #include <glm/glm.hpp>;
 #include <glm/gtc/type_ptr.hpp>;
+#include <map>;
+#include <SHADER.h>;
 #include <CAMERA.h>;
+#include <drawingData.h>
+#include <CAMERA.h>;
+#include <Utils.h>
 
 using namespace glm;
 Camera camera;
