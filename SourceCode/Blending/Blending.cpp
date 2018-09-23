@@ -47,9 +47,9 @@ int main()
 	vegetation.push_back(glm::vec3(-0.3f, 0.0f, -2.3f));
 	vegetation.push_back(glm::vec3(0.5f, 0.0f, -0.6f));
 
-	UpdateVAOVBO_3Pos2Normal(CubeVAO, CubeVBO, cubeVertices,sizeof(cubeVertices));
-	UpdateVAOVBO_3Pos2Normal(PlaneVAO, PlaneVBO, planeVertices,sizeof(planeVertices));
-	UpdateVAOVBO_3Pos2Normal(TransparentVAO, TransparentVBO, transparentVertices,sizeof(transparentVertices));
+	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord,sizeof(cubeVertices_3Pos_2Texcoord));
+	UpdateVAOVBO_3Pos_2Texcoord(PlaneVAO, PlaneVBO, planeVertices_3Pos_2Texcoord,sizeof(planeVertices_3Pos_2Texcoord));
+	UpdateVAOVBO_3Pos_2Texcoord(TransparentVAO, TransparentVBO, transparentVertices_3Pos_2Texcoord,sizeof(transparentVertices_3Pos_2Texcoord));
 
 	UpdateTexture(floorTex, "E:/Learn/LearnOpenGL/SourceCode/Jiang.png",GL_REPEAT);
 	UpdateTexture(cubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg",GL_REPEAT);

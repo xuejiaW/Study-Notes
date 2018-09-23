@@ -25,7 +25,7 @@ void Render();
 
 int main()
 {
-	UpdateVAOVBO_3Pos2Normal(CubeVAO, CubeVBO, cubeVertices, sizeof(cubeVertices));
+	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord, sizeof(cubeVertices_3Pos_2Texcoord));
 	UpdateTexture(CubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg", GL_REPEAT);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);

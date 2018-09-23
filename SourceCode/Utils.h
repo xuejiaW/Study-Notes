@@ -40,7 +40,7 @@ void UpdateTexture(GLuint &tid, unsigned char* imageData, int width, int height,
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 }
 
-void UpdateVAOVBO_3Pos2Normal(GLuint &VAO, GLuint &VBO, float data[], int dataSize)
+void UpdateVAOVBO_3Pos_2Texcoord(GLuint &VAO, GLuint &VBO, float data[], int dataSize)
 {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);

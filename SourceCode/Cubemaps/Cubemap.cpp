@@ -28,8 +28,8 @@ void main()
 	glEnable(GL_DEPTH_TEST);
 	UpdateCubemap(cubemap, faces);
 	UpdateTexture(cubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg",GL_REPEAT);
-	UpdateVAOVBO_3Pos(skyboxVAO, skyboxVBO, skyboxVertices, sizeof(skyboxVertices));
-	UpdateVAOVBO_3Pos2Normal(cubeVAO, cubeVBO, cubeVertices,sizeof(cubeVertices));
+	UpdateVAOVBO_3Pos(skyboxVAO, skyboxVBO, CubeVertics_3Pos, sizeof(CubeVertics_3Pos));
+	UpdateVAOVBO_3Pos_2Texcoord(cubeVAO, cubeVBO, cubeVertices_3Pos_2Texcoord,sizeof(cubeVertices_3Pos_2Texcoord));
 	
 	window.SetRenderFunction(Render);
 	window.MainLoop();

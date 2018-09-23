@@ -18,9 +18,9 @@ GLuint rbo;
 
 void main()
 {
-	UpdateVAOVBO_3Pos2Normal(CubeVAO, CubeVBO, cubeVertices, sizeof(cubeVertices));
+	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord, sizeof(cubeVertices_3Pos_2Texcoord));
 	UpdateTexture(CubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg", GL_REPEAT);
-	UpdateVAOVBO_3Pos2Normal(QuadVAO, QuadVBO, quadVertices, sizeof(quadVertices));
+	UpdateVAOVBO_3Pos_2Texcoord(QuadVAO, QuadVBO, quadVertices_3Pos_2Texcoord, sizeof(quadVertices_3Pos_2Texcoord));
 
 	UpdateTexture(frameTexture, NULL, 800, 600, GL_REPEAT);
 
@@ -53,7 +53,7 @@ void main()
 
 
 	glEnable(GL_DEPTH_TEST);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	window.SetRenderFunction(Render);
 	window.MainLoop();
 }
