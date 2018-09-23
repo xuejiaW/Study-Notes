@@ -69,6 +69,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FaceCulling", "FaceCulling\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framebuffers", "Framebuffers\Framebuffers.vcxproj", "{DDE8CF02-38BC-4945-A0C9-D80520317B97}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cubemaps", "Cubemaps\Cubemaps.vcxproj", "{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -341,6 +343,14 @@ Global
 		{DDE8CF02-38BC-4945-A0C9-D80520317B97}.Release|x64.Build.0 = Release|x64
 		{DDE8CF02-38BC-4945-A0C9-D80520317B97}.Release|x86.ActiveCfg = Release|Win32
 		{DDE8CF02-38BC-4945-A0C9-D80520317B97}.Release|x86.Build.0 = Release|Win32
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Debug|x64.ActiveCfg = Debug|x64
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Debug|x64.Build.0 = Debug|x64
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Debug|x86.ActiveCfg = Debug|Win32
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Debug|x86.Build.0 = Debug|Win32
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Release|x64.ActiveCfg = Release|x64
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Release|x64.Build.0 = Release|x64
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Release|x86.ActiveCfg = Release|Win32
+		{59A6724A-63CF-484F-86C1-6AEA4BD2FA78}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

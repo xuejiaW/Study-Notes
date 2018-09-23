@@ -55,6 +55,36 @@ void UpdateVAOVBO_3Pos2Normal(GLuint &VAO, GLuint &VBO, float data[], int dataSi
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void UpdateVAOVBO_3Pos(GLuint &VAO, GLuint &VBO, float data[], int dataSize)
+{
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, dataSize, data, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
+void UpdateCubemap(GLuint& tid, vector<std::string> textureFaces)
+{
+	glGenTextures(1, &tid);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, tid);
+
+	for (unsigned int i = 0; i < textureFaces.size(); i++)
+	{
+		int width, height;
+		unsigned char* data= SOIL_load_image(textureFaces[i].c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	}
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+}
 
 #endif // !Utils_H
