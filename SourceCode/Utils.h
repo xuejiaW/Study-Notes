@@ -68,6 +68,23 @@ void UpdateVAOVBO_3Pos(GLuint &VAO, GLuint &VBO, float data[], int dataSize)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void UpdateVAOVBO_3Pos_3Norm_2Texcoord(GLuint &VAO,GLuint& VBO,float data[],int dataSize)
+{
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, dataSize, data, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid*)(3*sizeof(GL_FLOAT)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid*)(6*sizeof(GL_FLOAT)));
+	glEnableVertexAttribArray(2);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 void UpdateCubemap(GLuint& tid, vector<std::string> textureFaces)
 {
 	glGenTextures(1, &tid);

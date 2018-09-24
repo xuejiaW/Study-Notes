@@ -29,8 +29,8 @@ void main()
 	UpdateCubemap(cubemap, faces);
 	UpdateTexture(cubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg",GL_REPEAT);
 	UpdateVAOVBO_3Pos(skyboxVAO, skyboxVBO, CubeVertics_3Pos, sizeof(CubeVertics_3Pos));
-	UpdateVAOVBO_3Pos_2Texcoord(cubeVAO, cubeVBO, cubeVertices_3Pos_2Texcoord,sizeof(cubeVertices_3Pos_2Texcoord));
-	
+	UpdateVAOVBO_3Pos_3Norm_2Texcoord(cubeVAO, cubeVBO, CubeVertices_3Pos_3Norm_2Texcoord, sizeof(CubeVertices_3Pos_3Norm_2Texcoord));
+
 	window.SetRenderFunction(Render);
 	window.MainLoop();
 
@@ -47,7 +47,11 @@ void Render()
 
 	cubeShader.Use();
 	glBindVertexArray(cubeVAO);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, cubeTex);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap);
+	glUniform3fv(glGetUniformLocation(cubeShader.Program, "camPos"), 1, value_ptr(camera.Position));
 	glUniformMatrix4fv(glGetUniformLocation(cubeShader.Program, "model"), 1, GL_FALSE, value_ptr(mat4()));
 	glUniformMatrix4fv(glGetUniformLocation(cubeShader.Program, "view"), 1, GL_FALSE, value_ptr(view));
 	glUniformMatrix4fv(glGetUniformLocation(cubeShader.Program, "projection"), 1, GL_FALSE, value_ptr(projection));
