@@ -9,88 +9,99 @@
 #include <GL/glew.h>
 
 using namespace std;
+void CreateShader(const GLchar* path, GLuint& shader, GLenum shaderType);
+void CreateShaderProgram(GLuint shaders[], int shadersCount, GLuint& program);
+void CheckShaderProgram(GLuint shaderProgram);
 
 class Shader 
 {
 public:
 	GLuint Program;
 	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
+	Shader(const GLchar* vertexPath, const GLchar* fragmentPath,const GLchar* geometryPath);
 
 	void Use();
 };
-Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
+
+Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath, const GLchar* geometryPath)
 {
-	string vertexCode;
-	string fragmentCode;
-	ifstream vShaderFile;
-	ifstream fShaderFile;
-
-	try
-	{
-		vShaderFile.open(vertexPath);
-		fShaderFile.open(fragmentPath);
-
-		stringstream vShaderStream, fShaderStream;
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-
-		vShaderFile.close();
-		fShaderFile.close();
-
-		vertexCode = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
-	}
-	catch (ifstream:: failure e)
-	{
-		std::cout << "ERROR_SHADER_NOT_SUCCESSFULLY_READ" << endl;
-	}
-
-	const GLchar* vShaderCode = vertexCode.c_str();
-	const GLchar* fShaderCode = fragmentCode.c_str();
-
-	GLuint vertex, fragment;
-	GLint success;
-	GLchar infoLog[512];
-
-	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1,&vShaderCode, nullptr);
-	glCompileShader(vertex);
-
-	glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
-		cout << "ERROE_VERTEX_SHADER_COMPILE" << infoLog << endl;
-	}
-
-	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, nullptr);
-	glCompileShader(fragment);
-
-	glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
-		cout << "ERROE_FRAGMENT_COMPILE" << infoLog << endl;
-	}
-
-	this->Program = glCreateProgram();
-	glAttachShader(this->Program, vertex);
-	glAttachShader(this->Program, fragment);
-	glLinkProgram(this->Program);
-
-	glGetProgramiv(this->Program, GL_LINK_STATUS, &success);
-	if (!success)
-	{
-		glGetProgramInfoLog(this->Program, 512, 0, infoLog);
-		cout << "ERROE_LINK_PROGRAM" << infoLog << endl;
-	}
+	GLuint vertex, fragment, geometry;
+	CreateShader(vertexPath, vertex, GL_VERTEX_SHADER);
+	CreateShader(fragmentPath, fragment, GL_FRAGMENT_SHADER);
+	CreateShader(geometryPath, geometry, GL_GEOMETRY_SHADER);
+	CreateShaderProgram(new GLuint[3]{ vertex,fragment,geometry }, 3, this->Program);
+	CheckShaderProgram(this->Program);
 }
 
-void Shader::Use() 
+
+Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
+{
+	GLuint vertex, fragment;
+	CreateShader(vertexPath, vertex, GL_VERTEX_SHADER);
+	CreateShader(fragmentPath, fragment, GL_FRAGMENT_SHADER);
+	CreateShaderProgram(new GLuint[2]{ vertex,fragment }, 2, this->Program);
+	CheckShaderProgram(this->Program);
+}
+
+void Shader::Use()
 {
 	glUseProgram(this->Program);
 }
 
+void CreateShaderProgram(GLuint shaders[],int shadersCount,GLuint& program)
+{
+	program = glCreateProgram();
+
+	for (int i = 0; i < shadersCount; i++)
+		glAttachShader(program, shaders[i]);
+
+	glLinkProgram(program);
+}
+
+void CreateShader(const GLchar* path, GLuint& shader, GLenum shaderType)
+{
+	string Code;
+	ifstream File;
+	try
+	{
+		File.open(path);
+		stringstream shaderStream;
+		shaderStream << File.rdbuf();
+		File.close();
+		Code = shaderStream.str();
+	}
+	catch (ifstream::failure e)
+	{
+		std::cout << "ERROR_SHADER_NOT_SUCCESSFULLY_READ" << endl;
+	}
+
+	const GLchar* ShaderCode = Code.c_str();
+
+	GLint success;
+	GLchar infoLog[512];
+
+	shader = glCreateShader(shaderType);
+	glShaderSource(shader, 1, &ShaderCode, nullptr);
+	glCompileShader(shader);
+
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+		cout << "ERROE_VERTEX_SHADER_COMPILE" << infoLog << endl;
+	}
+}
+
+void CheckShaderProgram(GLuint shaderProgram)
+{
+	GLint success;
+	GLchar infoLog[512];
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	if (!success)
+	{
+		glGetProgramInfoLog(shaderProgram, 512, 0, infoLog);
+		cout << "ERROE_LINK_PROGRAM" << infoLog << endl;
+	}
+}
 #endif
 
