@@ -75,6 +75,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Advanced_GLSL", "Advanced_G
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeometryShader", "GeometryShader\GeometryShader.vcxproj", "{7FE42ECF-8385-4060-B96C-112A9C8ADFDD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEffect", "ModelEffect\ModelEffect.vcxproj", "{E35FC50B-4C09-4919-B5A2-6D86698164B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -371,6 +373,14 @@ Global
 		{7FE42ECF-8385-4060-B96C-112A9C8ADFDD}.Release|x64.Build.0 = Release|x64
 		{7FE42ECF-8385-4060-B96C-112A9C8ADFDD}.Release|x86.ActiveCfg = Release|Win32
 		{7FE42ECF-8385-4060-B96C-112A9C8ADFDD}.Release|x86.Build.0 = Release|Win32
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Debug|x64.ActiveCfg = Debug|x64
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Debug|x64.Build.0 = Debug|x64
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Debug|x86.ActiveCfg = Debug|Win32
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Debug|x86.Build.0 = Debug|Win32
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Release|x64.ActiveCfg = Release|x64
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Release|x64.Build.0 = Release|x64
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Release|x86.ActiveCfg = Release|Win32
+		{E35FC50B-4C09-4919-B5A2-6D86698164B5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
