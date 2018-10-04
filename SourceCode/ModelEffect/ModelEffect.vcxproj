@@ -128,8 +128,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ModelEffect.frag" />
-    <None Include="ModelEffect.geom" />
+    <None Include="ModelEffect_Exploding.frag" />
+    <None Include="ModelEffect_Exploding.geom" />
     <None Include="ModelEffect.vert" />
+    <None Include="ModelEffect_VertexNormal.frag" />
+    <None Include="ModelEffect_VertexNormal.geom" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

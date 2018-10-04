@@ -23,10 +23,19 @@
     <None Include="ModelEffect.vert">
       <Filter>源文件</Filter>
     </None>
-    <None Include="ModelEffect.frag">
+    <None Include="ModelEffect_Exploding.geom">
       <Filter>源文件</Filter>
     </None>
-    <None Include="ModelEffect.geom">
+    <None Include="ModelEffect_VertexNormal.geom">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="ModelEffect_VertexNormal.frag">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="ModelEffect_Exploding.frag">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="ModelEffect.frag">
       <Filter>源文件</Filter>
     </None>
   </ItemGroup>

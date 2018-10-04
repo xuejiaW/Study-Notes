@@ -6,6 +6,7 @@ layout(triangle_strip,max_vertices=3) out;
 in VS_OUT
 {
 	vec2 texcoord;
+	vec3 normal;
 }gs_in[];
 
 out vec2 texcoord;
@@ -28,6 +29,7 @@ vec4 explode(vec4 position, vec3 normal)
 
 void main()
 {
+//Exploding efect
 	vec3 normal=GetNormal();
 	gl_Position=explode(gl_in[0].gl_Position,normal);
 	texcoord=gs_in[0].texcoord;
