@@ -169,3 +169,14 @@ float quadVertices_3Pos_2Texcoord[] = { // vertex attributes for a quad that fil
 	1.0f, -1.0f,  0,1.0f, 0.0f,
 	1.0f,  1.0f,  0,1.0f, 1.0f
 };
+
+float smallQuadVertices_2Pos_3Color[] = {
+	// positions     // colors
+	-0.05f,  0.05f,  1.0f, 0.0f, 0.0f,
+	 0.05f, -0.05f,  0.0f, 1.0f, 0.0f,
+	-0.05f, -0.05f,  0.0f, 0.0f, 1.0f,
+
+	-0.05f,  0.05f,  1.0f, 0.0f, 0.0f,
+	 0.05f, -0.05f,  0.0f, 1.0f, 0.0f,
+	 0.05f,  0.05f,  0.0f, 1.0f, 1.0f
+};
