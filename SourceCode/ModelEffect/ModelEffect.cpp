@@ -15,7 +15,7 @@ Shader shader_VertexNormal = Shader("E:/Learn/LearnOpenGL/SourceCode/ModelEffect
 Shader shader_NoEffect = Shader("E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect.vert",
 	"E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect.frag");
 
-Model ourModel("E:/Learn/LearnOpenGL/SourceCode/Model/nanoSuit/nanosuit.obj");
+Model ourModel("E:/Learn/LearnOpenGL/SourceCode/Resource/nanoSuit/nanosuit.obj");
 
 void Render();
 GLuint uboMatrices;

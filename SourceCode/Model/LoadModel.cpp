@@ -51,7 +51,7 @@ int main()
 	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Model/model.vert",
 		"E:/Learn/LearnOpenGL/SourceCode/Model/model.frag");
 
-	Model ourModel("E:/Learn/LearnOpenGL/SourceCode/Model/nanoSuit/nanosuit.obj");
+	Model ourModel("E:/Learn/LearnOpenGL/SourceCode/Resource/nanoSuit/nanosuit.obj");
 
 	while (!glfwWindowShouldClose(window))
 	{
