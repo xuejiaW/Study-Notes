@@ -43,15 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChicagoPizzaIngredientFactory.cs" />
-    <Compile Include="ChicagoPizzaStore.cs" />
-    <Compile Include="ConcretePizzas.cs" />
-    <Compile Include="Ingredient.cs" />
-    <Compile Include="NYPizzaIngredientFactory.cs" />
-    <Compile Include="NYPizzaStore.cs" />
-    <Compile Include="Pizza.cs" />
-    <Compile Include="PizzaIngredientFactory.cs" />
-    <Compile Include="PizzaStore.cs" />
+    <Compile Include="Ingredient\ChicagoPizzaIngredientFactory.cs" />
+    <Compile Include="PizzaStore\ChicagoPizzaStore.cs" />
+    <Compile Include="Pizza\ConcretePizzas.cs" />
+    <Compile Include="Ingredient\Ingredient.cs" />
+    <Compile Include="Ingredient\NYPizzaIngredientFactory.cs" />
+    <Compile Include="PizzaStore\NYPizzaStore.cs" />
+    <Compile Include="Pizza\Pizza.cs" />
+    <Compile Include="Ingredient\PizzaIngredientFactory.cs" />
+    <Compile Include="PizzaStore\PizzaStore.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -13,7 +13,6 @@ namespace AbstractFactoryMethod
         public Pizza OrderPizza(string type)
         {
             Pizza pizza = createPizza(type);
-            Console.WriteLine("----Making a " + pizza.name + " ----");
             pizza.prepare();
             pizza.bake();
             pizza.cut();

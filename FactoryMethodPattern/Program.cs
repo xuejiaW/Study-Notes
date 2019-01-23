@@ -15,7 +15,7 @@ namespace FactoryMethodPattern
             pizza.Debug();
 
             store = new NYPizzaStore();
-            pizza=store.orderPizza("cheese");
+            pizza = store.orderPizza("cheese");
             pizza.Debug();
         }
     }

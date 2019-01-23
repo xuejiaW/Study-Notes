@@ -6,22 +6,16 @@ using System.Threading.Tasks;
 
 namespace AbstractFactoryMethod
 {
-    public class ChicagoPizzaStore : PizzaStore
+    public class NYPizzaStore : PizzaStore
     {
         protected override Pizza createPizza(string item)
         {
             Pizza pizza = null;
-            PizzaIngredientFactory ingredientFactory = new ChicagoPizzaIngredientFactory();
+            PizzaIngredientFactory ingredientFactory = new NYPizzaIngredientFactory();
             if (item == "cheese")
-            {
                 pizza = new CheesePizza(ingredientFactory);
-                pizza.name = "Chicago Style Cheese Pizza";
-            }
             else if (item == "sauce")
-            {
                 pizza = new SaucePizza(ingredientFactory);
-                pizza.name = "Chicago Sttle Sauce Pizza";
-            }
             return pizza;
         }
     }
