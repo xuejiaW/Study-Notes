@@ -27,7 +27,7 @@ namespace SingletonPattern
 
         private Singleton()
         {
-            Console.WriteLine("Constructor the Singleton");
+            Console.WriteLine("Singleton Constructor");
         }
     }
 }
