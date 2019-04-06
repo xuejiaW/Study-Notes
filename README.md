@@ -10,6 +10,6 @@
 
 ## 设计模式
 
-### Head_First_Design_Pattern
+### HeadFirstDesignPattern
 
 书籍 《Head First Design Pattern》
