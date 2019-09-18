@@ -28,7 +28,7 @@ int main()
 	glfwGetFramebufferSize(window,&width,&height);
 	glViewport(0, 0, width, height);
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Shaders_2/vertex.vert", "E:/Learn/LearnOpenGL/SourceCode/Shaders_2/fragment.frag");
+	Shader shader("../Shaders_2/vertex.vert", "../Shaders_2/fragment.frag");
 
 	GLfloat vertices[] =
 	{

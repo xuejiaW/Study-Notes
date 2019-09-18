@@ -1,9 +1,9 @@
 #include <WINDOW.h>
 
 Window window = Window("Geometry", 800, 600);
-Shader shader = Shader("E:/Learn/LearnOpenGL/SourceCode/GeometryShader/Point.vert"
-	, "E:/Learn/LearnOpenGL/SourceCode/GeometryShader/Point.frag",
-	"E:/Learn/LearnOpenGL/SourceCode/GeometryShader/Point.geom");
+Shader shader = Shader("../GeometryShader/Point.vert"
+	, "../GeometryShader/Point.frag",
+	"../GeometryShader/Point.geom");
 
 
 float points[] =

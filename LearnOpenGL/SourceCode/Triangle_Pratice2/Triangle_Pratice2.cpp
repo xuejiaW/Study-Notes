@@ -40,7 +40,7 @@ int main()
 		0.45f, 0.5f, 0.0f   // Top 
 	};
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice2/Triangle_Pratice2.vert", "E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice2/Triangle_Pratice2.frag");
+	Shader shader("../Triangle_Pratice2/Triangle_Pratice2.vert", "../Triangle_Pratice2/Triangle_Pratice2.frag");
 
 	GLuint VAO[2], VBO[2];
 	glGenVertexArrays(2, VAO);

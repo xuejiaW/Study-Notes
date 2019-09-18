@@ -30,7 +30,7 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Shaders_3/vertex.vert", "E:/Learn/LearnOpenGL/SourceCode/Shaders_3/fragment.frag");
+	Shader shader("../Shaders_3/vertex.vert", "../Shaders_3/fragment.frag");
 
 	GLfloat vertices[] =
 	{

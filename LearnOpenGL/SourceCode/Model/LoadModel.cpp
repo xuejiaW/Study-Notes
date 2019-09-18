@@ -48,10 +48,10 @@ int main()
 	glViewport(0, 0, width, height);
 
 	glEnable(GL_DEPTH_TEST);
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Model/model.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/Model/model.frag");
+	Shader shader("../Model/model.vert",
+		"../Model/model.frag");
 
-	Model ourModel("E:/Learn/LearnOpenGL/SourceCode/Resource/nanoSuit/nanosuit.obj");
+	Model ourModel("../Resource/nanoSuit/nanosuit.obj");
 
 	while (!glfwWindowShouldClose(window))
 	{

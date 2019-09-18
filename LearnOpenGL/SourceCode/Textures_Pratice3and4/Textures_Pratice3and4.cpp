@@ -59,8 +59,8 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Textures_Pratice3and4/Textures_Pratice3and4.vert"
-		, "E:/Learn/LearnOpenGL/SourceCode/Textures_Pratice3and4/Textures_Pratice3and4.frag");
+	Shader shader("../Textures_Pratice3and4/Textures_Pratice3and4.vert"
+		, "../Textures_Pratice3and4/Textures_Pratice3and4.frag");
 
 	GLuint Texture1, Texture2;
 	glGenTextures(1, &Texture1);
@@ -69,7 +69,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* image = SOIL_load_image("E:/Learn/LearnOpenGL/SourceCode/container.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("../container.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -81,7 +81,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	image = SOIL_load_image("E:/Learn/LearnOpenGL/SourceCode/Jiang.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	image = SOIL_load_image("../Jiang.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);

@@ -49,7 +49,7 @@ int main()
 	glBindVertexArray(0);
 
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice1/Triangle_Pratice1.vert", "E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice1/Triangle_Pratice1.frag");
+	Shader shader("../Triangle_Pratice1/Triangle_Pratice1.vert", "../Triangle_Pratice1/Triangle_Pratice1.frag");
 
 	while (!glfwWindowShouldClose(window))
 	{

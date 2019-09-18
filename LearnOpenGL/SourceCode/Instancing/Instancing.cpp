@@ -8,8 +8,8 @@ GLuint VAO, VBO,InstanceData;
 void createTranslationsArray();
 void Render();
 
-Shader shader = Shader("E:/Learn/LearnOpenGL/SourceCode/Instancing/Instancing.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Instancing/Instancing.frag");
+Shader shader = Shader("../Instancing/Instancing.vert",
+	"../Instancing/Instancing.frag");
 
 void main()
 {

@@ -18,15 +18,15 @@ using namespace glm;
 Window window = Window("FaceCulling", 800, 600);
 GLuint CubeVBO, CubeVAO;
 GLuint CubeTex;
-Shader shader("E:/Learn/LearnOpenGL/SourceCode/FaceCulling/FaceCulling.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/FaceCulling/FaceCulling.frag");
+Shader shader("../FaceCulling/FaceCulling.vert",
+	"../FaceCulling/FaceCulling.frag");
 
 void Render();
 
 int main()
 {
 	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord, sizeof(cubeVertices_3Pos_2Texcoord));
-	UpdateTexture(CubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg", GL_REPEAT);
+	UpdateTexture(CubeTex, "../container.jpg", GL_REPEAT);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);

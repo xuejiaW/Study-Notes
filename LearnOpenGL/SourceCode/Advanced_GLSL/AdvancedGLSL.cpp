@@ -3,17 +3,17 @@
 Window window = Window("AdvancedGLSL",800, 600);
 
 GLuint CubeTex, CubeVBO, CubeVAO;
-Shader cubeShader = Shader("E:/Learn/LearnOpenGL/SourceCode/Advanced_GLSL/Cube.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Advanced_GLSL/Cube.frag");
-Shader cubeShader2 = Shader("E:/Learn/LearnOpenGL/SourceCode/Advanced_GLSL/Cube.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Advanced_GLSL/Cube2.frag");
+Shader cubeShader = Shader("./Cube.vert",
+	"./Cube.frag");
+Shader cubeShader2 = Shader("./Cube.vert",
+	"./Cube2.frag");
 
 unsigned int uboMatrices;
 
 void Render();
 void main()
 {
-	UpdateTexture(CubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg", GL_REPEAT);
+	UpdateTexture(CubeTex, "../container.jpg", GL_REPEAT);
 	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord, sizeof(cubeVertices_3Pos_2Texcoord));
 
 	unsigned int uniformBlockIndexTex = glGetUniformBlockIndex(cubeShader.Program, "Matrices");

@@ -21,10 +21,10 @@ GLuint CubeVBO, CubeVAO;
 GLuint PlaneVBO, PlaneVAO;
 GLuint TransparentVBO, TransparentVAO;
 GLuint floorTex, cubeTex, grassTex, windowTex;
-Shader shader("E:/Learn/LearnOpenGL/SourceCode/Blending/blending.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Blending/blending.frag");
-Shader shader_discard("E:/Learn/LearnOpenGL/SourceCode/Blending/blending.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Blending/blending_Discard.frag");
+Shader shader("../Blending/blending.vert",
+	"../Blending/blending.frag");
+Shader shader_discard("../Blending/blending.vert",
+	"../Blending/blending_Discard.frag");
 
 
 vector<glm::vec3> windows
@@ -51,10 +51,10 @@ int main()
 	UpdateVAOVBO_3Pos_2Texcoord(PlaneVAO, PlaneVBO, planeVertices_3Pos_2Texcoord,sizeof(planeVertices_3Pos_2Texcoord));
 	UpdateVAOVBO_3Pos_2Texcoord(TransparentVAO, TransparentVBO, transparentVertices_3Pos_2Texcoord,sizeof(transparentVertices_3Pos_2Texcoord));
 
-	UpdateTexture(floorTex, "E:/Learn/LearnOpenGL/SourceCode/Jiang.png",GL_REPEAT);
-	UpdateTexture(cubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg",GL_REPEAT);
-	UpdateTexture(grassTex, "E:/Learn/LearnOpenGL/SourceCode/Grass.png",GL_CLAMP_TO_EDGE);
-	UpdateTexture(windowTex, "E:/Learn/LearnOpenGL/SourceCode/Window.png", GL_CLAMP_TO_EDGE);
+	UpdateTexture(floorTex, "../Jiang.png",GL_REPEAT);
+	UpdateTexture(cubeTex, "../container.jpg",GL_REPEAT);
+	UpdateTexture(grassTex, "../Grass.png",GL_CLAMP_TO_EDGE);
+	UpdateTexture(windowTex, "../Window.png", GL_CLAMP_TO_EDGE);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);

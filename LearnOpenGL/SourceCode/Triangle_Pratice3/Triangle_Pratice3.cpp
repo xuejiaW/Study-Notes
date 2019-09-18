@@ -59,8 +59,8 @@ int main()
 	glBindVertexArray(0);
 
 
-	Shader shader_1("E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice3/Triangle_Pratice3.vert", "E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice3/Triangle_Pratice3.frag");
-	Shader shader_2("E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice3/Triangle_Pratice3_2.vert", "E:/Learn/LearnOpenGL/SourceCode/Triangle_Pratice3/Triangle_Pratice3_2.frag");
+	Shader shader_1("../Triangle_Pratice3/Triangle_Pratice3.vert", "../Triangle_Pratice3/Triangle_Pratice3.frag");
+	Shader shader_2("../Triangle_Pratice3/Triangle_Pratice3_2.vert", "../Triangle_Pratice3/Triangle_Pratice3_2.frag");
 	//在while循环前，VAO与VBO其实并未传递给着色器，所以着色器写在VAO和VBO的设置前后并无关系
 
 	glfwSetKeyCallback(window, Key_Callback);

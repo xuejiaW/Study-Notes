@@ -115,8 +115,8 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	GLuint floorTex, CubeTex;
-	UpdateTexture(floorTex, "E:/Learn/LearnOpenGL/SourceCode/Jiang.png");
-	UpdateTexture(CubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg");
+	UpdateTexture(floorTex, "../Jiang.png");
+	UpdateTexture(CubeTex, "../container.jpg");
 
 
 	GLuint PlaneVBO, PlaneVAO;
@@ -134,8 +134,8 @@ int main()
 
 
 
-	Shader shader_Cube("E:/Learn/LearnOpenGL/SourceCode/DepthTesting/Depth.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/DepthTesting/Depth.frag");
+	Shader shader_Cube("../DepthTesting/Depth.vert",
+		"../DepthTesting/Depth.frag");
 	shader_Cube.Use();
 
 

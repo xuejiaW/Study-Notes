@@ -95,10 +95,10 @@ int main()
 	};
 
 
-	Shader shader_Cube("E:/Learn/LearnOpenGL/SourceCode/Materials/Cube.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/Materials/Cube.frag");
-	Shader shader_Lamp("E:/Learn/LearnOpenGL/SourceCode/Materials/Lamp.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/Materials/Lamp.frag");
+	Shader shader_Cube("../Materials/Cube.vert",
+		"../Materials/Cube.frag");
+	Shader shader_Lamp("../Materials/Lamp.vert",
+		"../Materials/Lamp.frag");
 
 	GLuint VBO, CubeVAO, LampVAO;
 	glGenBuffers(1, &VBO);

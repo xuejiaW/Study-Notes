@@ -133,14 +133,14 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	GLuint diffuseLightMap, specularLightMap;
-	UpdateTexture(diffuseLightMap, "E:/Learn/LearnOpenGL/SourceCode/DiffuseLightingMap.png");
-	UpdateTexture(specularLightMap, "E:/Learn/LearnOpenGL/SourceCode/SpecularLightingMap.png");
+	UpdateTexture(diffuseLightMap, "../DiffuseLightingMap.png");
+	UpdateTexture(specularLightMap, "../SpecularLightingMap.png");
 
-	Shader shader_Cube("E:/Learn/LearnOpenGL/SourceCode/LightCasters/Cube.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/LightCasters/Cube.frag");
+	Shader shader_Cube("../LightCasters/Cube.vert",
+		"../LightCasters/Cube.frag");
 
-	Shader shader_Lamp("E:/Learn/LearnOpenGL/SourceCode/LightCasters/Lamp.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/LightCasters/Lamp.frag");
+	Shader shader_Lamp("../LightCasters/Lamp.vert",
+		"../LightCasters/Lamp.frag");
 
 	vec3 lightColor = vec3(1, 1, 1);
 	shader_Lamp.Use();

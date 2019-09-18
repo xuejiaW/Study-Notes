@@ -9,25 +9,25 @@ GLuint skyboxVAO, skyboxVBO;
 GLuint cubeVAO, cubeVBO;
 vector<std::string> faces
 {
-	"E:/Learn/LearnOpenGL/SourceCode/skybox/right.jpg",
-	"E:/Learn/LearnOpenGL/SourceCode/skybox/left.jpg",
-	"E:/Learn/LearnOpenGL/SourceCode/skybox/top.jpg",
-	"E:/Learn/LearnOpenGL/SourceCode/skybox/bottom.jpg",
-	"E:/Learn/LearnOpenGL/SourceCode/skybox/front.jpg",
-	"E:/Learn/LearnOpenGL/SourceCode/skybox/back.jpg",
+	"../skybox/right.jpg",
+	"../skybox/left.jpg",
+	"../skybox/top.jpg",
+	"../skybox/bottom.jpg",
+	"../skybox/front.jpg",
+	"../skybox/back.jpg",
 };
 
-Shader cuebmapShader("E:/Learn/LearnOpenGL/SourceCode/Cubemaps/Cubemap.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Cubemaps/Cubemap.frag");
-Shader cubeShader("E:/Learn/LearnOpenGL/SourceCode/Cubemaps/Cube.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Cubemaps/Cube.frag");
+Shader cuebmapShader("../Cubemaps/Cubemap.vert",
+	"../Cubemaps/Cubemap.frag");
+Shader cubeShader("../Cubemaps/Cube.vert",
+	"../Cubemaps/Cube.frag");
 
 void main()
 {
 
 	glEnable(GL_DEPTH_TEST);
 	UpdateCubemap(cubemap, faces);
-	UpdateTexture(cubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg",GL_REPEAT);
+	UpdateTexture(cubeTex, "../container.jpg",GL_REPEAT);
 	UpdateVAOVBO_3Pos(skyboxVAO, skyboxVBO, CubeVertics_3Pos, sizeof(CubeVertics_3Pos));
 	UpdateVAOVBO_3Pos_3Norm_2Texcoord(cubeVAO, cubeVBO, CubeVertices_3Pos_3Norm_2Texcoord, sizeof(CubeVertices_3Pos_3Norm_2Texcoord));
 

@@ -119,11 +119,11 @@ int main()
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 
-	Shader shader_Cube("E:/Learn/LearnOpenGL/SourceCode/Color_1/Cube.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/Color_1/Cube.frag");
+	Shader shader_Cube("../Color_1/Cube.vert",
+		"../Color_1/Cube.frag");
 
-	Shader shader_Lamp("E:/Learn/LearnOpenGL/SourceCode/Color_1/Lamp.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/Color_1/Lamp.frag");
+	Shader shader_Lamp("../Color_1/Lamp.vert",
+		"../Color_1/Lamp.frag");
 
 	glEnable(GL_DEPTH_TEST);
 

@@ -45,7 +45,7 @@ int main()
 		1,2,3
 	};
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Triangle_2/vertex.vert","E:/Learn/LearnOpenGL/SourceCode/Triangle_2/fragment.frag");
+	Shader shader("../Triangle_2/vertex.vert","../Triangle_2/fragment.frag");
 
 	GLuint VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);

@@ -97,11 +97,11 @@ int main()
 	};
 
 
-	Shader shader_Cube("E:/Learn/LearnOpenGL/SourceCode/BasicLighting_1/Cube.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/BasicLighting_1/Cube.frag");
+	Shader shader_Cube("../BasicLighting_1/Cube.vert",
+		"../BasicLighting_1/Cube.frag");
 
-	Shader shader_Lamp("E:/Learn/LearnOpenGL/SourceCode/BasicLighting_1/Lamp.vert",
-		"E:/Learn/LearnOpenGL/SourceCode/BasicLighting_1/Lamp.frag");
+	Shader shader_Lamp("../BasicLighting_1/Lamp.vert",
+		"../BasicLighting_1/Lamp.frag");
 
 	GLuint VBO, CubeVAO, LampVAO;
 	glGenVertexArrays(1, &CubeVAO);

@@ -36,7 +36,7 @@ int main()
 		0,0.5f,0
 	};
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Shaders_Pratice1and2/Shaders_Pratice1and2.vert", "E:/Learn/LearnOpenGL/SourceCode/Shaders_Pratice1and2/Shaders_Pratice1and2.frag");
+	Shader shader("../Shaders_Pratice1and2/Shaders_Pratice1and2.vert", "../Shaders_Pratice1and2/Shaders_Pratice1and2.frag");
 
 	GLuint VBO, VAO;
 	glGenVertexArrays(1,&VAO);

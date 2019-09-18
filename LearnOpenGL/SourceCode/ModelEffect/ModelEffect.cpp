@@ -4,18 +4,18 @@
 
 Window window = Window("ModelEffect", 800, 600);
 
-Shader shader_Exploding = Shader("E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect_Exploding.frag",
-	"E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect_Exploding.geom");
+Shader shader_Exploding = Shader("../ModelEffect/ModelEffect.vert",
+	"../ModelEffect/ModelEffect_Exploding.frag",
+	"../ModelEffect/ModelEffect_Exploding.geom");
 
-Shader shader_VertexNormal = Shader("E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect_VertexNormal.frag",
-	"E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect_VertexNormal.geom");
+Shader shader_VertexNormal = Shader("../ModelEffect/ModelEffect.vert",
+	"../ModelEffect/ModelEffect_VertexNormal.frag",
+	"../ModelEffect/ModelEffect_VertexNormal.geom");
 
-Shader shader_NoEffect = Shader("E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/ModelEffect/ModelEffect.frag");
+Shader shader_NoEffect = Shader("../ModelEffect/ModelEffect.vert",
+	"../ModelEffect/ModelEffect.frag");
 
-Model ourModel("E:/Learn/LearnOpenGL/SourceCode/Resource/nanoSuit/nanosuit.obj");
+Model ourModel("../Resource/nanoSuit/nanosuit.obj");
 
 void Render();
 GLuint uboMatrices;

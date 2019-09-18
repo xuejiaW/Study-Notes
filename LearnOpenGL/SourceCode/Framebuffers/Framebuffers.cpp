@@ -8,10 +8,10 @@ GLuint CubeVBO, CubeVAO;
 GLuint QuadVBO, QuadVAO;
 GLuint CubeTex;
 GLuint frameTexture, Depth_Stencil_Tex;
-Shader shader("E:/Learn/LearnOpenGL/SourceCode/Framebuffers/Framebuffers.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Framebuffers/framebuffers.frag");
-Shader shader_screen("E:/Learn/LearnOpenGL/SourceCode/Framebuffers/screen.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/Framebuffers/screen.frag");
+Shader shader("../Framebuffers/Framebuffers.vert",
+	"../Framebuffers/framebuffers.frag");
+Shader shader_screen("../Framebuffers/screen.vert",
+	"../Framebuffers/screen.frag");
 
 GLuint fbo;
 GLuint rbo;
@@ -19,7 +19,7 @@ GLuint rbo;
 void main()
 {
 	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord, sizeof(cubeVertices_3Pos_2Texcoord));
-	UpdateTexture(CubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg", GL_REPEAT);
+	UpdateTexture(CubeTex, "../container.jpg", GL_REPEAT);
 	UpdateVAOVBO_3Pos_2Texcoord(QuadVAO, QuadVBO, quadVertices_3Pos_2Texcoord, sizeof(quadVertices_3Pos_2Texcoord));
 
 	UpdateTexture(frameTexture, NULL, 800, 600, GL_REPEAT);

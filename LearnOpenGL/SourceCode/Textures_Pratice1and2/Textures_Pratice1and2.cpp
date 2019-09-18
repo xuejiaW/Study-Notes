@@ -70,7 +70,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	unsigned char* image = SOIL_load_image("E:/Learn/LearnOpenGL/SourceCode/container.jpg",&width,&height,0,SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("../container.jpg",&width,&height,0,SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -83,14 +83,14 @@ int main()
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	image = SOIL_load_image("E:/Learn/LearnOpenGL/SourceCode/Jiang.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	image = SOIL_load_image("../Jiang.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	//这里如果用了自定义图片，仍然用教程的RGB读取的话会出现图像错位，改成RGBA模式后正常
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Textures_Pratice1and2/Textures_Pratice1and2.vert", "E:/Learn/LearnOpenGL/SourceCode/Textures_Pratice1and2/Textures_Pratice1and2.frag");
+	Shader shader("../Textures_Pratice1and2/Textures_Pratice1and2.vert", "../Textures_Pratice1and2/Textures_Pratice1and2.frag");
 	glfwSetKeyCallback(window, Key_Callback);
 	while (!glfwWindowShouldClose(window))
 	{

@@ -58,7 +58,7 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	Shader shader("E:/Learn/LearnOpenGL/SourceCode/Triangle_1/vertex.vert", "E:/Learn/LearnOpenGL/SourceCode/Triangle_1/fragment.frag");
+	Shader shader("../Triangle_1/vertex.vert", "../Triangle_1/fragment.frag");
 
 	while (!glfwWindowShouldClose(window))
 	{

@@ -1,10 +1,10 @@
 #include <WINDOW.h>
 
 Window window = Window("AntiAliasing", 800, 600);
-Shader cubeShader = Shader("E:/Learn/LearnOpenGL/SourceCode/AntiAliasing/Cube.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/AntiAliasing/Cube.frag");
-Shader screenShader = Shader("E:/Learn/LearnOpenGL/SourceCode/AntiAliasing/Screen.vert",
-	"E:/Learn/LearnOpenGL/SourceCode/AntiAliasing/Screen.frag");
+Shader cubeShader = Shader("../AntiAliasing/Cube.vert",
+	"../AntiAliasing/Cube.frag");
+Shader screenShader = Shader("../AntiAliasing/Screen.vert",
+	"../AntiAliasing/Screen.frag");
 
 GLuint cubeTex,multisampleFrameTex,intermediateFrameTex;
 GLuint CubeVBO, CubeVAO;
@@ -18,7 +18,7 @@ void main()
 	UpdateVAOVBO_3Pos_2Texcoord(CubeVAO, CubeVBO, cubeVertices_3Pos_2Texcoord, sizeof(cubeVertices_3Pos_2Texcoord));
 	UpdateVAOVBO_3Pos_2Texcoord(QuadVAO, QuadVBO, quadVertices_3Pos_2Texcoord, sizeof(quadVertices_3Pos_2Texcoord));
 
-	UpdateTexture(cubeTex, "E:/Learn/LearnOpenGL/SourceCode/container.jpg", GL_REPEAT);
+	UpdateTexture(cubeTex, "../container.jpg", GL_REPEAT);
 	UpdateMultiSampleTexture(multisampleFrameTex, NULL, 800, 600, GL_REPEAT);
 	UpdateTexture(intermediateFrameTex, NULL, 800, 600, GL_REPEAT);
 
