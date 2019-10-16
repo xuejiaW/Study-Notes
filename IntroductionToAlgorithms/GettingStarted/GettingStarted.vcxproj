@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B2331AFC-DAF7-4CF1-AC72-871C66F2F2BB}</ProjectGuid>
+    <ProjectGuid>{3C8A96C9-317B-4BC4-A6B1-D2310D030CEE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>InsertionSort</RootNamespace>
+    <RootNamespace>GettingStarted</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,7 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InsertionSort.cpp" />
+    <ClCompile Include="GettingStarted.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InsertionSort.h" />
+    <ClInclude Include="MergeSort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
