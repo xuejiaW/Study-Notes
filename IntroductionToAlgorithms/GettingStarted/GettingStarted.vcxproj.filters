@@ -26,5 +26,11 @@
     <ClInclude Include="MergeSort.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MaximumSubarray_BruteForce.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaximumSubarray_DivideAConquer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -155,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InsertionSort.h" />
+    <ClInclude Include="MaximumSubarray_DivideAConquer.h" />
+    <ClInclude Include="MaximumSubarray_BruteForce.h" />
     <ClInclude Include="MergeSort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
