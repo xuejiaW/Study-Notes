@@ -45,6 +45,8 @@ public:
 	bool RotateLeft(RB_Node* node);      //左旋
 	bool RotateRight(RB_Node* node); //右旋
 	bool Delete(int key);   //删除
+	bool CheckRB();
+	bool CheckRB(RB_Node* root, int blackNodesNum, int k);
 	void DoubleBlackFixUp(RB_Node* node);    //双黑修复
 	RB_Node* FindMin(RB_Node* node);
 	void InOrderTraverse()  //中序遍历外部接口
@@ -57,6 +59,48 @@ public:
 		delete nullNode;
 	}
 };
+
+bool RB_Tree::CheckRB()
+{
+	if (root == nullNode)
+		return true;
+	if (root->color == RED) //Break rule 2
+		return false;
+
+	int blackNodesNum = 0;//left path black NodesNum from root
+
+	RB_Node* node = root;
+	while (node != nullNode)
+	{
+		if (node->color == BLACK)
+			blackNodesNum++;
+
+		node = node->left;
+	}
+
+	return CheckRB(root, blackNodesNum, 0);
+}
+
+bool RB_Tree::CheckRB(RB_Node* node, int rootBlackNodesNum, int currentBlackNodesNum)
+{
+	if (node == nullNode)
+		return true;
+	if (node->color == BLACK)
+		currentBlackNodesNum++;
+
+	RB_Node* parent = node->parent;
+
+	if (parent != nullNode && parent->color == RED && node->color == RED)
+		return false; //break rule 4
+
+	if (node == nullNode && currentBlackNodesNum != rootBlackNodesNum)
+		return false; //break rule 5
+
+
+	return CheckRB(node->left, rootBlackNodesNum, currentBlackNodesNum)
+		&& CheckRB(node -> right, rootBlackNodesNum, currentBlackNodesNum);
+
+}
 
 RB_Tree::RB_Tree()       //构造函数
 {
@@ -167,7 +211,7 @@ bool RB_Tree::RotateRight(RB_Node* node)  //右旋，原理同左旋,left和right交换就可
 		root = lower_left;
 		nullNode->left = root;
 		nullNode->right = root;
-		nullNode->parent = root;    
+		nullNode->parent = root;
 	}
 	else
 	{
@@ -515,7 +559,7 @@ RB_Node* RB_Tree::FindMin(RB_Node* node)
 	return FindMin(node->left);
 }
 
-  //中序遍历
+//中序遍历
 void RB_Tree::InOrderTraverse(RB_Node* node)
 {
 	if (node == nullNode)

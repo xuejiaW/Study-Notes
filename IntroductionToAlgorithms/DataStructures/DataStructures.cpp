@@ -48,7 +48,15 @@ void TestRBTreeWithTestFile()
 			cout << "searching for " << value << " - " << result << endl;
 		}
 	}
-	//bst.InOrderTraverse();
+	if (bst.CheckRB())
+	{
+		cout << "Is RB tree"<<endl;
+	}
+	else
+	{
+		cout << "Is not RB Tree"<<endl;
+	}
+	bst.InOrderTraverse();
 
 }
 
