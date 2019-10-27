@@ -48,16 +48,6 @@ void TestRBTreeWithTestFile()
 			cout << "searching for " << value << " - " << result << endl;
 		}
 	}
-	if (bst.CheckRB())
-	{
-		cout << "Is RB tree" << endl;
-	}
-	else
-	{
-		cout << "Is not RB Tree" << endl;
-	}
-	//bst.InorderTreeWalk(bst.rootNode);
-
 }
 
 void TestBinarySearchTreeWithTestFile()

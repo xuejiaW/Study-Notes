@@ -32,7 +32,6 @@ string ReadTestTxt()
 
 void ParserTestContent(string content, vector<string>& commandList, vector<int>& valueList)
 {
-	cout << "content is " << content << endl;
 	regex expression("((insert )|(delete )|(search ))[0-9]+");
 	smatch matchResult;
 	while (std::regex_search(content, matchResult, expression))
