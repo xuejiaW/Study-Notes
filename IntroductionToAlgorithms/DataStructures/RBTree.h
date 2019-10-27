@@ -36,7 +36,8 @@ private:
 	bool RightRotate(RBTreeNode* node);
 	void InsertFixUp(RBTreeNode* node);
 	bool CheckRB(RBTreeNode* root, int blackNodesNum, int k);
-	void DoubleBlackFixUp(RBTreeNode* node);
+	void DeleteFixUp(RBTreeNode* node);
+	void TransPlant(RBTreeNode* originNode, RBTreeNode* newNode);
 public:
 	RBTreeNode* doubleBlackNode;//Used for delete function
 	RBTreeNode* rootNode;
@@ -335,211 +336,151 @@ void RBTree::InsertFixUp(RBTreeNode* node)
 	rootNode->color = BLACK;
 }
 
-/*
-	删除一个结点：
 
-*/
-bool RBTree::Delete(int key)
+void RBTree::TransPlant(RBTreeNode* originNode, RBTreeNode* newNode)
 {
-
-	RBTreeNode* delete_point = Search(key);   //找到要删除的点
-	if (delete_point == nullNode)
+	if (originNode->parent == nullNode)
 	{
-		return false;
+		rootNode = newNode;
 	}
-	if (delete_point->left != nullNode && delete_point->right != nullNode) //有两个子结点
+	else if (originNode == originNode->parent->left)
 	{
-		RBTreeNode* replace_node = GetMinimum(delete_point->right);
-		//删除点和替换点的值互换，结点颜色不换
-		int tmpkey = delete_point->value;
-		delete_point->value = replace_node->value;
-		replace_node->value = tmpkey;
-		delete_point = replace_node;
+		originNode->parent->left = newNode;
 	}
-	RBTreeNode* delete_point_child;
-	if (delete_point->color == RED)  //若该节点为红色
+	else
 	{
-		if (delete_point == delete_point->parent->left)   //如果是左孩子
-		{
-			delete_point->parent->left = nullNode;
-		}
-		else   //如果是右孩子
-		{
-			delete_point->parent->right = nullNode;
-		}
-		delete delete_point;
+		originNode->parent->right = newNode;
 	}
 
-	else if (delete_point->right != nullNode) //如果右结点不为空,此时要删除的结点肯定为黑色，且右结点肯定为红色
-	{
-		if (delete_point == delete_point->parent->left)  //要删除的点是左结点
-		{
-			delete_point->parent->left = delete_point->right;
-			delete_point->right->parent = delete_point->parent;
-		}
-		else
-		{
-			delete_point->parent->right = delete_point->right;
-			delete_point->right->parent = delete_point->parent;
-		}
-		delete_point->right->color = BLACK;    //右结点颜色改为黑色
-		delete delete_point;
-	}
-	else if (delete_point->left != nullNode)  //如果左结点不为空（未经过替换），与右节点不为空操作一样
-	{
-		if (delete_point == delete_point->parent->left)   //要删除的点是左结点
-		{
-			delete_point->parent->left = delete_point->left;
-			delete_point->left->parent = delete_point->parent;
-		}
-		else
-		{
-			delete_point->parent->right = delete_point->left;
-			delete_point->left->parent = delete_point->parent;
-		}
-		delete_point->left->color = BLACK; //右结点颜色改为黑色
-		delete delete_point;
-	}
-	else    //无子节点的情况
-	{
-		//此时唯一剩下情况为，要删除结点为黑色且无子结点
-		if (delete_point->parent == nullNode)  //如果要删除的是根节点
-		{
-			rootNode = nullNode;
-			nullNode->parent = rootNode;
-			nullNode->left = rootNode;
-			nullNode->left = rootNode;
-			delete delete_point;
-		}
-		else
-		{
-
-
-			RBTreeNode* tmp = delete_point->parent;
-			if (delete_point == delete_point->parent->left)   //如果要删除结点为左节点
-			{
-
-				delete delete_point;
-				tmp->left = doubleBlackNode;
-				doubleBlackNode->parent = tmp;
-				DoubleBlackFixUp(doubleBlackNode);
-				tmp->left = nullNode;
-			}
-			else    //如果要删除结点为右节点
-			{
-
-				delete delete_point;
-				tmp->right = doubleBlackNode;
-				doubleBlackNode->parent = tmp;
-				DoubleBlackFixUp(doubleBlackNode);
-				tmp->right = nullNode;
-			}
-		}
-	}
+	newNode->parent = originNode->parent;
 }
 
-/*
-	双黑修复
-*/
-void RBTree::DoubleBlackFixUp(RBTreeNode* node) //传过来的参数都是双黑结点
+bool RBTree::Delete(int value)
 {
+	RBTreeNode* toDelete = Search(value);
+	if (toDelete == nullNode)
+		return false;
 
-	if (node == node->parent->left)  //如果此结点是左结点
+
+	RBTreeNode* toDeleteTrack = toDelete;//this track will be removed from the tree
+	NodeColor originDeleteTrackColor = toDeleteTrack->color;
+
+	RBTreeNode* toReplaceTrack;
+
+	if (toDelete->left == nullNode)
 	{
-
-		RBTreeNode* brother = node->parent->right;
-		//情况3
-		if (brother->color == RED)
-		{
-			node->parent->color = RED;
-			brother->color = BLACK;
-			LeftRotate(node->parent);
-			//之后转入情况1或2
-		}
-		//情况1
-		if (brother->color == BLACK && (brother->left->color == RED || brother->right->color == RED))
-		{
-			if (brother->right->color == RED) //A
-			{
-				brother->color = node->parent->color;
-				brother->right->color == BLACK;
-				node->parent->color = BLACK;
-				LeftRotate(node->parent);
-			}
-			else   //B
-			{
-				RightRotate(brother);
-				node->parent->right->color = node->parent->color;
-				node->parent->color = BLACK;
-				LeftRotate(node->parent);
-			}
-		}
-		//情况2
-		else if (brother->color == BLACK && (brother->left->color == BLACK && brother->right->color == BLACK))
-		{
-			while (node->parent != nullNode)  //当node不是根节点的时候
-			{
-				brother->color = RED;
-				if (node->parent->color == RED)   //父结点原来为红色
-				{
-					node->parent->color = BLACK;
-					break;
-				}
-				else  //父结点本来就是黑色
-				{
-					node = node->parent;
-				}
-			}
-		}
-
+		toReplaceTrack = toDelete->right;
+		TransPlant(toDelete, toReplaceTrack);
 	}
-	else    //如果此节点是右结点，把左结点情况 left和right调换就可以
+	else if (toDelete->right == nullNode)
 	{
-		RBTreeNode* brother = node->parent->left;
-		//情况3
-		if (brother->color == RED)
+		toReplaceTrack = toDelete->left;
+		TransPlant(toDelete, toReplaceTrack);
+	}
+	else //Both children are not nullNode
+	{
+		toDeleteTrack = GetMinimum(toDelete->right);//The track is Successor
+		//This track will moved in toDelete's postion
+		originDeleteTrackColor = toDeleteTrack->color;
+
+		toReplaceTrack = toDeleteTrack->right;
+		if (toDeleteTrack->parent == toDelete)//Track is toDelete's rightChild
 		{
-			node->parent->color = RED;
-			brother->color = BLACK;
-			RightRotate(node->parent);
-			//之后转入情况1或2
+			toReplaceTrack->parent = toDeleteTrack;
 		}
-		//情况1
-		if (brother->color == BLACK && (brother->right->color == RED || brother->left->color == RED))
+		else
 		{
-			if (brother->left->color == RED)   //A,远侄子
+			TransPlant(toDeleteTrack, toReplaceTrack);
+			toDeleteTrack->right = toDelete->right;
+			toDeleteTrack->right->parent = toDeleteTrack;
+		}
+		TransPlant(toDelete, toDeleteTrack);
+		toDeleteTrack->left = toDelete->left;
+		toDeleteTrack->left->parent = toDeleteTrack;
+		toDeleteTrack->color = toDelete->color;
+
+		//set the pointer be null to ensure children and parent won't be released
+		toDelete->parent = nullptr;
+		toDelete->right = nullptr;
+		toDelete->left = nullptr;
+		delete toDelete;
+	}
+	if (originDeleteTrackColor == BLACK)
+	{
+		DeleteFixUp(toReplaceTrack);
+	}
+
+	return true;
+}
+
+void RBTree::DeleteFixUp(RBTreeNode* toReplaceTrack)
+{
+	while (toReplaceTrack != rootNode && toReplaceTrack->color == BLACK)
+	{
+		if (toReplaceTrack == toReplaceTrack->parent->left) //The first four cases
+		{
+			RBTreeNode* uncle = toReplaceTrack->parent->right;
+			if (uncle->color == RED)   //case1
 			{
-				brother->color = node->parent->color;
-				brother->left->color = BLACK;
-				node->parent->color = BLACK;
-				RightRotate(node->parent);
+				uncle->color = BLACK;
+				toReplaceTrack->parent->color = RED;
+				LeftRotate(toReplaceTrack->parent);
+				uncle = toReplaceTrack->parent->right;   //to case 2/3/4
 			}
-			else   //B
+			if (uncle->left->color == BLACK && uncle->right->color == BLACK)
 			{
-				LeftRotate(brother);
-				node->parent->left->color = node->parent->color;
-				node->parent->color = BLACK;
-				RightRotate(node->parent);
+				uncle->color = RED;    //case2
+				toReplaceTrack = toReplaceTrack->parent;
+			}
+			else
+			{
+				if (uncle->right->color == BLACK)
+				{
+					uncle->left->color = BLACK;
+					uncle->color = RED;
+					RightRotate(uncle);   // to case4
+					uncle = toReplaceTrack->parent->right;
+				}
+				uncle->color = toReplaceTrack->parent->color;
+				toReplaceTrack->parent->color = BLACK;          //case4;
+				uncle->right->color = BLACK;
+				RightRotate(toReplaceTrack->parent);
+				toReplaceTrack = rootNode;
 			}
 		}
-		//情况2
-		else if (brother->color == BLACK && (brother->right->color == BLACK && brother->left->color == BLACK))
+		else//The remaining four cases,as the symetry of the first four
 		{
-			while (node->parent != nullNode)   //当node不是根节点的时候
+			RBTreeNode* uncle = toReplaceTrack->parent->left;
+			if (uncle->color == RED)
 			{
-				brother->color = RED;
-				if (node->parent->color == RED)    //父结点原来为红色
+				uncle->color = BLACK;
+				toReplaceTrack->parent->color = RED;
+				RightRotate(toReplaceTrack->parent);
+				uncle = toReplaceTrack->parent->left;
+			}
+			if (uncle->right->color == BLACK && uncle->left->color == BLACK)
+			{
+				uncle->color = RED;
+				toReplaceTrack = toReplaceTrack->parent;
+			}
+			else
+			{
+				if (uncle->left->color == BLACK)
 				{
-					node->parent->color = BLACK;
-					break;
+					uncle->right->color = BLACK;
+					uncle->color = RED;
+					LeftRotate(uncle);
+					uncle = toReplaceTrack->parent->left;
 				}
-				else  //父结点本来就是黑色
-				{
-					node = node->parent;
-				}
+				uncle->color = toReplaceTrack->parent->color;
+				toReplaceTrack->parent->color = BLACK;
+				uncle->left->color = BLACK;
+				RightRotate(toReplaceTrack->parent);
+				toReplaceTrack = rootNode;
 			}
 		}
 	}
+	toReplaceTrack->color = BLACK;
 }
 
 RBTreeNode* RBTree::GetMinimum(RBTreeNode* node)
