@@ -7,6 +7,8 @@
 //#include "List.h"
 #include "List_Sentinels.h"
 #include "BinarySearchTree.h"
+#include "TestTxtParser.h"
+#include <vector>
 
 void testStack();
 void testQueue();
@@ -16,11 +18,36 @@ void testBinarySearchTree();
 
 int main()
 {
-	std::cout << "Hello World!\n";
-	//testList_Sentinels();
-	testBinarySearchTree();
 
 }
+
+void TestBinarySearchTreeWithTestFile()
+{
+	BinarySearchTree bst;
+
+	string content = ReadTestTxt();
+	vector<string> commandList;
+	vector<int> valueList;
+	ParserTestContent(content, commandList, valueList);
+	for (int i = 0; i < commandList.size(); i++)
+	{
+		string command = commandList[i];
+		int value = valueList[i];
+		if (command == "insert")
+			bst.Insert(value);
+		if (command == "delete")
+		{
+			bst.Delete(value);
+		}
+		if (command == "search")
+		{
+			TreeNode* node = bst.Search(bst.root, value);
+			string result = node == nullptr ? "not found" : "found";
+			cout << "searching for " << value << " - " << result << endl;
+		}
+	}
+}
+
 
 void testBinarySearchTree()
 {
@@ -52,7 +79,6 @@ void testBinarySearchTree()
 	bst.InorderWalk(bst.root);
 
 }
-
 
 void testStack()
 {

@@ -133,7 +133,7 @@ void BinarySearchTree::Delete(int value)
 	TreeNode* toDeleteNode = Search(root, value);
 	if (toDeleteNode == nullptr)
 	{
-		cout << "There is no node with value " << value << endl;
+		//cout << "There is no node with value " << value << endl;
 		return;
 	}
 

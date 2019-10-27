@@ -35,5 +35,8 @@
     <ClInclude Include="BinarySearchTree.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestTxtParser.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
