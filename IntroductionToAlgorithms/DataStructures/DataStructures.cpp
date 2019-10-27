@@ -6,16 +6,51 @@
 #include "Queue.h"
 //#include "List.h"
 #include "List_Sentinels.h"
+#include "BinarySearchTree.h"
 
 void testStack();
 void testQueue();
 void testList();
 void testList_Sentinels();
+void testBinarySearchTree();
 
 int main()
 {
 	std::cout << "Hello World!\n";
-	testList_Sentinels();
+	//testList_Sentinels();
+	testBinarySearchTree();
+
+}
+
+void testBinarySearchTree()
+{
+	BinarySearchTree bst;
+	bst.Insert(5);
+	bst.Insert(10);
+	bst.Insert(3);
+	bst.Insert(7);
+	bst.Insert(20);
+	cout << "Inorder is :" << endl;
+	bst.InorderWalk(bst.root);
+	cout << endl << "Preorder is :" << endl;
+	bst.PreorderWalk(bst.root);
+	cout << endl << "Postorder is :" << endl;
+	bst.PostorderWalk(bst.root);
+
+	TreeNode* maxNode = bst.Maximum(bst.root);
+	TreeNode* minNode = bst.Minimum(bst.root);
+
+	if (maxNode != nullptr)
+		cout << endl << "max value is " << maxNode->value << endl;
+	if (minNode != nullptr)
+		cout << endl << "min value is " << minNode->value << endl;
+
+
+	bst.Delete(3);
+	bst.Delete(10);
+	cout << endl << "Inorder after delete is :" << endl;
+	bst.InorderWalk(bst.root);
+
 }
 
 
