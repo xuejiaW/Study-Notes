@@ -25,7 +25,7 @@ int main()
 
 void TestRBTreeWithTestFile()
 {
-	RB_Tree<int,int> bst;
+	RB_Tree bst;
 
 	string content = ReadTestTxt();
 	vector<string> commandList;
@@ -36,15 +36,15 @@ void TestRBTreeWithTestFile()
 		string command = commandList[i];
 		int value = valueList[i];
 		if (command == "insert")
-			bst.Insert(value,i);
+			bst.Insert(value);
 		if (command == "delete")
 		{
 			bst.Delete(value);
 		}
 		if (command == "search")
 		{
-			RB_Node<int,int>* node = bst.find(value);
-			string result = node == bst.m_nullNode ? "not found" : "found";
+			RB_Node* node = bst.find(value);
+			string result = node == bst.nullNode ? "not found" : "found";
 			cout << "searching for " << value << " - " << result << endl;
 		}
 	}

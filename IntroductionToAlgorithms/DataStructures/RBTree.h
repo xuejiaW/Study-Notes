@@ -8,7 +8,7 @@ enum NodeColor
 	BLACK
 };
 
-template<class KEY, class VALUE>
+
 class RB_Node   //结点类
 {
 public:
@@ -18,69 +18,65 @@ public:
 		left = NULL;
 		parent = NULL;
 	}
-	NodeColor RB_COLOR; //颜色
-	RB_Node<KEY,VALUE>* right;  //右子树
-	RB_Node<KEY,VALUE>* left;   //左子树
-	RB_Node<KEY,VALUE>* parent; //父结点
-	KEY key;    //键
-	VALUE val;  //值
+	NodeColor color; //颜色
+	RB_Node* right;  //右子树
+	RB_Node* left;   //左子树
+	RB_Node* parent; //父结点
+	int value;    //键
 };
 
-template<class KEY, class VALUE>
+
 class RB_Tree
 {
-	//RB树类
 private:
 	RB_Tree(const RB_Tree& input) {}
 	const RB_Tree& operator=(const RB_Tree& input) {}
-	void InOrderTraverse(RB_Node<KEY,VALUE>* node); //中序遍历
-	void clear(RB_Node<KEY,VALUE>* node);   //清除RB树
-	//成员变量
-	//RB_Node<KEY,VALUE>* m_nullNode;
-	RB_Node<KEY,VALUE>* m_DBNode;
+	void InOrderTraverse(RB_Node* node); //中序遍历
+	void clear(RB_Node* node);   //清除RB树
+	RB_Node* doubleBlackNode;
 public:
-	RB_Node<KEY, VALUE>* m_root;
-	RB_Node<KEY, VALUE>* m_nullNode;
+	RB_Node* root;
+	RB_Node* nullNode;
 	RB_Tree();  //构造函数
 	bool Empty();   //是否为空树
-	RB_Node<KEY,VALUE>* find(KEY key);  //查找键key的值
-	bool Insert(KEY KEY,VALUE val);    //插入
-	void InsertFixUp(RB_Node<KEY,VALUE>* node); //插入后修复
-	bool RotateLeft(RB_Node<KEY,VALUE>* node);      //左旋
-	bool RotateRight(RB_Node<KEY,VALUE>* node); //右旋
-	bool Delete(KEY key);   //删除
-	void DoubleBlackFixUp(RB_Node<KEY,VALUE>* node);    //双黑修复
-	RB_Node<KEY,VALUE>* FindMin(RB_Node<KEY,VALUE>* node);
+	RB_Node* find(int key);  //查找键key的值
+	bool Insert(int key);    //插入
+	void InsertFixUp(RB_Node* node); //插入后修复
+	bool RotateLeft(RB_Node* node);      //左旋
+	bool RotateRight(RB_Node* node); //右旋
+	bool Delete(int key);   //删除
+	void DoubleBlackFixUp(RB_Node* node);    //双黑修复
+	RB_Node* FindMin(RB_Node* node);
 	void InOrderTraverse()  //中序遍历外部接口
 	{
-		InOrderTraverse(m_root);
+		InOrderTraverse(root);
 	}
 	~RB_Tree()
 	{
-		clear(m_root);
-		delete m_nullNode;
+		clear(root);
+		delete nullNode;
 	}
 };
 
-template<class KEY,class VALUE>
-RB_Tree<KEY,VALUE>::RB_Tree()       //构造函数
+RB_Tree::RB_Tree()       //构造函数
 {
-	this->m_nullNode = new RB_Node<KEY,VALUE>();
-	this->m_root = m_nullNode;
-	this->m_nullNode->right = this->m_root;
-	this->m_nullNode->left = this->m_root;
-	this->m_nullNode->parent = this->m_root;
-	this->m_nullNode->RB_COLOR = BLACK;
-	this->m_DBNode = new RB_Node<KEY,VALUE>();
-	this->m_DBNode->RB_COLOR = BLACK;
-	this->m_DBNode->left = m_nullNode;
-	this->m_DBNode->right = m_nullNode;
+	this->nullNode = new RB_Node();
+	this->root = nullNode;
+	this->nullNode->right = this->root;
+	this->nullNode->left = this->root;
+	this->nullNode->parent = this->root;
+	this->nullNode->color = BLACK;
+
+	this->doubleBlackNode = new RB_Node();
+	this->doubleBlackNode->color = BLACK;
+	this->doubleBlackNode->left = nullNode;
+	this->doubleBlackNode->right = nullNode;
 };
 
-template<class KEY, class VALUE>
-bool RB_Tree<KEY,VALUE>::Empty()
+
+bool RB_Tree::Empty()
 {
-	if (this->m_root == this->m_nullNode)
+	if (this->root == this->nullNode)
 	{
 		return true;
 	}
@@ -90,17 +86,17 @@ bool RB_Tree<KEY,VALUE>::Empty()
 	}
 }
 
-template<class KEY, class VALUE>
-RB_Node<KEY,VALUE>* RB_Tree<KEY,VALUE>::find(KEY key)   //查找，此处可递归，参考上一篇二叉查找树
+
+RB_Node* RB_Tree::find(int key)   //查找，此处可递归，参考上一篇二叉查找树
 {
-	RB_Node<KEY,VALUE>* index = m_root;
-	while (index != m_nullNode)
+	RB_Node* index = root;
+	while (index != nullNode)
 	{
-		if (key < index->key)
+		if (key < index->value)
 		{
 			index = index->left;
 		}
-		else if (key > index->key)
+		else if (key > index->value)
 		{
 			index = index->right;
 		}
@@ -118,26 +114,25 @@ RB_Node<KEY,VALUE>* RB_Tree<KEY,VALUE>::find(KEY key)   //查找，此处可递归，参考
 	判断旋转点是否为根节点。是的话更改m_root的值，否则更改旋转点的父结点左孩子 or 右孩子的指向。
 	更改旋转点父结点为lower_right，lower_right的左孩子为旋转点
 */
-template<class KEY,class VALUE>
-bool RB_Tree<KEY,VALUE>::RotateLeft(RB_Node<KEY,VALUE>* node)
+bool RB_Tree::RotateLeft(RB_Node* node)
 {
-	if (node == m_nullNode || node->right == m_nullNode)
+	if (node == nullNode || node->right == nullNode)
 	{
 		return false;   //不能旋转
 	}
-	RB_Node<KEY,VALUE>* lower_right = node->right;
+	RB_Node* lower_right = node->right;
 	lower_right->parent = node->parent;
 	node->right = lower_right->left;
-	if (lower_right->left != m_nullNode)
+	if (lower_right->left != nullNode)
 	{
 		lower_right->left->parent = node;
 	}
-	if (node->parent == m_nullNode)
+	if (node->parent == nullNode)
 	{
-		m_root = lower_right;
-		m_nullNode->right = m_root;
-		m_nullNode->left = m_root;
-		m_nullNode->parent = m_root;
+		root = lower_right;
+		nullNode->right = root;
+		nullNode->left = root;
+		nullNode->parent = root;
 	}
 	else
 	{
@@ -154,26 +149,25 @@ bool RB_Tree<KEY,VALUE>::RotateLeft(RB_Node<KEY,VALUE>* node)
 	lower_right->left = node;
 }
 
-template<class KEY,class VALUE>
-bool RB_Tree<KEY,VALUE>::RotateRight(RB_Node<KEY,VALUE>* node)  //右旋，原理同左旋,left和right交换就可以
+bool RB_Tree::RotateRight(RB_Node* node)  //右旋，原理同左旋,left和right交换就可以
 {
-	if (node == m_nullNode || node->left == m_nullNode)
+	if (node == nullNode || node->left == nullNode)
 	{
 		return false;//can't rotate    
 	}
-	RB_Node<KEY,VALUE>* lower_left = node->left;
+	RB_Node* lower_left = node->left;
 	node->left = lower_left->right;
 	lower_left->parent = node->parent;
-	if (lower_left->right != m_nullNode)
+	if (lower_left->right != nullNode)
 	{
 		lower_left->right->parent = node;
 	}
-	if (node->parent == m_nullNode) //node is root    
+	if (node->parent == nullNode) //node is root    
 	{
-		m_root = lower_left;
-		m_nullNode->left = m_root;
-		m_nullNode->right = m_root;
-		m_nullNode->parent = m_root;    
+		root = lower_left;
+		nullNode->left = root;
+		nullNode->right = root;
+		nullNode->parent = root;    
 	}
 	else
 	{
@@ -194,20 +188,19 @@ bool RB_Tree<KEY,VALUE>::RotateRight(RB_Node<KEY,VALUE>* node)  //右旋，原理同左
 		插入，while循环将insert_point指向要插入的点
 		如果插入点已经存在，返回false，如果插入的是一颗空树，直接赋值给根节点。否则在插入点赋值
 */
-template<class KEY,class VALUE>
-bool RB_Tree<KEY,VALUE>::Insert(KEY key,VALUE val)
+bool RB_Tree::Insert(int key)
 {
-	RB_Node<KEY,VALUE>* targetNode = m_root;
-	RB_Node<KEY, VALUE>* targetNodeParent = m_nullNode;
+	RB_Node* targetNode = root;
+	RB_Node* targetNodeParent = nullNode;
 
-	while (targetNode != m_nullNode)
+	while (targetNode != nullNode)
 	{
 		targetNodeParent = targetNode;
-		if (key < targetNode->key)
+		if (key < targetNode->value)
 		{
 			targetNode = targetNode->left;
 		}
-		else if (key > targetNode->key)
+		else if (key > targetNode->value)
 		{
 			targetNode = targetNode->right;
 		}
@@ -216,23 +209,22 @@ bool RB_Tree<KEY,VALUE>::Insert(KEY key,VALUE val)
 			return false;
 		}
 	}   //此时insert_point指向要插入的点
-	RB_Node<KEY,VALUE>* insert_node = new RB_Node<KEY,VALUE>(); //构造插入的结点
-	insert_node->key = key;
-	insert_node->val = val;
-	insert_node->RB_COLOR = RED;
-	insert_node->right = m_nullNode;
-	insert_node->left = m_nullNode;
-	if (targetNodeParent == m_nullNode)        //如果是一颗空树
+	RB_Node* insert_node = new RB_Node(); //构造插入的结点
+	insert_node->value = key;
+	insert_node->color = RED;
+	insert_node->right = nullNode;
+	insert_node->left = nullNode;
+	if (targetNodeParent == nullNode)        //如果是一颗空树
 	{
-		m_root = insert_node;
-		m_root->parent = m_nullNode;
-		m_nullNode->left = m_root;
-		m_nullNode->right = m_root;
-		m_nullNode->parent = m_root;
+		root = insert_node;
+		root->parent = nullNode;
+		nullNode->left = root;
+		nullNode->right = root;
+		nullNode->parent = root;
 	}
 	else
 	{
-		if (key < targetNodeParent->key)
+		if (key < targetNodeParent->value)
 		{
 			targetNodeParent->left = insert_node;
 		}
@@ -255,22 +247,21 @@ B   左孩子的话：
  F      3）叔叔节点为黑色：插入节点为左孩子：父结点变黑，祖父变红，祖父结点为支点右旋
 G   右孩子的话：
 */
-template<class KEY,class VALUE>
-void RB_Tree<KEY,VALUE>::InsertFixUp(RB_Node<KEY,VALUE>* node)
+void RB_Tree::InsertFixUp(RB_Node* node)
 {
-	while (node->parent->RB_COLOR == RED)        //A
+	while (node->parent->color == RED)        //A
 	{
 		if (node->parent == node->parent->parent->left)    //B
 		{
-			RB_Node<KEY,VALUE>* uncle = node->parent->parent->right;   //C
-			if (uncle->RB_COLOR == RED) //D
+			RB_Node* uncle = node->parent->parent->right;   //C
+			if (uncle->color == RED) //D
 			{
-				node->parent->RB_COLOR = BLACK;
-				uncle->RB_COLOR = BLACK;
-				node->parent->parent->RB_COLOR = RED;
+				node->parent->color = BLACK;
+				uncle->color = BLACK;
+				node->parent->parent->color = RED;
 				node = node->parent->parent;
 			}
-			else if (uncle->RB_COLOR == BLACK)
+			else if (uncle->color == BLACK)
 			{
 				if (node == node->parent->right) //E
 				{
@@ -278,22 +269,22 @@ void RB_Tree<KEY,VALUE>::InsertFixUp(RB_Node<KEY,VALUE>* node)
 					RotateLeft(node);
 				}
 				//F
-				node->parent->RB_COLOR = BLACK;
-				node->parent->parent->RB_COLOR = RED;
+				node->parent->color = BLACK;
+				node->parent->parent->color = RED;
 				RotateRight(node->parent->parent);
 			}
 		}
 		else    //G
 		{
-			RB_Node<KEY,VALUE>* uncle = node->parent->parent->left;
-			if (uncle->RB_COLOR == RED)
+			RB_Node* uncle = node->parent->parent->left;
+			if (uncle->color == RED)
 			{
-				node->parent->RB_COLOR = BLACK;
-				uncle->RB_COLOR = BLACK;
-				uncle->parent->RB_COLOR = RED;
+				node->parent->color = BLACK;
+				uncle->color = BLACK;
+				uncle->parent->color = RED;
 				node = node->parent->parent;
 			}
-			else if (uncle->RB_COLOR == BLACK)
+			else if (uncle->color == BLACK)
 			{
 				if (node == node->parent->left)
 				{
@@ -301,55 +292,51 @@ void RB_Tree<KEY,VALUE>::InsertFixUp(RB_Node<KEY,VALUE>* node)
 					RotateRight(node);
 				}
 
-				node->parent->RB_COLOR = BLACK;
-				node->parent->parent->RB_COLOR = RED;
+				node->parent->color = BLACK;
+				node->parent->parent->color = RED;
 				RotateLeft(node->parent->parent);
 			}
 		}
 	}
-	m_root->RB_COLOR = BLACK;    //修复根节点颜色，防止被改为红色
+	root->color = BLACK;    //修复根节点颜色，防止被改为红色
 }
 
 /*
 	删除一个结点：
 
 */
-template<class KEY,class VALUE>
-bool RB_Tree<KEY,VALUE>::Delete(KEY key)
+bool RB_Tree::Delete(int key)
 {
 
-	RB_Node<KEY,VALUE>* delete_point = find(key);   //找到要删除的点
-	if (delete_point == m_nullNode)
+	RB_Node* delete_point = find(key);   //找到要删除的点
+	if (delete_point == nullNode)
 	{
 		return false;
 	}
-	if (delete_point->left != m_nullNode && delete_point->right != m_nullNode) //有两个子结点
+	if (delete_point->left != nullNode && delete_point->right != nullNode) //有两个子结点
 	{
-		RB_Node<KEY,VALUE>* replace_node = FindMin(delete_point->right);
+		RB_Node* replace_node = FindMin(delete_point->right);
 		//删除点和替换点的值互换，结点颜色不换
-		KEY tmpkey = delete_point->key;
-		VALUE tmpval = delete_point->val;
-		delete_point->key = replace_node->key;
-		delete_point->val = replace_node->val;
-		replace_node->key = tmpkey;
-		replace_node->val = tmpval;
+		int tmpkey = delete_point->value;
+		delete_point->value = replace_node->value;
+		replace_node->value = tmpkey;
 		delete_point = replace_node;
 	}
-	RB_Node<KEY,VALUE>* delete_point_child;
-	if (delete_point->RB_COLOR == RED)  //若该节点为红色
+	RB_Node* delete_point_child;
+	if (delete_point->color == RED)  //若该节点为红色
 	{
 		if (delete_point == delete_point->parent->left)   //如果是左孩子
 		{
-			delete_point->parent->left = m_nullNode;
+			delete_point->parent->left = nullNode;
 		}
 		else   //如果是右孩子
 		{
-			delete_point->parent->right = m_nullNode;
+			delete_point->parent->right = nullNode;
 		}
 		delete delete_point;
 	}
 
-	else if (delete_point->right != m_nullNode) //如果右结点不为空,此时要删除的结点肯定为黑色，且右结点肯定为红色
+	else if (delete_point->right != nullNode) //如果右结点不为空,此时要删除的结点肯定为黑色，且右结点肯定为红色
 	{
 		if (delete_point == delete_point->parent->left)  //要删除的点是左结点
 		{
@@ -361,10 +348,10 @@ bool RB_Tree<KEY,VALUE>::Delete(KEY key)
 			delete_point->parent->right = delete_point->right;
 			delete_point->right->parent = delete_point->parent;
 		}
-		delete_point->right->RB_COLOR = BLACK;    //右结点颜色改为黑色
+		delete_point->right->color = BLACK;    //右结点颜色改为黑色
 		delete delete_point;
 	}
-	else if (delete_point->left != m_nullNode)  //如果左结点不为空（未经过替换），与右节点不为空操作一样
+	else if (delete_point->left != nullNode)  //如果左结点不为空（未经过替换），与右节点不为空操作一样
 	{
 		if (delete_point == delete_point->parent->left)   //要删除的点是左结点
 		{
@@ -376,42 +363,42 @@ bool RB_Tree<KEY,VALUE>::Delete(KEY key)
 			delete_point->parent->right = delete_point->left;
 			delete_point->left->parent = delete_point->parent;
 		}
-		delete_point->left->RB_COLOR = BLACK; //右结点颜色改为黑色
+		delete_point->left->color = BLACK; //右结点颜色改为黑色
 		delete delete_point;
 	}
 	else    //无子节点的情况
 	{
 		//此时唯一剩下情况为，要删除结点为黑色且无子结点
-		if (delete_point->parent == m_nullNode)  //如果要删除的是根节点
+		if (delete_point->parent == nullNode)  //如果要删除的是根节点
 		{
-			m_root = m_nullNode;
-			m_nullNode->parent = m_root;
-			m_nullNode->left = m_root;
-			m_nullNode->left = m_root;
+			root = nullNode;
+			nullNode->parent = root;
+			nullNode->left = root;
+			nullNode->left = root;
 			delete delete_point;
 		}
 		else
 		{
 
 
-			RB_Node<KEY,VALUE>* tmp = delete_point->parent;
+			RB_Node* tmp = delete_point->parent;
 			if (delete_point == delete_point->parent->left)   //如果要删除结点为左节点
 			{
 
 				delete delete_point;
-				tmp->left = m_DBNode;
-				m_DBNode->parent = tmp;
-				DoubleBlackFixUp(m_DBNode);
-				tmp->left = m_nullNode;
+				tmp->left = doubleBlackNode;
+				doubleBlackNode->parent = tmp;
+				DoubleBlackFixUp(doubleBlackNode);
+				tmp->left = nullNode;
 			}
 			else    //如果要删除结点为右节点
 			{
 
 				delete delete_point;
-				tmp->right = m_DBNode;
-				m_DBNode->parent = tmp;
-				DoubleBlackFixUp(m_DBNode);
-				tmp->right = m_nullNode;
+				tmp->right = doubleBlackNode;
+				doubleBlackNode->parent = tmp;
+				DoubleBlackFixUp(doubleBlackNode);
+				tmp->right = nullNode;
 			}
 		}
 	}
@@ -420,49 +407,48 @@ bool RB_Tree<KEY,VALUE>::Delete(KEY key)
 /*
 	双黑修复
 */
-template<class KEY,class VALUE>
-void RB_Tree<KEY,VALUE>::DoubleBlackFixUp(RB_Node<KEY,VALUE>* node) //传过来的参数都是双黑结点
+void RB_Tree::DoubleBlackFixUp(RB_Node* node) //传过来的参数都是双黑结点
 {
 
 	if (node == node->parent->left)  //如果此结点是左结点
 	{
 
-		RB_Node<KEY,VALUE>* brother = node->parent->right;
+		RB_Node* brother = node->parent->right;
 		//情况3
-		if (brother->RB_COLOR == RED)
+		if (brother->color == RED)
 		{
-			node->parent->RB_COLOR = RED;
-			brother->RB_COLOR = BLACK;
+			node->parent->color = RED;
+			brother->color = BLACK;
 			RotateLeft(node->parent);
 			//之后转入情况1或2
 		}
 		//情况1
-		if (brother->RB_COLOR == BLACK && (brother->left->RB_COLOR == RED || brother->right->RB_COLOR == RED))
+		if (brother->color == BLACK && (brother->left->color == RED || brother->right->color == RED))
 		{
-			if (brother->right->RB_COLOR == RED) //A
+			if (brother->right->color == RED) //A
 			{
-				brother->RB_COLOR = node->parent->RB_COLOR;
-				brother->right->RB_COLOR == BLACK;
-				node->parent->RB_COLOR = BLACK;
+				brother->color = node->parent->color;
+				brother->right->color == BLACK;
+				node->parent->color = BLACK;
 				RotateLeft(node->parent);
 			}
 			else   //B
 			{
 				RotateRight(brother);
-				node->parent->right->RB_COLOR = node->parent->RB_COLOR;
-				node->parent->RB_COLOR = BLACK;
+				node->parent->right->color = node->parent->color;
+				node->parent->color = BLACK;
 				RotateLeft(node->parent);
 			}
 		}
 		//情况2
-		else if (brother->RB_COLOR == BLACK && (brother->left->RB_COLOR == BLACK && brother->right->RB_COLOR == BLACK))
+		else if (brother->color == BLACK && (brother->left->color == BLACK && brother->right->color == BLACK))
 		{
-			while (node->parent != m_nullNode)  //当node不是根节点的时候
+			while (node->parent != nullNode)  //当node不是根节点的时候
 			{
-				brother->RB_COLOR = RED;
-				if (node->parent->RB_COLOR == RED)   //父结点原来为红色
+				brother->color = RED;
+				if (node->parent->color == RED)   //父结点原来为红色
 				{
-					node->parent->RB_COLOR = BLACK;
+					node->parent->color = BLACK;
 					break;
 				}
 				else  //父结点本来就是黑色
@@ -475,42 +461,42 @@ void RB_Tree<KEY,VALUE>::DoubleBlackFixUp(RB_Node<KEY,VALUE>* node) //传过来的参
 	}
 	else    //如果此节点是右结点，把左结点情况 left和right调换就可以
 	{
-		RB_Node<KEY,VALUE>* brother = node->parent->left;
+		RB_Node* brother = node->parent->left;
 		//情况3
-		if (brother->RB_COLOR == RED)
+		if (brother->color == RED)
 		{
-			node->parent->RB_COLOR = RED;
-			brother->RB_COLOR = BLACK;
+			node->parent->color = RED;
+			brother->color = BLACK;
 			RotateRight(node->parent);
 			//之后转入情况1或2
 		}
 		//情况1
-		if (brother->RB_COLOR == BLACK && (brother->right->RB_COLOR == RED || brother->left->RB_COLOR == RED))
+		if (brother->color == BLACK && (brother->right->color == RED || brother->left->color == RED))
 		{
-			if (brother->left->RB_COLOR == RED)   //A,远侄子
+			if (brother->left->color == RED)   //A,远侄子
 			{
-				brother->RB_COLOR = node->parent->RB_COLOR;
-				brother->left->RB_COLOR = BLACK;
-				node->parent->RB_COLOR = BLACK;
+				brother->color = node->parent->color;
+				brother->left->color = BLACK;
+				node->parent->color = BLACK;
 				RotateRight(node->parent);
 			}
 			else   //B
 			{
 				RotateLeft(brother);
-				node->parent->left->RB_COLOR = node->parent->RB_COLOR;
-				node->parent->RB_COLOR = BLACK;
+				node->parent->left->color = node->parent->color;
+				node->parent->color = BLACK;
 				RotateRight(node->parent);
 			}
 		}
 		//情况2
-		else if (brother->RB_COLOR == BLACK && (brother->right->RB_COLOR == BLACK && brother->left->RB_COLOR == BLACK))
+		else if (brother->color == BLACK && (brother->right->color == BLACK && brother->left->color == BLACK))
 		{
-			while (node->parent != m_nullNode)   //当node不是根节点的时候
+			while (node->parent != nullNode)   //当node不是根节点的时候
 			{
-				brother->RB_COLOR = RED;
-				if (node->parent->RB_COLOR == RED)    //父结点原来为红色
+				brother->color = RED;
+				if (node->parent->color == RED)    //父结点原来为红色
 				{
-					node->parent->RB_COLOR = BLACK;
+					node->parent->color = BLACK;
 					break;
 				}
 				else  //父结点本来就是黑色
@@ -522,33 +508,31 @@ void RB_Tree<KEY,VALUE>::DoubleBlackFixUp(RB_Node<KEY,VALUE>* node) //传过来的参
 	}
 }
 
-template<class KEY,class VALUE>
-RB_Node<KEY,VALUE>* RB_Tree<KEY,VALUE>::FindMin(RB_Node<KEY,VALUE>* node)
+RB_Node* RB_Tree::FindMin(RB_Node* node)
 {
-	if (node->left == m_nullNode)
+	if (node->left == nullNode)
 		return node;
 	return FindMin(node->left);
 }
 
-template<class KEY,class VALUE>    //中序遍历
-void RB_Tree<KEY,VALUE>::InOrderTraverse(RB_Node<KEY,VALUE>* node)
+  //中序遍历
+void RB_Tree::InOrderTraverse(RB_Node* node)
 {
-	if (node == m_nullNode)
+	if (node == nullNode)
 	{
 		return;
 	}
 	else
 	{
 		InOrderTraverse(node->left);
-		cout << node->key << endl;
+		cout << node->value << endl;
 		InOrderTraverse(node->right);
 	}
 }
 
-template<class KEY,class VALUE>
-void RB_Tree<KEY,VALUE>::clear(RB_Node<KEY,VALUE>* node)
+void RB_Tree::clear(RB_Node* node)
 {
-	if (node == m_nullNode)
+	if (node == nullNode)
 	{
 		return;
 	}
