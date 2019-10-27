@@ -25,7 +25,7 @@ int main()
 
 void TestRBTreeWithTestFile()
 {
-	RB_Tree bst;
+	RBTree bst;
 
 	string content = ReadTestTxt();
 	vector<string> commandList;
@@ -43,20 +43,20 @@ void TestRBTreeWithTestFile()
 		}
 		if (command == "search")
 		{
-			RB_Node* node = bst.find(value);
+			RBTreeNode* node = bst.Search(value);
 			string result = node == bst.nullNode ? "not found" : "found";
 			cout << "searching for " << value << " - " << result << endl;
 		}
 	}
 	if (bst.CheckRB())
 	{
-		cout << "Is RB tree"<<endl;
+		cout << "Is RB tree" << endl;
 	}
 	else
 	{
-		cout << "Is not RB Tree"<<endl;
+		cout << "Is not RB Tree" << endl;
 	}
-	bst.InOrderTraverse();
+	//bst.InorderTreeWalk(bst.rootNode);
 
 }
 
