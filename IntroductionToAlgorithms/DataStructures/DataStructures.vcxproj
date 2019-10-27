@@ -158,6 +158,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="List_Sentinels.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="RBTree.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="TestTxtParser.h" />
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include "List_Sentinels.h"
 #include "BinarySearchTree.h"
 #include "TestTxtParser.h"
+#include "RBTree.h"
 #include <vector>
 
 void testStack();
@@ -15,9 +16,39 @@ void testQueue();
 void testList();
 void testList_Sentinels();
 void testBinarySearchTree();
+void TestRBTreeWithTestFile();
 
 int main()
 {
+	TestRBTreeWithTestFile();
+}
+
+void TestRBTreeWithTestFile()
+{
+	RB_Tree<int,int> bst;
+
+	string content = ReadTestTxt();
+	vector<string> commandList;
+	vector<int> valueList;
+	ParserTestContent(content, commandList, valueList);
+	for (int i = 0; i < commandList.size(); i++)
+	{
+		string command = commandList[i];
+		int value = valueList[i];
+		if (command == "insert")
+			bst.Insert(value,i);
+		if (command == "delete")
+		{
+			bst.Delete(value);
+		}
+		if (command == "search")
+		{
+			RB_Node<int,int>* node = bst.find(value);
+			string result = node == bst.m_nullNode ? "not found" : "found";
+			cout << "searching for " << value << " - " << result << endl;
+		}
+	}
+	//bst.InOrderTraverse();
 
 }
 
