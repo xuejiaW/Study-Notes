@@ -1,11 +1,31 @@
 #include <iostream>
 #include "TestTxtParser.h"
 #include "RBTree.h"
+#include "BinarySearchTree.h"
 #include <vector>
+
+void TestBinarySearchTree();
+void TestRBTree();
+
 
 int main()
 {
+	TestBinarySearchTree();
+}
 
+void TestBinarySearchTree()
+{
+	BinarySearchTree bsTree;
+	bsTree.Insert(5);
+	bsTree.Insert(3);
+	bsTree.Insert(8);
+	bsTree.Insert(7);
+	bsTree.InorderWalk(bsTree.root);
+
+}
+
+void TestRBTree()
+{
 	string content = ReadTestTxt();
 	vector<string> commandList;
 	vector<int> valueList;

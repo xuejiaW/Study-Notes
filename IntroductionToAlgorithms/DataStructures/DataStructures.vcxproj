@@ -152,7 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="RBTree.cpp" />
-    <ClCompile Include="searchtree.cpp" />
+    <ClCompile Include="DataStructure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinarySearchTree.h" />

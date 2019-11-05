@@ -90,12 +90,25 @@ void BinarySearchTree::PostorderWalk(TreeNode* rootNode)
 }
 
 
+//TreeNode* BinarySearchTree::Search(TreeNode* rootNode, int value)
+//{
+//	if (rootNode == nullptr || rootNode->value == value)
+//		return rootNode;
+//
+//	return value < rootNode->value ? Search(rootNode->leftChild, value) : Search(rootNode->rightChild, value);
+//}
+
 TreeNode* BinarySearchTree::Search(TreeNode* rootNode, int value)
 {
-	if (rootNode == nullptr || rootNode->value == value)
-		return rootNode;
+	while (rootNode != nullptr && rootNode->value != value)
+	{
+		if (value < rootNode->value)
+			rootNode = rootNode->leftChild;
+		else
+			rootNode = rootNode->rightChild;
+	}
 
-	return value < rootNode->value ? Search(rootNode->leftChild, value) : Search(rootNode->rightChild, value);
+	return rootNode;
 }
 
 TreeNode* BinarySearchTree::Maximum(TreeNode* node)
