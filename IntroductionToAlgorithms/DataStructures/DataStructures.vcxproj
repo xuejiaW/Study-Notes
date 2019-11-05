@@ -151,7 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataStructures.cpp" />
+    <ClCompile Include="RBTree.cpp" />
+    <ClCompile Include="searchtree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinarySearchTree.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="List_Sentinels.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="RBTree.h" />
+    <ClInclude Include="RBTreeNode.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="TestTxtParser.h" />
   </ItemGroup>

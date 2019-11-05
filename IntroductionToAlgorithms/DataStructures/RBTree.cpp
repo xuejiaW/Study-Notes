@@ -33,7 +33,7 @@ bool RBTree::CheckRB()
 
 	if (rootNode == nullNode)
 		return true;
-	if (rootNode->color == RED) //Break rule 2
+	if (rootNode->color == RED) //break rule 2
 		return false;
 
 	int blackNodesNum_Left = 0;//left path black NodesNum from root

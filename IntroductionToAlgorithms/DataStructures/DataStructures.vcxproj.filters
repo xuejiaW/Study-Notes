@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataStructures.cpp">
+    <ClCompile Include="RBTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="searchtree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="RBTree.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RBTreeNode.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
