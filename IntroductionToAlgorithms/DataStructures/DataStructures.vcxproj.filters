@@ -16,6 +16,9 @@
     <Filter Include="Source Files\RBTRee">
       <UniqueIdentifier>{3713a6af-d274-4f5a-a8c7-ba7c0b337125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BSTree">
+      <UniqueIdentifier>{4620a439-f5b5-4303-8955-df061fa2743f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RBTree.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="DataStructure.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BinarySearchTree.cpp">
+      <Filter>Source Files\BSTree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,17 +44,20 @@
     <ClInclude Include="List_Sentinels.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinarySearchTree.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestTxtParser.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="RBTree.h">
       <Filter>Source Files\RBTRee</Filter>
     </ClInclude>
     <ClInclude Include="RBTreeNode.h">
       <Filter>Source Files\RBTRee</Filter>
+    </ClInclude>
+    <ClInclude Include="TestTxtParser.h">
+      <Filter>Source Files\RBTRee</Filter>
+    </ClInclude>
+    <ClInclude Include="BinarySearchTree.h">
+      <Filter>Source Files\BSTree</Filter>
+    </ClInclude>
+    <ClInclude Include="BSTreeNode.h">
+      <Filter>Source Files\BSTree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

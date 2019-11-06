@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinarySearchTree.cpp" />
     <ClCompile Include="RBTree.cpp" />
     <ClCompile Include="DataStructure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinarySearchTree.h" />
+    <ClInclude Include="BSTreeNode.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="List_Sentinels.h" />
     <ClInclude Include="Queue.h" />

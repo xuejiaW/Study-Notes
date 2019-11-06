@@ -11,6 +11,7 @@ void TestRBTree();
 int main()
 {
 	TestBinarySearchTree();
+	//TestRBTree();
 }
 
 void TestBinarySearchTree()
@@ -21,6 +22,8 @@ void TestBinarySearchTree()
 	bsTree.Insert(8);
 	bsTree.Insert(7);
 	bsTree.InorderWalk(bsTree.root);
+	cout << "Successor is " << bsTree.Successor(5)->value << endl;
+	cout << "Predecessor is " << bsTree.Predecessor(5)->value << endl;
 
 }
 
