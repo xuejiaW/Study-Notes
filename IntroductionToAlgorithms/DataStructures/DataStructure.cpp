@@ -10,8 +10,8 @@ void TestRBTree();
 
 int main()
 {
-	TestBinarySearchTree();
-	//TestRBTree();
+	//TestBinarySearchTree();
+	TestRBTree();
 }
 
 void TestBinarySearchTree()
@@ -52,7 +52,7 @@ void TestRBTree()
 			cout << "searching for " << value << " - " << result << endl;
 		}
 
-		//string rbTreeCheck = rbTree.CheckRB() ? "Is RBTree" : "Is not RBTree";
-		//cout << rbTreeCheck << endl;
+		string rbTreeCheck = rbTree.CheckRB() ? "Is RBTree" : "Is not RBTree";
+		cout << rbTreeCheck << endl;
 	}
 }

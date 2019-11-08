@@ -100,6 +100,12 @@ RBTreeNode* RBTree::Search(int value)
 
 bool RBTree::Insert(int value)
 {
+	RBTreeNode* toInsert = new RBTreeNode();
+	toInsert->value = value;
+	toInsert->color = RED;
+	toInsert->right = nullNode;
+	toInsert->left = nullNode;
+
 	RBTreeNode* targetNode = rootNode;
 	RBTreeNode* targetNodeParent = nullNode;
 
@@ -119,12 +125,6 @@ bool RBTree::Insert(int value)
 			return false;
 		}
 	}
-
-	RBTreeNode* toInsert = new RBTreeNode();
-	toInsert->value = value;
-	toInsert->color = RED;
-	toInsert->right = nullNode;
-	toInsert->left = nullNode;
 
 	if (targetNodeParent == nullNode)//Tree is empty
 	{
@@ -366,13 +366,7 @@ bool RBTree::LeftRotate(RBTreeNode* node)
 		return false;
 	}
 
-	//lowerRight's left subtree become node's right subtree
 	RBTreeNode* lowerRight = node->right;
-	node->right = lowerRight->left;
-	if (lowerRight->left != nullNode)
-	{
-		lowerRight->left->parent = node;
-	}
 
 	//lowerRight replace node's place
 	lowerRight->parent = node->parent;
@@ -392,9 +386,18 @@ bool RBTree::LeftRotate(RBTreeNode* node)
 		node->parent->right = lowerRight;
 	}
 
+	//lowerRight's left subtree become node's right subtree
+	node->right = lowerRight->left;
+	if (lowerRight->left != nullNode)
+	{
+		lowerRight->left->parent = node;
+	}
+
 	//node as lowerRight's left subtree
 	node->parent = lowerRight;
 	lowerRight->left = node;
+
+	return true;
 }
 
 bool RBTree::RightRotate(RBTreeNode* node)
@@ -406,11 +409,6 @@ bool RBTree::RightRotate(RBTreeNode* node)
 	}
 
 	RBTreeNode* lowerLeft = node->left;
-	node->left = lowerLeft->right;
-	if (lowerLeft->right != nullNode)
-	{
-		lowerLeft->right->parent = node;
-	}
 
 	lowerLeft->parent = node->parent;
 	if (node->parent == nullNode)
@@ -429,8 +427,16 @@ bool RBTree::RightRotate(RBTreeNode* node)
 		node->parent->left = lowerLeft;
 	}
 
+	node->left = lowerLeft->right;
+	if (lowerLeft->right != nullNode)
+	{
+		lowerLeft->right->parent = node;
+	}
+
 	node->parent = lowerLeft;
 	lowerLeft->right = node;
+
+	return true;
 }
 
 RBTreeNode* RBTree::GetMinimum(RBTreeNode* node)
