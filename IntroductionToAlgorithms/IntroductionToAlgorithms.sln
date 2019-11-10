@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GettingStarted", "GettingSt
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructures", "DataStructures\DataStructures.vcxproj", "{38D51B87-B5A9-4D0B-9720-70E004284D17}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphAlgorithms", "GraphAlgorithms\GraphAlgorithms.vcxproj", "{46AD5472-A3BD-4496-984D-44EF6F5636D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{38D51B87-B5A9-4D0B-9720-70E004284D17}.Release|x64.Build.0 = Release|x64
 		{38D51B87-B5A9-4D0B-9720-70E004284D17}.Release|x86.ActiveCfg = Release|Win32
 		{38D51B87-B5A9-4D0B-9720-70E004284D17}.Release|x86.Build.0 = Release|Win32
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Debug|x64.ActiveCfg = Debug|x64
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Debug|x64.Build.0 = Debug|x64
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Debug|x86.ActiveCfg = Debug|Win32
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Debug|x86.Build.0 = Debug|Win32
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Release|x64.ActiveCfg = Release|x64
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Release|x64.Build.0 = Release|x64
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Release|x86.ActiveCfg = Release|Win32
+		{46AD5472-A3BD-4496-984D-44EF6F5636D3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
