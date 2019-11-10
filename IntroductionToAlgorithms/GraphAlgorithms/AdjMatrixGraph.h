@@ -10,15 +10,15 @@ class AdjMatrixGraph
 {
 public:
 	AdjMatrixGraph(int graphSize);
-	AdjMatrixGraph(AdjListGraph listGraph);
+	AdjMatrixGraph(AdjListGraph* listGraph);
 	~AdjMatrixGraph();
 
 	void AddEdge(int u, int v, float weight);
 	void PrintAdjMatrix();
 
-private:
 	int graphSize;
 	float** matrixGraph;
+private:
 };
 
 void AdjMatrixGraph::AddEdge(int u, int v, float weight)
@@ -52,10 +52,10 @@ void AdjMatrixGraph::PrintAdjMatrix()
 	}
 }
 
-AdjMatrixGraph::AdjMatrixGraph(AdjListGraph adjListGraph) :AdjMatrixGraph(adjListGraph.graphSize)
+AdjMatrixGraph::AdjMatrixGraph(AdjListGraph* adjListGraph) :AdjMatrixGraph(adjListGraph->graphSize)
 {
 	//Convert from Adjacency list to Adjacency Matrix
-	vector<pair<int, float>>* listGraph = adjListGraph.listGraph;
+	vector<pair<int, float>>* listGraph = adjListGraph->listGraph;
 	for (int u = 0; u < graphSize; u++)
 	{
 		for (int i = 0; i < listGraph[u].size(); i++)

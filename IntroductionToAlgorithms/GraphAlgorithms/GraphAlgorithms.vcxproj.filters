@@ -29,5 +29,8 @@
     <ClInclude Include="TestTxtParser.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="DijkstraShortest.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
