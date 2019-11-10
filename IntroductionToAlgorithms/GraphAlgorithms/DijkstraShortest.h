@@ -1,15 +1,14 @@
 #pragma once
 
 #include <iostream>
-#include "AdjMatrixgraph.h"
+#include "AdjMatrixGraph.h"
 using namespace std;
 
-void DijkstraShortest(AdjMatrixGraph* graph, int source)
+vector<float> DijkstraShortest(AdjMatrixGraph* graph, int source)
 {
 
 	vector<int> touchedVertex;
 	vector<float> shortestDist(graph->graphSize);
-	vector<vector<int>> shortestPath(graph->graphSize);
 	float** graphEdges = graph->graphEdges;
 
 	//Init
@@ -25,11 +24,6 @@ void DijkstraShortest(AdjMatrixGraph* graph, int source)
 		}
 
 		shortestDist[i] = graphEdges[source][i];
-		if (shortestDist[i] != INT_MAX)
-		{
-			shortestPath[i].push_back(source);
-			shortestPath[i].push_back(i);
-		}
 	}
 
 	for (int v = 1; v < graph->graphSize - 1; v++)
@@ -57,17 +51,10 @@ void DijkstraShortest(AdjMatrixGraph* graph, int source)
 			bool notTouched = find(touchedVertex.rbegin(), touchedVertex.rend(), i) == touchedVertex.rend();
 			if (notTouched && graphEdges[minVertex][i] != INT_MAX
 				&& graphEdges[minVertex][i] + shortestDist[minVertex] < shortestDist[i])
-			{
 				shortestDist[i] = graphEdges[minVertex][i] + shortestDist[minVertex];
-				shortestPath[i] = shortestPath[minVertex];
-				shortestPath[i].push_back(minVertex);
-			}
 		}
 	}
 
-	for (int i = 0; i < shortestDist.size(); i++)
-	{
-		cout << "min is " << shortestDist[i] << endl;
-	}
+	return shortestDist;
 }
 

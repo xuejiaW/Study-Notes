@@ -9,11 +9,11 @@
 
 using namespace std;
 
-string ReadTestTxt()
+string ReadTestTxt(const char* filePath)
 {
 	string line;
 
-	ifstream testTxt("./testGraph.txt");
+	ifstream testTxt(filePath);
 	if (testTxt.is_open())
 	{
 		if (getline(testTxt, line))

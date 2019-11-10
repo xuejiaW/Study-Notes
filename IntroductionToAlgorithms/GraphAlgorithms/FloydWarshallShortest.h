@@ -1,16 +1,16 @@
 #pragma once
 
 #include <iostream>
-#include "AdjMatrixgraph.h"
+#include "AdjMatrixGraph.h"
 using namespace std;
 
-void FloydWarshallShortest(AdjMatrixGraph* matrixGraph)
+float** FloydWarshallShortest(AdjMatrixGraph* matrixGraph)
 {
 	int graphSize = matrixGraph->graphSize;
-	float** minDist = (float**)malloc(sizeof(float*) * graphSize);
+	float** minDistMat = (float**)malloc(sizeof(float*) * graphSize);
 	float** graphEdges = matrixGraph->graphEdges;
 	for (int i = 0; i < graphSize; i++)
-		minDist[i] = (float*)malloc(sizeof(float) * graphSize);
+		minDistMat[i] = (float*)malloc(sizeof(float) * graphSize);
 
 
 	for (int u = 0; u < graphSize; u++)
@@ -18,9 +18,9 @@ void FloydWarshallShortest(AdjMatrixGraph* matrixGraph)
 		for (int v = 0; v < graphSize; v++)
 		{
 			if (u == v)
-				minDist[u][v] = 0;
+				minDistMat[u][v] = 0;
 			else
-				minDist[u][v] = graphEdges[u][v];
+				minDistMat[u][v] = graphEdges[u][v];
 
 		}
 	}
@@ -31,28 +31,11 @@ void FloydWarshallShortest(AdjMatrixGraph* matrixGraph)
 		{
 			for (int j = 0; j < graphSize; j++)
 			{
-				if (minDist[i][j] > minDist[i][k] + minDist[k][j])
-					minDist[i][j] = minDist[i][k] + minDist[k][j];
+				if (minDistMat[i][j] > minDistMat[i][k] + minDistMat[k][j])
+					minDistMat[i][j] = minDistMat[i][k] + minDistMat[k][j];
 			}
 		}
 	}
 
-	for (int u = 0; u < graphSize; u++)
-	{
-		for (int v = 0; v < graphSize; v++)
-		{
-			cout << minDist[u][v] << " ";
-			//if (u == v)
-			//	minDist[u][v] = 0;
-			//else
-			//	minDist[u][v] = graphEdges[u][v];
-		}
-		cout << endl;
-	}
-
-
-	for (int i = 0; i < graphSize; i++)
-		free(minDist[i]);
-
-	free(minDist);
+	return minDistMat;
 }

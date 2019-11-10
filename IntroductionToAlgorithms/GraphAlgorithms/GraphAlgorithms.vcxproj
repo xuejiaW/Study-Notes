@@ -151,13 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GraphAlgorithms.cpp" />
+    <ClCompile Include="AdjListGraph.cpp" />
+    <ClCompile Include="AdjMatrixGraph.cpp" />
+    <ClCompile Include="shortPaths.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjListGraph.h" />
     <ClInclude Include="AdjMatrixGraph.h" />
     <ClInclude Include="DijkstraShortest.h" />
     <ClInclude Include="FloydWarshallShortest.h" />
+    <ClInclude Include="PrintFloatMatrix.h" />
     <ClInclude Include="TestTxtParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
