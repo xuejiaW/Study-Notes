@@ -157,6 +157,7 @@
     <ClInclude Include="AdjListGraph.h" />
     <ClInclude Include="AdjMatrixGraph.h" />
     <ClInclude Include="DijkstraShortest.h" />
+    <ClInclude Include="FloydWarshallShortest.h" />
     <ClInclude Include="TestTxtParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

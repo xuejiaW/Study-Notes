@@ -32,5 +32,8 @@
     <ClInclude Include="DijkstraShortest.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="FloydWarshallShortest.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

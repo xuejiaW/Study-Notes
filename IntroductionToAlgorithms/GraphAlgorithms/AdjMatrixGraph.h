@@ -17,13 +17,13 @@ public:
 	void PrintAdjMatrix();
 
 	int graphSize;
-	float** matrixGraph;
+	float** graphEdges;
 private:
 };
 
 void AdjMatrixGraph::AddEdge(int u, int v, float weight)
 {
-	matrixGraph[u][v] = weight;
+	graphEdges[u][v] = weight;
 }
 
 void AdjMatrixGraph::PrintAdjMatrix()
@@ -43,10 +43,10 @@ void AdjMatrixGraph::PrintAdjMatrix()
 		{
 			cout << setiosflags(ios::fixed);
 			cout << setprecision(1);
-			if (matrixGraph[u][v] == INT_MAX)
+			if (graphEdges[u][v] == INT_MAX)
 				cout << setw(7) << ".";
 			else
-				cout << setw(7) << matrixGraph[u][v];
+				cout << setw(7) << graphEdges[u][v];
 		}
 		cout << endl;
 	}
@@ -69,14 +69,14 @@ AdjMatrixGraph::AdjMatrixGraph(AdjListGraph* adjListGraph) :AdjMatrixGraph(adjLi
 AdjMatrixGraph::AdjMatrixGraph(int graphSize)
 {
 	this->graphSize = graphSize;
-	matrixGraph = (float**)malloc(sizeof(float*) * graphSize);
+	graphEdges = (float**)malloc(sizeof(float*) * graphSize);
 	for (int i = 0; i < graphSize; i++)
-		matrixGraph[i] = (float*)malloc(sizeof(float) * graphSize);
+		graphEdges[i] = (float*)malloc(sizeof(float) * graphSize);
 	for (int u = 0; u < graphSize; u++)
 	{
 		for (int v = 0; v < graphSize; v++)
 		{
-			matrixGraph[u][v] = INT_MAX;
+			graphEdges[u][v] = INT_MAX;
 		}
 	}
 }
@@ -84,6 +84,6 @@ AdjMatrixGraph::AdjMatrixGraph(int graphSize)
 AdjMatrixGraph::~AdjMatrixGraph()
 {
 	for (int i = 0; i < graphSize; i++)
-		free(matrixGraph[i]);
-	free(matrixGraph);
+		free(graphEdges[i]);
+	free(graphEdges);
 }

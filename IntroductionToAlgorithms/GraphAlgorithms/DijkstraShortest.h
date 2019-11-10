@@ -10,7 +10,7 @@ void DijkstraShortest(AdjMatrixGraph* graph, int source)
 	vector<int> touchedVertex;
 	vector<float> shortestDist(graph->graphSize);
 	vector<vector<int>> shortestPath(graph->graphSize);
-	float** matrixGraph = graph->matrixGraph;
+	float** graphEdges = graph->graphEdges;
 
 	//Init
 	touchedVertex.push_back(source);
@@ -24,7 +24,7 @@ void DijkstraShortest(AdjMatrixGraph* graph, int source)
 			continue;
 		}
 
-		shortestDist[i] = matrixGraph[source][i];
+		shortestDist[i] = graphEdges[source][i];
 		if (shortestDist[i] != INT_MAX)
 		{
 			shortestPath[i].push_back(source);
@@ -55,10 +55,10 @@ void DijkstraShortest(AdjMatrixGraph* graph, int source)
 		{
 			//Not need to update already touched Vertex
 			bool notTouched = find(touchedVertex.rbegin(), touchedVertex.rend(), i) == touchedVertex.rend();
-			if (notTouched && matrixGraph[minVertex][i] != INT_MAX
-				&& matrixGraph[minVertex][i] + shortestDist[minVertex] < shortestDist[i])
+			if (notTouched && graphEdges[minVertex][i] != INT_MAX
+				&& graphEdges[minVertex][i] + shortestDist[minVertex] < shortestDist[i])
 			{
-				shortestDist[i] = matrixGraph[minVertex][i] + shortestDist[minVertex];
+				shortestDist[i] = graphEdges[minVertex][i] + shortestDist[minVertex];
 				shortestPath[i] = shortestPath[minVertex];
 				shortestPath[i].push_back(minVertex);
 			}

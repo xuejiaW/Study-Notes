@@ -6,6 +6,7 @@
 #include "TestTxtParser.h"
 #include "AdjMatrixGraph.h"
 #include "DijkstraShortest.h"
+#include "FloydWarshallShortest.h"
 
 int main()
 {
@@ -13,7 +14,7 @@ int main()
 	vector<int> uList, vList;
 	vector<float> weightList;
 	int vertexCount = ParserTestContent(content, uList, vList, weightList);
-	std::cout << "Graphic count " << vertexCount << endl;
+	//std::cout << "Graphic count " << vertexCount << endl;
 
 
 	AdjListGraph adjlistGraphic(vertexCount);
@@ -28,5 +29,6 @@ int main()
 	matrixGraph.PrintAdjMatrix();
 	DijkstraShortest(&matrixGraph,1);
 
+	FloydWarshallShortest(&matrixGraph);
 }
 
