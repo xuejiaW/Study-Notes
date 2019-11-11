@@ -8,6 +8,7 @@
 #include "DijkstraShortest.h"
 #include "FloydWarshallShortest.h"
 #include "PrintFloatMatrix.h"
+#include "GraphConverter.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,18 +23,23 @@ int main(int argc, char* argv[])
 	AdjListGraph adjlistGraphic(vertexCount);
 	for (int i = 0; i < uList.size(); i++)
 		adjlistGraphic.AddEdge(uList[i], vList[i], weightList[i]);
+	//adjlistGraphic.PrintListGraphic();//Test adjListGraphic
 
 	//Convert AdjlistGraph to AdjMatrixGraph
-	AdjMatrixGraph matrixGraph(&adjlistGraphic);
+	AdjMatrixGraph* matrixGraph = ConvertToMatrixGraph(&adjlistGraphic);
+
+	////Convert AdjMatrixGraph to AdjListGraph
+	//AdjListGraph* adjlistGraph_converted = ConvertToListGraph(matrixGraph);
+	//adjlistGraph_converted->PrintListGraphic();
 
 	//Print AdjMatrixGraph
 	cout << "Adjacency Matrix" << endl;
-	PrintFloatMatrix(&(matrixGraph.graphEdges), matrixGraph.graphSize);
+	PrintFloatMatrix(&(matrixGraph->graphEdges), matrixGraph->graphSize);
 
 	cout << endl;
 
 	//Show minimum dist from 0 using Dijkstra's algorithm
-	vector<float> shortestDist = DijkstraShortest(&matrixGraph, 0);
+	vector<float> shortestDist = DijkstraShortest(matrixGraph, 0);
 	cout << "Dijkstra's Algorithm" << endl;
 	cout << "Shortest Paths from source" << endl;
 	for (int i = 0; i < shortestDist.size(); i++)
@@ -49,12 +55,12 @@ int main(int argc, char* argv[])
 	cout << endl;
 
 	//Show minumum dist from each vertic using Floyd-Warshall algorithm
-	float** minDistMat = FloydWarshallShortest(&matrixGraph);
+	float** minDistMat = FloydWarshallShortest(matrixGraph);
 	cout << "Floyd-Warshall Algorithm" << endl;
-	PrintFloatMatrix(&minDistMat, matrixGraph.graphSize);
+	PrintFloatMatrix(&minDistMat, matrixGraph->graphSize);
 
 	//Free minDistMat
-	for (int i = 0; i < matrixGraph.graphSize; i++)
+	for (int i = 0; i < matrixGraph->graphSize; i++)
 		free(minDistMat[i]);
 
 	free(minDistMat);

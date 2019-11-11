@@ -1,5 +1,11 @@
 #include "AdjListGraph.h"
 
+AdjListGraph::AdjListGraph(int size)
+{
+	this->graphSize = size;
+	listGraph = new vector<pair<int, float>>[size];
+}
+
 void AdjListGraph::AddEdge(int u, int v, float weight)
 {
 	if (u > graphSize - 1)
@@ -19,12 +25,6 @@ void AdjListGraph::PrintListGraphic()
 			cout << "v is " << node.first << " weight is " << node.second << endl;
 		}
 	}
-}
-
-AdjListGraph::AdjListGraph(int size)
-{
-	this->graphSize = size;
-	listGraph = new vector<pair<int, float>>[size];
 }
 
 AdjListGraph::~AdjListGraph()

@@ -30,11 +30,12 @@ string ReadTestTxt(const char* filePath)
 	}
 }
 
-int ParserTestContent(string content,vector<int>& uList,vector<int>& vList,vector<float>& weightList)
+int ParserTestContent(string content, vector<int>& uList, vector<int>& vList, vector<float>& weightList)
 {
 	regex expression("\([0-9]+,[0-9]+,[0-9\.]+\)");
 	smatch matchResult;
 	set<int> uSet;//Used to calculate vertex count
+	set<int> vSet;
 
 	while (std::regex_search(content, matchResult, expression))
 	{
@@ -47,6 +48,7 @@ int ParserTestContent(string content,vector<int>& uList,vector<int>& vList,vecto
 		float edgeWeight = stof(result.substr(lastCommaIndex + 1));
 
 		uSet.insert(uIndex);
+		vSet.insert(vIndex);
 		uList.push_back(uIndex);
 		vList.push_back(vIndex);
 		weightList.push_back(edgeWeight);
@@ -54,5 +56,7 @@ int ParserTestContent(string content,vector<int>& uList,vector<int>& vList,vecto
 		content = matchResult.suffix().str();
 	}
 
-	return uSet.size();
+	int uSetSize = uSet.size();
+	int vSetSize = vSet.size();
+	return uSetSize > vSetSize ? uSetSize : vSetSize;
 }

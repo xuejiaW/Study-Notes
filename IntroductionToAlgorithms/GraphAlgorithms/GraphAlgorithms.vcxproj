@@ -153,13 +153,14 @@
   <ItemGroup>
     <ClCompile Include="AdjListGraph.cpp" />
     <ClCompile Include="AdjMatrixGraph.cpp" />
-    <ClCompile Include="shortPaths.cpp" />
+    <ClCompile Include="shortpaths.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdjListGraph.h" />
     <ClInclude Include="AdjMatrixGraph.h" />
     <ClInclude Include="DijkstraShortest.h" />
     <ClInclude Include="FloydWarshallShortest.h" />
+    <ClInclude Include="GraphConverter.h" />
     <ClInclude Include="PrintFloatMatrix.h" />
     <ClInclude Include="TestTxtParser.h" />
   </ItemGroup>

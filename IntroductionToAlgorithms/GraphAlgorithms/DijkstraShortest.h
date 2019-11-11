@@ -13,13 +13,11 @@ vector<float> DijkstraShortest(AdjMatrixGraph* graph, int source)
 
 	//Init
 	touchedVertex.push_back(source);
-	//shortestDist[0] = 0;//0 for go to himself
-
 	for (int i = 0; i < graph->graphSize; i++)
 	{
 		if (i == source)
 		{
-			shortestDist[i] = 0;
+			shortestDist[i] = 0;//0 for go to himself
 			continue;
 		}
 

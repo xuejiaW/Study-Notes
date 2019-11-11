@@ -10,13 +10,11 @@ class AdjMatrixGraph
 {
 public:
 	AdjMatrixGraph(int graphSize);
-	AdjMatrixGraph(AdjListGraph* listGraph);
 	~AdjMatrixGraph();
 
 	void AddEdge(int u, int v, float weight);
-	void PrintAdjMatrix();
 
-	int graphSize;
+	int graphSize = 0;
 	float** graphEdges;
 private:
 };

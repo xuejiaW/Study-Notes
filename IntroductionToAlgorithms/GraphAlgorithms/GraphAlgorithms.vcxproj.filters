@@ -33,15 +33,18 @@
     <ClInclude Include="PrintFloatMatrix.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="GraphConverter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="shortPaths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AdjListGraph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AdjMatrixGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shortpaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
