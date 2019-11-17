@@ -13,3 +13,21 @@
 ### HeadFirstDesignPattern
 
 书籍 《Head First Design Pattern》
+
+## 数据库
+
+### TheMangaGuideToDatabases
+
+书籍 《The Manga Guide to Databases》
+
+## 算法与数据结构
+
+### IntroductionToAlgorithms
+
+书籍 《Introduction to Algorithms》3th
+
+## 计算机语言
+
+### CSsharpInDepth
+
+书籍 《C# in depth》
