@@ -154,6 +154,7 @@
     <ClCompile Include="AdvancedDesignAndAnalysisTechniques.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="RodCutting.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

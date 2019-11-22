@@ -23,5 +23,8 @@
     <ClInclude Include="RodCutting.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
