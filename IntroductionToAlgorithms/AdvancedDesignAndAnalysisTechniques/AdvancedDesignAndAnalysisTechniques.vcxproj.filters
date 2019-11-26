@@ -26,5 +26,8 @@
     <ClInclude Include="Matrix.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MatrixChainMultiplication.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ public:
 	int column;
 	Matrix(int row, int column);
 	~Matrix();
-	void PrintMatrix();
+	void PrintMatrix(int width = 7);
 	Matrix* multiply(Matrix* mat);
 	void LoadData(int* data, int dataLength);
 private:
@@ -51,7 +51,7 @@ Matrix* Matrix::multiply(Matrix* mat)
 	return result;
 }
 
-void Matrix::PrintMatrix()
+void Matrix::PrintMatrix(int width)
 {
 	cout.setf(ios::left);
 
@@ -60,7 +60,7 @@ void Matrix::PrintMatrix()
 		for (int j = 0; j < column; j++)
 		{
 			cout << setiosflags(ios::fixed);
-			cout << setw(7) << data[i][j];
+			cout << setw(width) << data[i][j];
 		}
 		cout << endl;
 	}
