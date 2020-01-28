@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphAlgorithms", "GraphAlg
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdvancedDesignAndAnalysisTechniques", "AdvancedDesignAndAnalysisTechniques\AdvancedDesignAndAnalysisTechniques.vcxproj", "{940B7DD9-95EE-4A64-B403-55FE4BF660CD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdvancedDataStructures", "AdvancedDataStructures\AdvancedDataStructures.vcxproj", "{3F5C6C60-5AB4-4208-8636-92715D160E68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{940B7DD9-95EE-4A64-B403-55FE4BF660CD}.Release|x64.Build.0 = Release|x64
 		{940B7DD9-95EE-4A64-B403-55FE4BF660CD}.Release|x86.ActiveCfg = Release|Win32
 		{940B7DD9-95EE-4A64-B403-55FE4BF660CD}.Release|x86.Build.0 = Release|Win32
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Debug|x64.ActiveCfg = Debug|x64
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Debug|x64.Build.0 = Debug|x64
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Debug|x86.ActiveCfg = Debug|Win32
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Debug|x86.Build.0 = Debug|Win32
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Release|x64.ActiveCfg = Release|x64
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Release|x64.Build.0 = Release|x64
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Release|x86.ActiveCfg = Release|Win32
+		{3F5C6C60-5AB4-4208-8636-92715D160E68}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
