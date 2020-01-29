@@ -2,17 +2,41 @@
 #include "TestTxtParser.h"
 #include "RBTree.h"
 #include "BinarySearchTree.h"
+#include "Heap.h"
 #include <vector>
 
-void TestBinarySearchTree();
-void TestRBTree();
-
+//void TestBinarySearchTree();
+//void TestRBTree();
+void TestHeap();
 
 int main()
 {
 	//TestBinarySearchTree();
-	TestRBTree();
+	//TestRBTree();
+	TestHeap();
 }
+
+void TestHeap()
+{
+	int heapArray[20] = { 4,6,7,1,8,3,4 ,1,2,10,-1 };
+	Heap heap(heapArray, 11, 20);
+	heap.heapSort();
+
+	heap.HeapDebug();
+	heap.IncreaseKey(10, 11);
+	heap.HeapDebug();
+	heap.Insert(99);
+	heap.Insert(-3);
+	heap.Insert(-2);
+	heap.Insert(0);
+	heap.HeapDebug();
+
+	while (!heap.IsEmpty())
+	{
+		cout << "Max is " << heap.ExtractMaximum() << endl;
+	}
+}
+
 
 void TestBinarySearchTree()
 {

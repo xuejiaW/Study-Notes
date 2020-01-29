@@ -59,5 +59,8 @@
     <ClInclude Include="BSTreeNode.h">
       <Filter>Source Files\BSTree</Filter>
     </ClInclude>
+    <ClInclude Include="Heap.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

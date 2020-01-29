@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="BSTreeNode.h" />
+    <ClInclude Include="Heap.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="List_Sentinels.h" />
     <ClInclude Include="Queue.h" />
