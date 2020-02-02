@@ -1,0 +1,12 @@
+/**/ /* 
+
+sum is 0
+
+
+sum is 6
+/**/ /* 
+
+sum is 0
+
+
+sum is 6
