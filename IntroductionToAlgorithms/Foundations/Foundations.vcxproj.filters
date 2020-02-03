@@ -27,6 +27,9 @@
     <ClInclude Include="MaximumSubarray_DivideAConquer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="MatrixMultiply.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Foundations.cpp">

@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="InsertionSort.h" />
+    <ClInclude Include="MatrixMultiply.h" />
     <ClInclude Include="MaximumSubarray_DivideAConquer.h" />
     <ClInclude Include="MaximumSubarray_BruteForce.h" />
     <ClInclude Include="MergeSort.h" />
