@@ -2,8 +2,8 @@
 #define __WINDOWMGR__
 
 #include <vector>
-#include "Screen.h"
 
+class Screen;
 using std::vector;
 
 class Window_mgr
@@ -11,9 +11,10 @@ class Window_mgr
 public:
     using ScreenIndex = vector<Screen>::size_type;
     void Clear(ScreenIndex index);
+    ScreenIndex addScreen(const Screen &s);
 
 private:
-    vector<Screen> screens{Screen(5, 5, 'a')};
+    vector<Screen> screens;
 };
 
 #endif

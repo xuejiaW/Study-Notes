@@ -4,13 +4,15 @@
 #include <string>
 #include <iostream>
 
+#include "Window_mgr.h"
+
 using std::istream;
 using std::ostream;
 using std::string;
 
 class Screen
 {
-    friend class Window_mgr;
+    friend void Window_mgr::Clear(ScreenIndex);
 
 public:
     // pos i = 0; //error, the pos hasn't been
@@ -33,6 +35,8 @@ public:
 
     inline const Screen &Display(ostream &) const;
     inline Screen &Display(ostream &);
+
+    void dummyFcn(pos height);
 
 private:
     mutable size_t accessCtr = 0;

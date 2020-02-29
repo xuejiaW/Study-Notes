@@ -11,13 +11,58 @@ void TestThisPointer();
 void TestSynthesizedAssignment();
 void TestReturnThisPointer();
 void TestClassType();
+void TestClassScope();
+void TestMemberInitializationOrder();
+void TestConstructorsRevisited();
+void TestAggregateClasses();
 
 int main()
 {
     // TestThisPointer();
     // TestSynthesizedAssignment();
     // TestReturnThisPointer();
-    TestClassType();
+    // TestClassType();
+    // TestClassScope();
+    // TestMemberInitializationOrder();
+    // TestConstructorsRevisited();
+}
+
+void TestStaticMember()
+{
+    double r = Account_S::rate();
+    Account_S ac1;
+    Account_S *ac2 = &ac1;
+    r = ac1.rate();
+    r = ac2->rate();
+}
+
+void TestAggregateClasses()
+{
+    Data val1{0, "Anna"};
+    Data val2{0};
+}
+
+void TestConstructorsRevisited()
+{
+    string null_book = "9999";
+    Sales_data item;
+    // item.combine(null_book);// error, when constructor is explicit
+    item.combine(Sales_data(null_book));
+    item.combine(static_cast<Sales_data>(null_book));
+    // item.combine("9999"); // this action needs two step conversion,so it fails
+}
+
+void TestMemberInitializationOrder()
+{
+    Sales_data s;
+    Num n(2);
+    n.Print();
+}
+
+void TestClassScope()
+{
+    Screen s(10, 2, ' ');
+    s.dummyFcn(3);
 }
 
 void TestClassType()

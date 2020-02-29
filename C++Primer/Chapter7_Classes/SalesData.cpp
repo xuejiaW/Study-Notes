@@ -1,10 +1,5 @@
 #include "SalesData.h"
 
-Sales_data::Sales_data(istream &is)
-{
-    read(is, *this);
-}
-
 double Sales_data::avg_Price() const
 {
     if (units_sold)
