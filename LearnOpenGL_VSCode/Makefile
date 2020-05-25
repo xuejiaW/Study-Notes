@@ -6,7 +6,7 @@ SRC		:= src
 INCLUDE	:= include
 LIB		:= lib
 
-LIBRARIES	:=
+LIBRARIES	:= -lglad -lglfw3dll # Add Lib file
 
 ifeq ($(OS),Windows_NT)
 EXECUTABLE	:= main.exe
@@ -37,5 +37,5 @@ clean:
 run: all
 	./$(BIN)/$(EXECUTABLE)
 
-$(BIN)/$(EXECUTABLE): $(OBJECTS)
+$(BIN)/$(EXECUTABLE): $(SOURCES) # Use SOURCES instead of OBJECTS to avoid complile without include/lib
 	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
