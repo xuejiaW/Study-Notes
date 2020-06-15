@@ -8,5 +8,6 @@ int main()
     // TestGroupAnagrams();
     // TestInorderTraversal();
     // TestCopyRandomList();
-    TestTopKFrequent();
+    // TestTopKFrequent();
+    TestFindAnagrams();
 }
