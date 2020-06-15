@@ -4,5 +4,7 @@ int main()
 {
     // TestTwoSum();
     // TestSingleNumber();
-    TestLengthofLonggestSubstring();
+    // TestLengthofLonggestSubstring();
+    // TestGroupAnagrams();
+    TestInorderTraversal();
 }
