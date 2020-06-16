@@ -6,6 +6,7 @@
 #include "121.best-time-to-buy-and-sell-stock.h"
 #include "136.single-number.h"
 #include "138.copy-list-with-random-pointer.h"
+#include "169.majority-element.h"
 #include "347.top-k-frequent-elements.h "
 #include "438.find-all-anagrams-in-a-string.h"
 #include "560.subarray-sum-equals-k.h"

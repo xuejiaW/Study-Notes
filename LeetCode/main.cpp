@@ -13,5 +13,6 @@ int main()
     // TestSubarraySum();
     // TestDailyTemperature();
     // TestMaxSubArray();
-    TestMaxProfit();
+    // TestMaxProfit();
+    TestMajorityElement();
 }
