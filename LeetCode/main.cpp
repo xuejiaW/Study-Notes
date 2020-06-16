@@ -12,5 +12,6 @@ int main()
     // TestFindAnagrams();
     // TestSubarraySum();
     // TestDailyTemperature();
-    TestMaxSubArray();
+    // TestMaxSubArray();
+    TestMaxProfit();
 }
