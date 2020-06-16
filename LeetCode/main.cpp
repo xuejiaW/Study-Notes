@@ -11,5 +11,6 @@ int main()
     // TestTopKFrequent();
     // TestFindAnagrams();
     // TestSubarraySum();
-    TestDailyTemperature();
+    // TestDailyTemperature();
+    TestMaxSubArray();
 }
