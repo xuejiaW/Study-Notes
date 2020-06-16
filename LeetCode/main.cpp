@@ -10,5 +10,6 @@ int main()
     // TestCopyRandomList();
     // TestTopKFrequent();
     // TestFindAnagrams();
-    TestSubarraySum();
+    // TestSubarraySum();
+    TestDailyTemperature();
 }
