@@ -2,6 +2,7 @@
 #include "3.longest-substring-without-repeating-characters.h "
 #include "11.container-with-most-water.h"
 #include "15.3-sum.h"
+#include "33.search-in-rotated-sorted-array.h"
 #include "49.group-anagrams.h"
 #include "53.maximum-subarray.h"
 #include "94.binary-tree-inorder-traversal.h"
