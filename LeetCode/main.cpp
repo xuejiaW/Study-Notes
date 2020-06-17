@@ -18,5 +18,6 @@ int main()
     // TestMaxArea();
     // Test3Sum();
     // TestMoveZeroes();
-    TestSearchInRotatedSortedArray();
+    // TestSearchInRotatedSortedArray();
+    TestCombinationSum();
 }
