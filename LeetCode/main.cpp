@@ -16,5 +16,6 @@ int main()
     // TestMaxProfit();
     // TestMajorityElement();
     // TestMaxArea();
-    Test3Sum();
+    // Test3Sum();
+    TestMoveZeroes();
 }
