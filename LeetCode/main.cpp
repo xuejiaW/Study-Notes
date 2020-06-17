@@ -14,5 +14,6 @@ int main()
     // TestDailyTemperature();
     // TestMaxSubArray();
     // TestMaxProfit();
-    TestMajorityElement();
+    // TestMajorityElement();
+    TestMaxArea();
 }
