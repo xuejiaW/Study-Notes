@@ -4,6 +4,7 @@ int main()
 {
     // TestFindRepeatNumber();
     // TestReplaceSpace();
-    TestReversePrint();
+    // TestReversePrint();
+    TestQueue();
     return 0;
 }
