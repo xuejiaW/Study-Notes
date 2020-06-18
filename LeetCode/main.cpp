@@ -22,5 +22,6 @@ int main()
     // TestCombinationSum();
     // TestSearchMatrixII();
     // TestBuildTree();
-    TestFib();
+    // TestFib();
+    TestClimbStairs();
 }
