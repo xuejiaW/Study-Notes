@@ -21,5 +21,6 @@ int main()
     // TestSearchInRotatedSortedArray();
     // TestCombinationSum();
     // TestSearchMatrixII();
-    TestBuildTree();
+    // TestBuildTree();
+    TestFib();
 }
