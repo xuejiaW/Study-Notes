@@ -20,5 +20,6 @@ int main()
     // TestMoveZeroes();
     // TestSearchInRotatedSortedArray();
     // TestCombinationSum();
-    TestSearchMatrixII();
+    // TestSearchMatrixII();
+    TestBuildTree();
 }
