@@ -2,6 +2,8 @@
 
 int main()
 {
-    TestFindRepeatNumber();
+    // TestFindRepeatNumber();
+    // TestReplaceSpace();
+    TestReversePrint();
     return 0;
 }
