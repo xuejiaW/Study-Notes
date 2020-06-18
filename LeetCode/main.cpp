@@ -23,5 +23,6 @@ int main()
     // TestSearchMatrixII();
     // TestBuildTree();
     // TestFib();
-    TestClimbStairs();
+    // TestClimbStairs();
+    TestFindMinInRotatedSortedArray();
 }
