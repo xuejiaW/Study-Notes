@@ -27,5 +27,6 @@ int main()
     // TestFindMinInRotatedSortedArray();
     // TestFindMinInRotatedSortedArrayII();
     // TestWordSearch();
-    TestIntegerBreak();
+    // TestIntegerBreak();
+    TestHammingWeight();
 }
