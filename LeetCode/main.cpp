@@ -26,5 +26,6 @@ int main()
     // TestClimbStairs();
     // TestFindMinInRotatedSortedArray();
     // TestFindMinInRotatedSortedArrayII();
-    TestWordSearch();
+    // TestWordSearch();
+    TestIntegerBreak();
 }
