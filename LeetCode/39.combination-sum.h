@@ -1,30 +1,36 @@
+// 组合总和
+
+// 难度：中等
+
 // Tags:
 // array | backtracking | dynamic programming
 
-// Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
+// 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-// The same repeated number may be chosen from candidates unlimited number of times.
+// candidates 中的数字可以无限制重复被选取。
 
-// Note:
+// 说明：
 
-// All numbers (including target) will be positive integers.
-// The solution set must not contain duplicate combinations.
-// Example 1:
+// 所有数字（包括 target）都是正整数。
+// 解集不能包含重复的组合。 
 
-// Input: candidates = [2,3,6,7], target = 7,
-// A solution set is:
+// 示例 1:
+
+// 输入: candidates = [2,3,6,7], target = 7,
+// 所求解集为:
 // [
 //   [7],
 //   [2,2,3]
 // ]
-// Example 2:
 
-// Input: candidates = [2,3,5], target = 8,
-// A solution set is:
+// 示例 2:
+
+// 输入: candidates = [2,3,5], target = 8,
+// 所求解集为:
 // [
-//   [2,2,2,2],
-//   [2,3,3],
-//   [3,5]
+//   [2,2,2,2],
+//   [2,3,3],
+//   [3,5]
 // ]
 
 #include <vector>
@@ -95,7 +101,7 @@ vector<vector<int>> combinationSum(vector<int> &candidates, int target)
     for (const int &value : candidates)
     {
         //The results can be yielded with this value
-        //e.g value = 2, i = 3, means trying get result for 3 by value 2 and existing result
+        //e.g value = 2, i = 3, means trying get result for 3 by value 2 and existing result for (3-2)
         for (int i = value; i <= target; ++i)
         {
             if (targetResultMap[i - value].size() > 0) // has result
