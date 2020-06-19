@@ -5,6 +5,7 @@ int main()
     // TestFindRepeatNumber();
     // TestReplaceSpace();
     // TestReversePrint();
-    TestQueue();
+    // TestQueue();
+    TestMovingCount();
     return 0;
 }
