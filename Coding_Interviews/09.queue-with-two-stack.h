@@ -17,8 +17,8 @@
 // [[],[],[5],[2],[],[]]
 // 输出：[null,-1,null,null,5,2]
 
-
 #include <stack>
+#include <iostream>
 
 using namespace std;
 
