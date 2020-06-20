@@ -32,5 +32,6 @@ int main()
     // TestPow();
     // TestReverseList();
     // TestMergeTwoSortedList();
-    TestPreorderTraversal();
+    // TestPreorderTraversal();
+    TestInvertTree();
 }
