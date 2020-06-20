@@ -28,5 +28,6 @@ int main()
     // TestFindMinInRotatedSortedArrayII();
     // TestWordSearch();
     // TestIntegerBreak();
-    TestHammingWeight();
+    // TestHammingWeight();
+    TestPow();
 }
