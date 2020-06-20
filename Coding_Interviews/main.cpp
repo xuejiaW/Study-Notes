@@ -8,6 +8,7 @@ int main()
     // TestQueue();
     // TestMovingCount();
     // TestPrintNumbers();
-    TestDeleteNode();
+    // TestDeleteNode();
+    TestExchange();
     return 0;
 }
