@@ -30,5 +30,6 @@ int main()
     // TestIntegerBreak();
     // TestHammingWeight();
     // TestPow();
-    TestReverseList();
+    // TestReverseList();
+    TestMergeTwoSortedList();
 }
