@@ -6,6 +6,7 @@ int main()
     // TestReplaceSpace();
     // TestReversePrint();
     // TestQueue();
-    TestMovingCount();
+    // TestMovingCount();
+    TestPrintNumbers();
     return 0;
 }
