@@ -7,6 +7,7 @@ int main()
     // TestReversePrint();
     // TestQueue();
     // TestMovingCount();
-    TestPrintNumbers();
+    // TestPrintNumbers();
+    TestDeleteNode();
     return 0;
 }
