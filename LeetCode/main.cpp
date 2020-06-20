@@ -31,5 +31,6 @@ int main()
     // TestHammingWeight();
     // TestPow();
     // TestReverseList();
-    TestMergeTwoSortedList();
+    // TestMergeTwoSortedList();
+    TestPreorderTraversal();
 }
