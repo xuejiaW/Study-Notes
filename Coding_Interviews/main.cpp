@@ -10,6 +10,7 @@ int main()
     // TestPrintNumbers();
     // TestDeleteNode();
     // TestExchange();
-    TestGetKthFromEnd();
+    // TestGetKthFromEnd();
+    TestIsSubStructure();
     return 0;
 }
