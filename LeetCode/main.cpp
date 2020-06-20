@@ -29,5 +29,6 @@ int main()
     // TestWordSearch();
     // TestIntegerBreak();
     // TestHammingWeight();
-    TestPow();
+    // TestPow();
+    TestReverseList();
 }
