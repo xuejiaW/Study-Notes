@@ -9,6 +9,7 @@ int main()
     // TestMovingCount();
     // TestPrintNumbers();
     // TestDeleteNode();
-    TestExchange();
+    // TestExchange();
+    TestGetKthFromEnd();
     return 0;
 }
