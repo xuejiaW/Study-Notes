@@ -11,6 +11,7 @@ int main()
     // TestDeleteNode();
     // TestExchange();
     // TestGetKthFromEnd();
-    TestIsSubStructure();
+    // TestIsSubStructure();
+    TestLevelOrderTraval();
     return 0;
 }
