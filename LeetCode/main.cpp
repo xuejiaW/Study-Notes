@@ -36,5 +36,6 @@ int main()
     // TestInvertTree();
     // TestSymmetricTree();
     // TestSpiralOrder();
-    TestMinStack();
+    // TestMinStack();
+    TestValidateStackSequences();
 }
