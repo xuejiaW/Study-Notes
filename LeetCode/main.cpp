@@ -37,5 +37,6 @@ int main()
     // TestSymmetricTree();
     // TestSpiralOrder();
     // TestMinStack();
-    TestValidateStackSequences();
+    // TestValidateStackSequences();
+    TestLevelOrderTraval();
 }
