@@ -34,5 +34,7 @@ int main()
     // TestMergeTwoSortedList();
     // TestPreorderTraversal();
     // TestInvertTree();
-    TestSymmetricTree();
+    // TestSymmetricTree();
+    // TestSpiralOrder();
+    TestMinStack();
 }
