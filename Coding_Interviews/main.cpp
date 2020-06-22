@@ -16,6 +16,7 @@ int main()
     // TestVerifyPoster();
     // TestPermutation();
     // TestGetLeastNumbers();
-    TestMinNumber();
+    // TestMinNumber();
+    TestTranslateNum();
     return 0;
 }
