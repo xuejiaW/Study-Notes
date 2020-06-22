@@ -39,5 +39,6 @@ int main()
     // TestMinStack();
     // TestValidateStackSequences();
     // TestLevelOrderTraval();
-    TestPostorderTraversal();
+    // TestPostorderTraversal();
+    TestPathSum();
 }
