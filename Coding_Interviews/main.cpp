@@ -12,6 +12,7 @@ int main()
     // TestExchange();
     // TestGetKthFromEnd();
     // TestIsSubStructure();
-    TestLevelOrderTraval();
+    // TestLevelOrderTraval();
+    TestVerifyPoster();
     return 0;
 }
