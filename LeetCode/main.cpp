@@ -38,5 +38,6 @@ int main()
     // TestSpiralOrder();
     // TestMinStack();
     // TestValidateStackSequences();
-    TestLevelOrderTraval();
+    // TestLevelOrderTraval();
+    TestPostorderTraversal();
 }
