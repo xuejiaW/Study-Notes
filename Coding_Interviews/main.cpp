@@ -17,6 +17,7 @@ int main()
     // TestPermutation();
     // TestGetLeastNumbers();
     // TestMinNumber();
-    TestTranslateNum();
+    // TestTranslateNum();
+    testMaxValue();
     return 0;
 }
