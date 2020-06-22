@@ -14,6 +14,7 @@ int main()
     // TestIsSubStructure();
     // TestLevelOrderTraval();
     // TestVerifyPoster();
-    TestPermutation();
+    // TestPermutation();
+    TestGetLeastNumbers();
     return 0;
 }
