@@ -40,5 +40,6 @@ int main()
     // TestValidateStackSequences();
     // TestLevelOrderTraval();
     // TestPostorderTraversal();
-    TestPathSum();
+    // TestPathSum();
+    TestCountDigitOne();
 }
