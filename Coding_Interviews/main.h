@@ -12,4 +12,5 @@
 // #include "32.level-order-III.h"
 // #include "33.verify-postorder.h"
 // #include "38.permutation.h"
-#include "40.get-least-numbers.h"
+// #include "40.get-least-numbers.h"
+#include "45.min-number.h"

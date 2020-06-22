@@ -15,6 +15,7 @@ int main()
     // TestLevelOrderTraval();
     // TestVerifyPoster();
     // TestPermutation();
-    TestGetLeastNumbers();
+    // TestGetLeastNumbers();
+    TestMinNumber();
     return 0;
 }
