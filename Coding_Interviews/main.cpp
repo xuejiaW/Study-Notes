@@ -20,6 +20,7 @@ int main()
     // TestTranslateNum();
     // testMaxValue();
     // TestFirstUnieChar();
-    TestMissingNumber();
+    // TestMissingNumber();
+    TestKthLargest();
     return 0;
 }
