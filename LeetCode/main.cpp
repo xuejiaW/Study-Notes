@@ -43,5 +43,6 @@ int main()
     // TestPathSum();
     // TestCountDigitOne();
     // TestnthUglyNumber();
-    TestGetIntersectionNode();
+    // TestGetIntersectionNode();
+    TestSearchRange();
 }
