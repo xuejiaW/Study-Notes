@@ -45,5 +45,6 @@ int main()
     // TestnthUglyNumber();
     // TestGetIntersectionNode();
     // TestSearchRange();
-    TestMaxDepth();
+    // TestMaxDepth();
+    TestBalanced();
 }
