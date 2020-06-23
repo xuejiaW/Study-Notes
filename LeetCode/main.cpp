@@ -46,5 +46,6 @@ int main()
     // TestGetIntersectionNode();
     // TestSearchRange();
     // TestMaxDepth();
-    TestBalanced();
+    // TestBalanced();
+    TestMaxSlidingWidnow();
 }
