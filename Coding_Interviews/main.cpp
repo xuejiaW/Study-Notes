@@ -22,6 +22,7 @@ int main()
     // TestFirstUnieChar();
     // TestMissingNumber();
     // TestKthLargest();
-    TestSingleNumbers();
+    // TestSingleNumbers();
+    TestTwoSum();
     return 0;
 }
