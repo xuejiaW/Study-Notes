@@ -21,6 +21,7 @@ int main()
     // testMaxValue();
     // TestFirstUnieChar();
     // TestMissingNumber();
-    TestKthLargest();
+    // TestKthLargest();
+    TestSingleNumbers();
     return 0;
 }
