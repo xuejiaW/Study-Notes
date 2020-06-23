@@ -24,6 +24,7 @@ int main()
     // TestKthLargest();
     // TestSingleNumbers();
     // TestTwoSum();
-    TestFindContinuousSequence();
+    // TestFindContinuousSequence();
+    TestReverseLeftWords();
     return 0;
 }
