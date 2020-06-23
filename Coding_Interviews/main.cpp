@@ -19,6 +19,7 @@ int main()
     // TestMinNumber();
     // TestTranslateNum();
     // testMaxValue();
-    TestFirstUnieChar();
+    // TestFirstUnieChar();
+    TestMissingNumber();
     return 0;
 }
