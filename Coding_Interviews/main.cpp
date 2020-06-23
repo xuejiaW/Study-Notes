@@ -25,6 +25,7 @@ int main()
     // TestSingleNumbers();
     // TestTwoSum();
     // TestFindContinuousSequence();
-    TestReverseLeftWords();
+    // TestReverseLeftWords();
+    TestMaxQueue();
     return 0;
 }
