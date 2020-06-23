@@ -44,5 +44,6 @@ int main()
     // TestCountDigitOne();
     // TestnthUglyNumber();
     // TestGetIntersectionNode();
-    TestSearchRange();
+    // TestSearchRange();
+    TestMaxDepth();
 }
