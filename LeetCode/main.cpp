@@ -41,5 +41,6 @@ int main()
     // TestLevelOrderTraval();
     // TestPostorderTraversal();
     // TestPathSum();
-    TestCountDigitOne();
+    // TestCountDigitOne();
+    TestnthUglyNumber();
 }
