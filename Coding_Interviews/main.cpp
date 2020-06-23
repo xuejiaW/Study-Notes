@@ -23,6 +23,7 @@ int main()
     // TestMissingNumber();
     // TestKthLargest();
     // TestSingleNumbers();
-    TestTwoSum();
+    // TestTwoSum();
+    TestFindContinuousSequence();
     return 0;
 }
