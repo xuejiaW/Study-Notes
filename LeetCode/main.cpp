@@ -42,5 +42,6 @@ int main()
     // TestPostorderTraversal();
     // TestPathSum();
     // TestCountDigitOne();
-    TestnthUglyNumber();
+    // TestnthUglyNumber();
+    TestGetIntersectionNode();
 }
