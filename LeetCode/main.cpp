@@ -47,5 +47,6 @@ int main()
     // TestSearchRange();
     // TestMaxDepth();
     // TestBalanced();
-    TestMaxSlidingWidnow();
+    // TestMaxSlidingWidnow();
+    TestMyAtoi();
 }
