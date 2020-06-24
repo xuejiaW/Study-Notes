@@ -24,4 +24,5 @@
 // #include "57.two-sum.h"
 // #include "57.find-continuous-sequence.h"
 // #include "58.reverse-left-words-II.h"
-#include "59.max-queue-II.h"
+// #include "59.max-queue-II.h"
+#include "60.dice-num.h"
