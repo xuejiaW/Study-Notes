@@ -31,6 +31,7 @@ int main()
     // TestIsStraight();
     // testLastRemaining();
     // TestSumNums();
-    TestAdd();
+    // TestAdd();
+    TestConstructArr();
     return 0;
 }
