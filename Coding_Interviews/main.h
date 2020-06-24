@@ -28,4 +28,5 @@
 // #include "60.dice-num.h"
 // #include "61.is-straight.h"
 // #include "62.last-remaining.h"
-#include "64.sum-nums.h"
+// #include "64.sum-nums.h"
+#include "65.app.h"

@@ -30,6 +30,7 @@ int main()
     // TestDiceNum();
     // TestIsStraight();
     // testLastRemaining();
-    TestSumNums();
+    // TestSumNums();
+    TestAdd();
     return 0;
 }
