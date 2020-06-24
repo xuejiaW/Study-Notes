@@ -29,6 +29,7 @@ int main()
     // TestMaxQueue();
     // TestDiceNum();
     // TestIsStraight();
-    testLastRemaining();
+    // testLastRemaining();
+    TestSumNums();
     return 0;
 }
