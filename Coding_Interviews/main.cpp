@@ -28,6 +28,7 @@ int main()
     // TestReverseLeftWords();
     // TestMaxQueue();
     // TestDiceNum();
-    TestIsStraight();
+    // TestIsStraight();
+    testLastRemaining();
     return 0;
 }
