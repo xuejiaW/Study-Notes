@@ -27,6 +27,7 @@ int main()
     // TestFindContinuousSequence();
     // TestReverseLeftWords();
     // TestMaxQueue();
-    TestDiceNum();
+    // TestDiceNum();
+    TestIsStraight();
     return 0;
 }
