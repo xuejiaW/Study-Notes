@@ -21,7 +21,6 @@
 
 // 输入: 2.00000, -2
 // 输出: 0.25000
-// 解释: 2-2 = 1/22 = 1/4 = 0.25
 
 #include <iostream>
 using namespace std;

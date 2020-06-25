@@ -1,3 +1,23 @@
+// 二叉树的中序遍历
+
+// 难度：中等
+
+// 标签：
+// 栈 | 树
+
+// 给定一个二叉树，返回它的中序遍历。
+
+// 示例:
+
+// 输入: [1,null,2,3]
+//    1
+//     \
+//      2
+//     /
+//    3
+
+// 输出: [1,3,2]
+
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -27,7 +47,7 @@ void TestInorderTraversal()
         cout << i << endl;
 }
 
-// Version: Recursive method
+// // Version: Recursive method
 // vector<int> inorderTraversal(TreeNode *root)
 // {
 //     if (root == nullptr)
@@ -42,7 +62,7 @@ void TestInorderTraversal()
 //     return left;
 // }
 
-// Version: Iterative method with stack
+// // Version: Iterative method with stack
 // vector<int> inorderTraversal(TreeNode *root)
 // {
 //     vector<int> result;
@@ -74,7 +94,6 @@ void TestInorderTraversal()
 // }
 
 // Version: Morris Traversal
-
 vector<int> inorderTraversal(TreeNode *root)
 {
     vector<int> result;

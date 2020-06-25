@@ -62,7 +62,7 @@ void TestSymmetricTree()
 
 // Can not use inorder result to judge, because some asymmetry tree with empty leaf may have the same inorder result
 
-// Version: recurrance, like DFS
+// // Version: recurrance, like DFS
 // bool isSymmetric(TreeNode *left, TreeNode *right);
 // bool isSymmetric(TreeNode *root)
 // {
@@ -83,7 +83,7 @@ void TestSymmetricTree()
 //     return (left->val == right->val) && isSymmetric(left->left, right->right) && isSymmetric(left->right, right->left);
 // }
 
-// Version: iteractive, like BFS
+// // Version: iteractive, like BFS
 bool isSymmetric(TreeNode *root)
 {
     if (!root || (!root->left && !root->right))

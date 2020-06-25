@@ -93,9 +93,11 @@ int getDepth(TreeNode *root)
 
     if (!root)
         return 0;
+
     int left = getDepth(root->left);
     if (left == -1)
         return -1;
+
     int right = getDepth(root->right);
     if (right == -1)
         return -1;

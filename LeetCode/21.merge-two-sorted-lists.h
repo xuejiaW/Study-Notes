@@ -15,7 +15,6 @@
 // 输入：1->2->4, 1->3->4
 // 输出：1->1->2->3->4->4
 
-
 #include <iostream>
 
 using namespace std;
@@ -65,10 +64,56 @@ ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
     if (l2 == nullptr)
         return l1;
 
-    ListNode *resultTemp = new ListNode(-1);
-    ListNode *result = resultTemp;
+    ListNode *resultTemp = nullptr;
+    ListNode *result = nullptr;
+
+    if (l1->val < l2->val)
+    {
+        resultTemp = l1;
+        l1 = l1->next;
+    }
+    else
+    {
+        resultTemp = l2;
+        l2 = l2->next;
+    }
 
     result = resultTemp;
+
+    while (l1 != nullptr && l2 != nullptr)
+    {
+        if (l1->val < l2->val)
+        {
+            resultTemp->next = l1;
+            l1 = l1->next;
+        }
+        else
+        {
+            resultTemp->next = l2;
+            l2 = l2->next;
+        }
+        resultTemp = resultTemp->next;
+    }
+
+    if (l1 != nullptr)
+        resultTemp->next = l1;
+    else
+        resultTemp->next = l2;
+
+    return result;
+}
+
+// Version： more concise, create a temp head
+// But may cause memory leak
+ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
+{
+    if (l1 == nullptr)
+        return l2;
+    if (l2 == nullptr)
+        return l1;
+
+    ListNode *resultTemp = new ListNode(-1);
+    ListNode *result = resultTemp;
 
     while (l1 != nullptr && l2 != nullptr)
     {

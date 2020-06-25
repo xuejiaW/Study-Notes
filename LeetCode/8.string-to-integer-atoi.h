@@ -67,22 +67,23 @@ int myAtoi(string str)
     int result = 0;
     int boundary = INT_MAX / 10;
 
-    while (str[index] == ' ')
+    while (str[index] == ' ') // Skip Space
         ++index;
 
-    if (str[index] == '-')
+    if (str[index] == '-') // Set flag
         flag = -1;
 
-    if (str[index] == '+' || str[index] == '-')
+    if (str[index] == '+' || str[index] == '-') // Skip flag
         index++;
 
-    while (index != str.size() && isdigit(str[index]))
+    while (index != str.size() && isdigit(str[index])) // Only handle digital
     {
         int curr = str[index] - '0';
-        if (result > boundary || (result == boundary && curr > 7))
+
+        if (result > boundary || (result == boundary && curr > 7)) // handle the boundary
             return flag == 1 ? INT_MAX : INT_MIN;
 
-        result = result * 10 + curr;
+        result = result * 10 + curr; // carry-over
         index++;
     }
 

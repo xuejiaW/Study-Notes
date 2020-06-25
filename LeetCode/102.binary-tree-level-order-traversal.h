@@ -76,7 +76,7 @@ void TestLevelOrderTraval()
 //     TreeNode *curr = nullptr;
 //     while (!toVisit.empty())
 //     {
-//         if (currVisit == currLevelNum)
+//         if (currVisit == currLevelNum) // one level completed
 //         {
 //             currVisit = 0;
 //             currLevelNum = nextLevelNum;
