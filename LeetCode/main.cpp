@@ -49,5 +49,6 @@ int main()
     // TestBalanced();
     // TestMaxSlidingWidnow();
     // TestMyAtoi();
-    TestLowestCommonAncester();
+    // TestLowestCommonAncester();
+    TestMaxProfit();
 }
