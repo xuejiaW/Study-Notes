@@ -48,5 +48,6 @@ int main()
     // TestMaxDepth();
     // TestBalanced();
     // TestMaxSlidingWidnow();
-    TestMyAtoi();
+    // TestMyAtoi();
+    TestLowestCommonAncester();
 }
