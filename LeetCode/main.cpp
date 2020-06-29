@@ -51,5 +51,6 @@ int main()
     // TestMyAtoi();
     // TestLowestCommonAncester();
     // TestMaxProfit();
-    TestAddTwoNumbers();
+    // TestAddTwoNumbers();
+    TestLongestPalindrome();
 }
