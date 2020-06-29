@@ -55,5 +55,6 @@ int main()
     // TestLongestPalindrome();
     // TestReverse();
     // TestMerge();
-    TestPermutations();
+    // TestPermutations();
+    TestIsValid();
 }
