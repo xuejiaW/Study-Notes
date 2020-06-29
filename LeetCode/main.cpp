@@ -57,5 +57,6 @@ int main()
     // TestMerge();
     // TestPermutations();
     // TestIsValid();
-    TestRightSideView();
+    // TestRightSideView();
+    TestFindKthLargest();
 }
