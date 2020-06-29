@@ -86,8 +86,7 @@ void TestTopKFrequent()
 //     return result;
 // }
 
-// Version: use priority_queue
-
+// // Version: use priority_queue
 vector<int> topKFrequent(vector<int> &nums, int k)
 {
     unordered_map<int, int> value2TimeMap;
@@ -97,6 +96,7 @@ vector<int> topKFrequent(vector<int> &nums, int k)
         ++value2TimeMap[i];
 
     priority_queue<pair<int, int>> times2ValueMaxHeap;
+
     int value2TimeMapSize = value2TimeMap.size();
     for (unordered_map<int, int>::iterator it = value2TimeMap.begin(); it != value2TimeMap.end(); ++it)
     {

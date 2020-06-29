@@ -54,7 +54,7 @@ void TestDailyTemperature()
 //     return result;
 // }
 
-// // Version: using find_if algorithm
+// Version: using find_if algorithm
 // vector<int> dailyTemperatures(vector<int> &T)
 // {
 //     vector<int> result;
@@ -71,7 +71,7 @@ void TestDailyTemperature()
 //     return result;
 // }
 
-// // Version: use priority queue
+// Version: use priority queue
 // vector<int> dailyTemperatures(vector<int> &T)
 // {
 //     int tsize = T.size();
@@ -104,19 +104,19 @@ vector<int> dailyTemperatures(vector<int> &T)
 {
     int tSize = T.size();
     vector<int> result(tSize, 0);
-    stack<pair<int, int>> value2MovingDaysStack; // need to move how many days to this value
+    stack<pair<int, int>> value2MovingDaysStack; // need to move how many days to larger value
     value2MovingDaysStack.push({T[tSize - 1], 0});
 
     int movingDays = 1;
     for (int i = tSize - 2; i >= 0; i--)
     {
         movingDays = 1;
+        // the remaining elements in stack must larger than T[i]
         while (!value2MovingDaysStack.empty() && T[i] >= value2MovingDaysStack.top().first)
         {
             movingDays += value2MovingDaysStack.top().second;
             value2MovingDaysStack.pop();
         }
-        // the remaining elements in stack must larger than T[i]
 
         if (value2MovingDaysStack.empty()) // no one larger then T[i]
         {

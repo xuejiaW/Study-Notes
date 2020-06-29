@@ -1,17 +1,21 @@
-// Tags:
-// array | hash-table
-// Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.
+// 和为K的子数组
 
-// Example 1:
+// 难度：中等
 
-// Input:nums = [1,1,1], k = 2
-// Output: 2
- 
+// 标签：
+// 数组 | 哈希表
 
-// Constraints:
+// 给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。
 
-// The length of the array is in range [1, 20,000].
-// The range of numbers in the array is [-1000, 1000] and the range of the integer k is [-1e7, 1e7].
+// 示例 1 :
+
+// 输入:nums = [1,1,1], k = 2
+// 输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。
+// 说明 :
+
+// 数组的长度为 [1, 20,000]。
+// 数组中元素的范围是 [-1000, 1000] ，且整数 k 的范围是 [-1e7, 1e7]
+
 
 
 #include <iostream>
@@ -45,38 +49,38 @@ void TestSubarraySum()
 }
 
 // Version: first calculating all the sum result
-// int subarraySum(vector<int> &nums, int k)
-// {
-//     int result = 0, vecSize = nums.size(), sum = 0;
+int subarraySum(vector<int> &nums, int k)
+{
+    int result = 0, vecSize = nums.size(), sum = 0;
 
-//     unordered_map<int, vector<int>> sum2IndexMap;
-//     vector<int> sumVec;
+    unordered_map<int, vector<int>> sum2IndexMap;
+    vector<int> sumVec;
 
-//     sum2IndexMap[0].push_back(-1);
+    sum2IndexMap[0].push_back(-1);
 
-//     for (int i = 0; i < vecSize; i++)
-//     {
-//         sum += nums[i];
-//         sum2IndexMap[sum].push_back(i);
-//         sumVec.push_back(sum);
-//     }
+    for (int i = 0; i < vecSize; i++)
+    {
+        sum += nums[i];
+        sum2IndexMap[sum].push_back(i);
+        sumVec.push_back(sum);
+    }
 
-//     vecSize = sumVec.size();
-//     int targetValue = 0;
-//     for (int i = 0; i != vecSize; ++i)
-//     {
-//         targetValue = sumVec[i] - k;
-//         if (sum2IndexMap.find(targetValue) != sum2IndexMap.end())
-//         {
-//             vector<int> &indexes = sum2IndexMap[targetValue];
-//             result += count_if(indexes.begin(), indexes.end(), [i](int index) { return index < i; });
-//         }
-//     }
+    vecSize = sumVec.size();
+    int targetValue = 0;
+    for (int i = 0; i != vecSize; ++i)
+    {
+        targetValue = sumVec[i] - k;
+        if (sum2IndexMap.find(targetValue) != sum2IndexMap.end())
+        {
+            vector<int> &indexes = sum2IndexMap[targetValue];
+            result += count_if(indexes.begin(), indexes.end(), [i](int index) { return index < i; });
+        }
+    }
 
-//     return result;
-// }
+    return result;
+}
 
-// // Version: calculating while summing
+// Version: calculating while summing
 int subarraySum(vector<int> &nums, int k)
 {
     int result = 0, sum = 0;

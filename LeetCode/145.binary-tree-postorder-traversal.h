@@ -80,21 +80,21 @@ vector<int> postorderTraversal(TreeNode *root)
 }
 
 // // Version: recurrance
-// vector<int> postorderTraversal(TreeNode *root)
-// {
-//     if (!root)
-//         return vector<int>();
+vector<int> postorderTraversal(TreeNode *root)
+{
+    if (!root)
+        return vector<int>();
 
-//     vector<int> result;
-//     vector<int> left = postorderTraversal(root->left);
-//     vector<int> right = postorderTraversal(root->right);
+    vector<int> result;
+    vector<int> left = postorderTraversal(root->left);
+    vector<int> right = postorderTraversal(root->right);
 
-//     result.insert(result.end(), left.begin(), left.end());
-//     result.insert(result.end(), right.begin(), right.end());
-//     result.push_back(root->val);
+    result.insert(result.end(), left.begin(), left.end());
+    result.insert(result.end(), right.begin(), right.end());
+    result.push_back(root->val);
 
-//     return result;
-// }
+    return result;
+}
 
 // // Version: iterative
 // vector<int> postorderTraversal(TreeNode *root)

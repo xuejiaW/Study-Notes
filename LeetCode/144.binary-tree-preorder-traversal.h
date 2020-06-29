@@ -49,30 +49,30 @@ void TestPreorderTraversal()
 }
 
 // // Version: interactive
-// vector<int> preorderTraversal(TreeNode *root)
-// {
-//     if (root == nullptr)
-//         return vector<int>();
+vector<int> preorderTraversal(TreeNode *root)
+{
+    if (root == nullptr)
+        return vector<int>();
 
-//     vector<int> result;
-//     stack<TreeNode *> toVisitNodes;
-//     toVisitNodes.push(root);
+    vector<int> result;
+    stack<TreeNode *> toVisitNodes;
+    toVisitNodes.push(root);
 
-//     TreeNode *curr = nullptr;
-//     while (!toVisitNodes.empty())
-//     {
-//         curr = toVisitNodes.top();
-//         toVisitNodes.pop();
+    TreeNode *curr = nullptr;
+    while (!toVisitNodes.empty())
+    {
+        curr = toVisitNodes.top();
+        toVisitNodes.pop();
 
-//         result.push_back(curr->val);
-//         if (curr->right)
-//             toVisitNodes.push(curr->right);
-//         if (curr->left)
-//             toVisitNodes.push(curr->left);
-//     }
+        result.push_back(curr->val);
+        if (curr->right)
+            toVisitNodes.push(curr->right);
+        if (curr->left)
+            toVisitNodes.push(curr->left);
+    }
 
-//     return result;
-// }
+    return result;
+}
 
 // // Version: recurrance
 vector<int> preorderTraversal(TreeNode *root)

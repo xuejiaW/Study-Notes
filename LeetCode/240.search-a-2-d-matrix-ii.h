@@ -88,7 +88,7 @@ void TestSearchMatrixII()
 //     return false;
 // }
 
-// Version: comparing with top-right
+// Version: comparing with top-right, like binary search
 bool searchMatrix(vector<vector<int>> &matrix, int target)
 {
     if (matrix.empty() || matrix[0].empty())

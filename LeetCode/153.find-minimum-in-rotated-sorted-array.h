@@ -33,7 +33,7 @@ void TestFindMinInRotatedSortedArray()
     cout << "result is " << result << endl;
 }
 
-// Version: binary-search
+// // Version: binary-search
 // int findMin(vector<int> &nums)
 // {
 //     if (nums.empty())

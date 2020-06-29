@@ -28,7 +28,7 @@ void TestIntegerBreak()
     cout << "result is " << result << endl;
 }
 
-// Version: Dynamic programming
+// // Version: Dynamic programming
 // int integerBreak(int n)
 // {
 //     unordered_map<int, int> length2CuttedMaxMap;

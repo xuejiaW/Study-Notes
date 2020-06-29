@@ -1,4 +1,4 @@
-// Tags: 
+// Tags:
 // array
 
 // Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
@@ -8,7 +8,6 @@
 // Input: [0,1,0,3,12]
 // Output: [1,3,12,0,0]
 // Note:
-
 
 #include <vector>
 #include <iostream>
@@ -27,20 +26,20 @@ void TestMoveZeroes()
 }
 
 // // Version: with external memory allocation
-// void moveZeroes(vector<int> &nums)
-// {
-//     vector<int> result(nums.size());
+void moveZeroes(vector<int> &nums)
+{
+    vector<int> result(nums.size());
 
-//     int index = 0;
+    int index = 0;
 
-//     for (const int &i : nums)
-//     {
-//         if (i != 0)
-//             result[index++] = i;
-//     }
+    for (const int &i : nums)
+    {
+        if (i != 0)
+            result[index++] = i;
+    }
 
-//     nums = result;
-// }
+    nums = result;
+}
 
 // Version: without external memory allocation
 void moveZeroes(vector<int> &nums)
@@ -56,4 +55,16 @@ void moveZeroes(vector<int> &nums)
 
     while (zeroNums != 0)
         nums[numsSize - (zeroNums--)] = 0;
+}
+
+// Version: two pointer
+void moveZeroes(vector<int> &nums)
+{
+    for (int lastNonZeroFoundAt = 0, cur = 0; cur < nums.size(); cur++)
+    {
+        if (nums[cur] != 0)
+        {
+            swap(nums[lastNonZeroFoundAt++], nums[cur]);
+        }
+    }
 }

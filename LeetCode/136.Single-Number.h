@@ -37,19 +37,19 @@ void TestSingleNumber()
 }
 
 //// Version: Use extra memory
-// int singleNumber(vector<int> &nums)
-// {
-//     unordered_map<int, int> valueTimesDict;
+int singleNumber(vector<int> &nums)
+{
+    unordered_map<int, int> valueTimesDict;
 
-//     for (int i : nums)
-//         valueTimesDict[i]++;
+    for (int i : nums)
+        valueTimesDict[i]++;
 
-//     for (unordered_map<int, int>::iterator i = valueTimesDict.begin(); i != valueTimesDict.end(); ++i)
-//         if (i->second == 1)
-//             return i->first;
+    for (unordered_map<int, int>::iterator i = valueTimesDict.begin(); i != valueTimesDict.end(); ++i)
+        if (i->second == 1)
+            return i->first;
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 // Version: Use xor (bit-manipulation) 
