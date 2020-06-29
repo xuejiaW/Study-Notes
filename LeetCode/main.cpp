@@ -56,5 +56,6 @@ int main()
     // TestReverse();
     // TestMerge();
     // TestPermutations();
-    TestIsValid();
+    // TestIsValid();
+    TestRightSideView();
 }
