@@ -54,5 +54,6 @@ int main()
     // TestAddTwoNumbers();
     // TestLongestPalindrome();
     // TestReverse();
-    TestMerge();
+    // TestMerge();
+    TestPermutations();
 }
