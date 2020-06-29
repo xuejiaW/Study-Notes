@@ -50,5 +50,6 @@ int main()
     // TestMaxSlidingWidnow();
     // TestMyAtoi();
     // TestLowestCommonAncester();
-    TestMaxProfit();
+    // TestMaxProfit();
+    TestAddTwoNumbers();
 }
