@@ -52,5 +52,6 @@ int main()
     // TestLowestCommonAncester();
     // TestMaxProfit();
     // TestAddTwoNumbers();
-    TestLongestPalindrome();
+    // TestLongestPalindrome();
+    TestReverse();
 }
