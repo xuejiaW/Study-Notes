@@ -53,5 +53,6 @@ int main()
     // TestMaxProfit();
     // TestAddTwoNumbers();
     // TestLongestPalindrome();
-    TestReverse();
+    // TestReverse();
+    TestMerge();
 }
