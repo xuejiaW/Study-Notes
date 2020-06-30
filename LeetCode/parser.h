@@ -10,11 +10,11 @@ using namespace std;
 vector<int> parse2Vector(string str)
 {
     vector<int> result;
-    int sSize = str.size();
-    str = str.substr(1, sSize - 2);
+    str = str.substr(1, str.size() - 2);
     int pos = 0;
     while ((pos = str.find(',')) != -1)
     {
+        string sub = str.substr(0, pos);
         result.push_back(stoi(str.substr(0, pos)));
         str.erase(0, pos + 1);
     }
@@ -23,4 +23,18 @@ vector<int> parse2Vector(string str)
     return result;
 }
 
-// vector<vector<int>> 
+vector<vector<int>> parser2VectorArray(string str)
+{
+    vector<vector<int>> result;
+    str = str.substr(1, str.size() - 2);
+    int pos = 0;
+    while ((pos = str.find(",[")) != -1)
+    {
+        string sub = str.substr(0, pos);
+        result.push_back(parse2Vector(sub));
+        str.erase(0, pos + 1);
+    }
+
+    result.push_back(parse2Vector(str));
+    return result;
+}
