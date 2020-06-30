@@ -61,5 +61,6 @@ int main()
     // TestFindKthLargest();
     // TestNextPermutation();
     // TestNumIslands();
-    TestRestoreIpAddress();
+    // TestRestoreIpAddress();
+    TestIsPalindrome();
 }
