@@ -50,3 +50,13 @@ void DebugTree(TreeNode *head)
         cout << endl;
     }
 }
+
+void DebugListNode(ListNode *node)
+{
+    while (node)
+    {
+        cout << node->val << " ";
+        node = node->next;
+    }
+    cout << endl;
+}

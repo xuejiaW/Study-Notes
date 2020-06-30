@@ -5,7 +5,8 @@
 #include <queue>
 #include <iostream>
 #include <algorithm>
-#include "treeNode.h"
+#include "TreeNode.h"
+#include "ListNode.h"
 
 using namespace std;
 
@@ -65,7 +66,7 @@ vector<vector<char>> parser2VectorArray_char(string str)
     return result;
 }
 
-TreeNode *parser2Tree(string str)
+TreeNode *parse2Tree(string str)
 {
     TreeNode *head = nullptr;
     queue<TreeNode *> headNodeQuque;
@@ -125,4 +126,21 @@ TreeNode *parser2Tree(string str)
     }
 
     return head;
+}
+
+ListNode *parse2List(string str)
+{
+    ListNode *headPrev = new ListNode(-1);
+    ListNode *headPrevTemp = headPrev;
+    str = str.substr(1, str.size() - 2);
+    int pos = 0;
+    while ((pos = str.find(',')) != -1)
+    {
+        headPrevTemp->next = new ListNode(stoi(str.substr(0, pos)));
+        str.erase(0, pos + 1);
+        headPrevTemp = headPrevTemp->next;
+    }
+    headPrevTemp->next = new ListNode(stoi(str));
+
+    return headPrev->next;
 }

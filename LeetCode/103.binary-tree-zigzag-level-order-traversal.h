@@ -33,7 +33,7 @@ vector<vector<int>> zigzagLevelOrder(TreeNode *root);
 
 void TestBinaryTreeZigzagLevelOrderTraversal()
 {
-    TreeNode *node = parser2Tree("[3,9,20,null,null,15,7]");
+    TreeNode *node = parse2Tree("[3,9,20,null,null,15,7]");
     DebugTree(node);
     auto result = zigzagLevelOrder(node);
     DebugVectorArray(result);
