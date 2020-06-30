@@ -45,7 +45,7 @@ void TestFindKthLargest()
 //     return nums[k - 1];
 // }
 
-// Version: stack
+// // Version: stack
 // int findKthLargest(vector<int> &nums, int k)
 // {
 //     if (nums.empty())

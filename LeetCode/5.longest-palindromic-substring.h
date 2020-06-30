@@ -69,7 +69,7 @@ void TestLongestPalindrome()
 // }
 
 // Version: dynamic programming
-// f[i][j] = f[i+1][j+1] && s[i]==s[j]
+// f[i][j] = f[i+1][j-1] && s[i]==s[j]
 string longestPalindrome(string s)
 {
     int sSize = s.length();

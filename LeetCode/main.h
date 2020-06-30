@@ -17,7 +17,7 @@
 // #include "50.pow-x-n.h"
 // #include "53.maximum-subarray.h"
 // #include "54.spiral-matrix.h"
-// #include "56.merge-inteveral.h"
+// #include "56.merge-interval.h"
 // #include "70.climbing-stairs.h"
 // #include "79.word-search.h"
 // #include "94.binary-tree-inorder-traversal.h"
