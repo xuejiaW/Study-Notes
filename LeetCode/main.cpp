@@ -64,5 +64,6 @@ int main()
     // TestRestoreIpAddress();
     // TestIsPalindrome();
     // TestBinaryTreeZigzagLevelOrderTraversal();
-    TestCoinChange();
+    // TestCoinChange();
+    TestRemoveNthFromEnd();
 }
