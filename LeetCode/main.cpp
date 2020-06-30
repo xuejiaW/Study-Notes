@@ -63,5 +63,6 @@ int main()
     // TestNumIslands();
     // TestRestoreIpAddress();
     // TestIsPalindrome();
-    TestBinaryTreeZigzagLevelOrderTraversal();
+    // TestBinaryTreeZigzagLevelOrderTraversal();
+    TestCoinChange();
 }
