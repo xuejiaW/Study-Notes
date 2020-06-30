@@ -60,5 +60,6 @@ int main()
     // TestRightSideView();
     // TestFindKthLargest();
     // TestNextPermutation();
-    TestNumIslands();
+    // TestNumIslands();
+    TestRestoreIpAddress();
 }
