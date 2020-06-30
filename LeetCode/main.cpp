@@ -62,5 +62,6 @@ int main()
     // TestNextPermutation();
     // TestNumIslands();
     // TestRestoreIpAddress();
-    TestIsPalindrome();
+    // TestIsPalindrome();
+    TestBinaryTreeZigzagLevelOrderTraversal();
 }

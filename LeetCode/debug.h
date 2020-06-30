@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include "parser.h"
 
 using namespace std;
 
@@ -19,6 +20,33 @@ void DebugVectorArray(vector<vector<T>> vecArray)
     {
         for (auto i : vec)
             cout << i << " ";
+        cout << endl;
+    }
+}
+
+void DebugTree(TreeNode *head)
+{
+    queue<TreeNode *> toVisit;
+    toVisit.push(head);
+    while (!toVisit.empty())
+    {
+        int size = toVisit.size();
+        for (int i = 0; i != size; ++i)
+        {
+            TreeNode *curr = toVisit.front();
+            toVisit.pop();
+            if (!curr)
+            {
+                cout << "null ";
+                continue;
+            }
+            else
+            {
+                cout << curr->val << " ";
+                toVisit.push(curr->left);
+                toVisit.push(curr->right);
+            }
+        }
         cout << endl;
     }
 }
