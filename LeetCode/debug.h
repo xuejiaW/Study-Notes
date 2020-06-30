@@ -5,13 +5,15 @@
 
 using namespace std;
 
-void DebugIntVector(vector<int> vec)
+template <typename T>
+void DebugVector(vector<T> vec)
 {
     for (auto i : vec)
         cout << i << endl;
 }
 
-void DebugIntVectorArray(vector<vector<int>> vecArray)
+template <typename T>
+void DebugVectorArray(vector<vector<T>> vecArray)
 {
     for (auto vec : vecArray)
     {

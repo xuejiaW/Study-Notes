@@ -59,5 +59,6 @@ int main()
     // TestIsValid();
     // TestRightSideView();
     // TestFindKthLargest();
-    TestNextPermutation();
+    // TestNextPermutation();
+    TestNumIslands();
 }

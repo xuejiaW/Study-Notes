@@ -25,7 +25,7 @@ void nextPermutation(vector<int> &nums);
 
 void TestNextPermutation()
 {
-    vector<int> nums = parse2Vector("[5,1,1]");
+    vector<int> nums = parse2Vector_int("[5,1,1]");
 
     nextPermutation(nums);
     for (auto i : nums)
