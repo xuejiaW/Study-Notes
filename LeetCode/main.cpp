@@ -66,5 +66,6 @@ int main()
     // TestBinaryTreeZigzagLevelOrderTraversal();
     // TestCoinChange();
     // TestRemoveNthFromEnd();
-    TestGenerateParenthesis();
+    // TestGenerateParenthesis();
+    TestSwapPairs();
 }
