@@ -70,5 +70,6 @@ int main()
     // TestSwapPairs();
     // TestMerge();
     // TestSortList();
-    TestLongestCommonPrefix();
+    // TestLongestCommonPrefix();
+    TestRob();
 }
