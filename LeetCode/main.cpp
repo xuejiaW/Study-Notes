@@ -65,5 +65,6 @@ int main()
     // TestIsPalindrome();
     // TestBinaryTreeZigzagLevelOrderTraversal();
     // TestCoinChange();
-    TestRemoveNthFromEnd();
+    // TestRemoveNthFromEnd();
+    TestGenerateParenthesis();
 }
