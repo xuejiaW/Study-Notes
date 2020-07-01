@@ -69,5 +69,6 @@ int main()
     // TestGenerateParenthesis();
     // TestSwapPairs();
     // TestMerge();
-    TestSortList();
+    // TestSortList();
+    TestLongestCommonPrefix();
 }
