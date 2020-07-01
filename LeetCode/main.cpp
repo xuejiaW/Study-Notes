@@ -67,5 +67,7 @@ int main()
     // TestCoinChange();
     // TestRemoveNthFromEnd();
     // TestGenerateParenthesis();
-    TestSwapPairs();
+    // TestSwapPairs();
+    // TestMerge();
+    TestSortList();
 }
