@@ -73,5 +73,6 @@ int main()
     // TestLongestCommonPrefix();
     // TestRob();
     // TestRevertBetween();
-    TestReorderList();
+    // TestReorderList();
+    TestAddTwoNum();
 }
