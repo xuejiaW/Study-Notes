@@ -74,5 +74,6 @@ int main()
     // TestRob();
     // TestRevertBetween();
     // TestReorderList();
-    TestAddTwoNum();
+    // TestAddTwoNum();
+    TestHasCycle();
 }
