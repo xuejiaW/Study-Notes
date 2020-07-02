@@ -76,5 +76,6 @@ int main()
     // TestReorderList();
     // TestAddTwoNum();
     // TestHasCycle();
-    TestLengthOfLTS();
+    // TestLengthOfLTS();
+    TestDiameterOfBinaryTree();
 }
