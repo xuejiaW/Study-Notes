@@ -75,5 +75,6 @@ int main()
     // TestRevertBetween();
     // TestReorderList();
     // TestAddTwoNum();
-    TestHasCycle();
+    // TestHasCycle();
+    TestLengthOfLTS();
 }
