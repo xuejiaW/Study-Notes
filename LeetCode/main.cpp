@@ -79,5 +79,6 @@ int main()
     // TestLengthOfLTS();
     // TestDiameterOfBinaryTree();
     // TestMaxAreaOfIsland();
-    TestMaxSquare();
+    // TestMaxSquare();
+    TestIsValidBST();
 }
