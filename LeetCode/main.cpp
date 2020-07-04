@@ -77,5 +77,6 @@ int main()
     // TestAddTwoNum();
     // TestHasCycle();
     // TestLengthOfLTS();
-    TestDiameterOfBinaryTree();
+    // TestDiameterOfBinaryTree();
+    TestMaxAreaOfIsland();
 }
