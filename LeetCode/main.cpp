@@ -80,5 +80,6 @@ int main()
     // TestDiameterOfBinaryTree();
     // TestMaxAreaOfIsland();
     // TestMaxSquare();
-    TestIsValidBST();
+    // TestIsValidBST();
+    TestSubsets();
 }
