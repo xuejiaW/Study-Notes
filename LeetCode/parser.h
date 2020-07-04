@@ -57,7 +57,7 @@ vector<vector<char>> parser2VectorArray_char(string str)
     while ((pos = str.find(",")) != -1)
     {
         string sub = str.substr(0, pos);
-        cout << "sub is " << sub << endl;
+        // cout << "sub is " << sub << endl;
         result.push_back(parse2Vector_char(sub));
         str.erase(0, pos + 1);
     }

@@ -78,5 +78,6 @@ int main()
     // TestHasCycle();
     // TestLengthOfLTS();
     // TestDiameterOfBinaryTree();
-    TestMaxAreaOfIsland();
+    // TestMaxAreaOfIsland();
+    TestMaxSquare();
 }
