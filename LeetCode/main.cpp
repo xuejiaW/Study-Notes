@@ -81,5 +81,6 @@ int main()
     // TestMaxAreaOfIsland();
     // TestMaxSquare();
     // TestIsValidBST();
-    TestSubsets();
+    // TestSubsets();
+    TestRemoveDuplicates();
 }
