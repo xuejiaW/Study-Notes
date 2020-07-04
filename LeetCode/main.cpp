@@ -82,5 +82,6 @@ int main()
     // TestMaxSquare();
     // TestIsValidBST();
     // TestSubsets();
-    TestRemoveDuplicates();
+    // TestRemoveDuplicates();
+    TestMySqrt();
 }
