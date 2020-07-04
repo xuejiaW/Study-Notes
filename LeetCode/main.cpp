@@ -83,5 +83,6 @@ int main()
     // TestIsValidBST();
     // TestSubsets();
     // TestRemoveDuplicates();
-    TestMySqrt();
+    // TestMySqrt();
+    TestCanJump();
 }
