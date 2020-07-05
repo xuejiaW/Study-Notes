@@ -88,5 +88,6 @@ int main()
     // TestLetterCombinations();
     // TestRotate();
     // TestUniquePath();
-    TestMinPathSum();
+    // TestMinPathSum();
+    TestSortColors();
 }
