@@ -87,5 +87,6 @@ int main()
     // TestCanJump();
     // TestLetterCombinations();
     // TestRotate();
-    TestUniquePath();
+    // TestUniquePath();
+    TestMinPathSum();
 }
