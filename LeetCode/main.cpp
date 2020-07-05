@@ -90,5 +90,6 @@ int main()
     // TestUniquePath();
     // TestMinPathSum();
     // TestSortColors();
-    TestNumTrees();
+    // TestNumTrees();
+    TestFlatten();
 }

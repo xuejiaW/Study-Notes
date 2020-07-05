@@ -5,6 +5,7 @@
 #include <queue>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 #include "TreeNode.h"
 #include "ListNode.h"
 
@@ -68,61 +69,51 @@ vector<vector<char>> parser2VectorArray_char(string str)
 
 TreeNode *parse2Tree(string str)
 {
-    TreeNode *head = nullptr;
-    queue<TreeNode *> headNodeQuque;
-    int currNode = -1; // 1 for left, 2 for right    // cout << "after debug" << endl;
-
-    str = str.substr(1, str.size() - 2);
+    str = str.substr(1, str.size() - 2); // erase [ and ]
     int pos = 0;
+    queue<string> strQueue;
 
     while ((pos = str.find(',')) != -1)
     {
         string temp = str.substr(0, pos);
-
-        if (head == nullptr)
-        {
-            head = new TreeNode(stoi(temp));
-            headNodeQuque.push(head);
-            currNode = 1;
-        }
-        else if (!headNodeQuque.empty())
-        {
-            TreeNode *tempHead = headNodeQuque.front();
-            if (currNode == 1)
-            {
-                if (temp != "null")
-                {
-                    tempHead->left = new TreeNode(stoi(temp));
-                    headNodeQuque.push(head->left);
-                }
-                currNode = 2;
-            }
-            else if (currNode == 2)
-            {
-                if (temp != "null")
-                {
-                    tempHead->right = new TreeNode(stoi(temp));
-                    headNodeQuque.push(head->right);
-                }
-                currNode = 1;
-                headNodeQuque.pop();
-            }
-        }
-
+        strQueue.push(temp);
         str.erase(0, pos + 1);
     }
+    strQueue.push(str);
 
-    if (!headNodeQuque.empty())
+    if (strQueue.empty())
+        return nullptr;
+
+    TreeNode *head = new TreeNode(stoi(strQueue.front()));
+    strQueue.pop();
+
+    vector<TreeNode *> lastLevelNodes;
+    lastLevelNodes.push_back(head);
+
+    int currLevel = 1;
+
+    while (!strQueue.empty())
     {
-        if (str != "null")
+        vector<TreeNode *> currentLevelNodes;
+        int targetNum = pow(2, (currLevel++));
+
+        for (int i = 0; i != targetNum; ++i)
         {
-            TreeNode *tempHead = headNodeQuque.front();
-            TreeNode *temp = new TreeNode(stoi(str));
-            if (currNode == 1)
-                tempHead->left = temp;
-            else if (currNode == 2)
-                tempHead->right = temp;
+            if (strQueue.empty())
+                break;
+            string str = strQueue.front();
+            strQueue.pop();
+            TreeNode *head = lastLevelNodes[i / 2];
+            if (str == "null")
+                currentLevelNodes.push_back(nullptr);
+            else
+            {
+                TreeNode *n = new TreeNode(stoi(str));
+                currentLevelNodes.push_back(n);
+                i % 2 == 0 ? head->left = n : head->right = n;
+            }
         }
+        lastLevelNodes = currentLevelNodes;
     }
 
     return head;
