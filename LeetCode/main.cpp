@@ -89,5 +89,6 @@ int main()
     // TestRotate();
     // TestUniquePath();
     // TestMinPathSum();
-    TestSortColors();
+    // TestSortColors();
+    TestNumTrees();
 }
