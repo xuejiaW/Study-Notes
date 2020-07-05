@@ -85,5 +85,6 @@ int main()
     // TestRemoveDuplicates();
     // TestMySqrt();
     // TestCanJump();
-    TestLetterCombinations();
+    // TestLetterCombinations();
+    TestRotate();
 }
