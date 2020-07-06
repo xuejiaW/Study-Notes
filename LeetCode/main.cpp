@@ -91,5 +91,6 @@ int main()
     // TestMinPathSum();
     // TestSortColors();
     // TestNumTrees();
-    TestFlatten();
+    // TestFlatten();
+    TestWordBreak();
 }
