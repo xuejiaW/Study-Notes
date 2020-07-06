@@ -94,5 +94,6 @@ int main()
     // TestFlatten();
     // TestWordBreak();
     // TestDetectCycle();
-    TestLRUCache();
+    // TestLRUCache();
+    TestMaxProduct();
 }
