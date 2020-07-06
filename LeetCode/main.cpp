@@ -97,5 +97,6 @@ int main()
     // TestLRUCache();
     // TestMaxProduct();
     // TestCanFinish();
-    TestIsPalindrome();
+    // TestIsPalindrome();
+    TestTrie();
 }
