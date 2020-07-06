@@ -93,5 +93,6 @@ int main()
     // TestNumTrees();
     // TestFlatten();
     // TestWordBreak();
-    TestDetectCycle();
+    // TestDetectCycle();
+    TestLRUCache();
 }
