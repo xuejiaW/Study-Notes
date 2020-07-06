@@ -35,39 +35,42 @@ void TestCanFinish()
 }
 
 // // Version: BFS
-// bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
-// {
-//     vector<int> reliesNum(numCourses); // reliesNum[0] -> course 0 relyes how many courses
-//     vector<vector<int>> graphics(numCourses, vector<int>());
-//     queue<int> nonRelyCourses;
+bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
+{
+    vector<int> reliesNum(numCourses); // reliesNum[0] -> course 0 relyes how many courses
+    vector<vector<int>> courseRelationGraph(numCourses, vector<int>());
+    queue<int> nonRelyCourses;
 
-//     for (vector<int> &requisite : prerequisites)
-//     {
-//         reliesNum[requisite[0]]++;
-//         graphics[requisite[1]].push_back(requisite[0]);
-//     }
+    // build relationship graphic and calculating every courses rely how many other courses
+    for (vector<int> &requisite : prerequisites)
+    {
+        reliesNum[requisite[0]]++;
+        courseRelationGraph[requisite[1]].push_back(requisite[0]);
+    }
 
-//     for (int i = 0; i != numCourses; ++i)
-//     {
-//         if (reliesNum[i] == 0)
-//             nonRelyCourses.push(i);
-//     }
+    // found nonRely courses
+    for (int i = 0; i != numCourses; ++i)
+    {
+        if (reliesNum[i] == 0)
+            nonRelyCourses.push(i);
+    }
 
-//     while (!nonRelyCourses.empty())
-//     {
-//         numCourses--;
-//         int course = nonRelyCourses.front();
-//         nonRelyCourses.pop();
-//         vector<int> &reliedCourses = graphics[course];
-//         for (const int &course : reliedCourses)
-//         {
-//             if (--reliesNum[course] == 0)
-//                 nonRelyCourses.push(course);
-//         }
-//     }
+    while (!nonRelyCourses.empty())
+    {
+        numCourses--; // study one courses
+        int course = nonRelyCourses.front();
+        nonRelyCourses.pop();
 
-//     return numCourses == 0;
-// }
+        vector<int> &reliedCourses = courseRelationGraph[course];
+        for (const int &course : reliedCourses)
+        {
+            if (--reliesNum[course] == 0)// reduce one rely nums
+                nonRelyCourses.push(course);
+        }
+    }
+
+    return numCourses == 0;
+}
 
 // Version: DFS
 // TODO
