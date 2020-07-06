@@ -92,5 +92,6 @@ int main()
     // TestSortColors();
     // TestNumTrees();
     // TestFlatten();
-    TestWordBreak();
+    // TestWordBreak();
+    TestDetectCycle();
 }
