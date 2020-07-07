@@ -98,5 +98,6 @@ int main()
     // TestMaxProduct();
     // TestCanFinish();
     // TestIsPalindrome();
-    TestTrie();
+    // TestTrie();
+    TestDecodeString();
 }
