@@ -100,5 +100,6 @@ int main()
     // TestIsPalindrome();
     // TestTrie();
     // TestDecodeString();
-    TestReconstructQueue();
+    // TestReconstructQueue();
+    TestMeetingRoom();
 }
