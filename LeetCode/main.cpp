@@ -99,5 +99,6 @@ int main()
     // TestCanFinish();
     // TestIsPalindrome();
     // TestTrie();
-    TestDecodeString();
+    // TestDecodeString();
+    TestReconstructQueue();
 }
