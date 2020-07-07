@@ -101,5 +101,6 @@ int main()
     // TestTrie();
     // TestDecodeString();
     // TestReconstructQueue();
-    TestMeetingRoom();
+    // TestMeetingRoom();
+    TestFindDuplicate();
 }
