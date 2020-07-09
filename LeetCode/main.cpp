@@ -102,5 +102,6 @@ int main()
     // TestDecodeString();
     // TestReconstructQueue();
     // TestMeetingRoom();
-    TestFindDuplicate();
+    // TestFindDuplicate();
+    TestSortArray();
 }
