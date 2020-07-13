@@ -103,5 +103,6 @@ int main()
     // TestReconstructQueue();
     // TestMeetingRoom();
     // TestFindDuplicate();
-    TestSortArray();
+    // TestSortArray();
+    TestReverseBits();
 }
