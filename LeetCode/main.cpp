@@ -104,5 +104,8 @@ int main()
     // TestMeetingRoom();
     // TestFindDuplicate();
     // TestSortArray();
-    TestReverseBits();
+    // TestReverseBits();
+    // TestIsCompleteTree();
+    // TestLFUCache();
+    TestReverseKGroup();
 }
