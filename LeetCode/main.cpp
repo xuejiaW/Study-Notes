@@ -109,5 +109,6 @@ int main()
     // TestLFUCache();
     // TestReverseKGroup();
     // TestStrStr();
-    TestFindDisappearNumbers();
+    // TestFindDisappearNumbers();
+    TestFindAllDuplicates();
 }
