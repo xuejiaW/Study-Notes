@@ -110,5 +110,6 @@ int main()
     // TestReverseKGroup();
     // TestStrStr();
     // TestFindDisappearNumbers();
-    TestFindAllDuplicates();
+    // TestFindAllDuplicates();
+    TestFirstMissing();
 }
