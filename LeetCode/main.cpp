@@ -107,5 +107,6 @@ int main()
     // TestReverseBits();
     // TestIsCompleteTree();
     // TestLFUCache();
-    TestReverseKGroup();
+    // TestReverseKGroup();
+    TestStrStr();
 }
