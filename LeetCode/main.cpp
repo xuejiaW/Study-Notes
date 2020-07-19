@@ -108,5 +108,6 @@ int main()
     // TestIsCompleteTree();
     // TestLFUCache();
     // TestReverseKGroup();
-    TestStrStr();
+    // TestStrStr();
+    TestFindDisappearNumbers();
 }
