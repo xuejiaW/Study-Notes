@@ -33,14 +33,17 @@ void TestSortArray()
 void quickSort(vector<int> &nums, int left, int right);
 void HeapSort(vector<int> &nums);
 void MergeSort(vector<int> &nums, vector<int> &temp, int left, int right);
+void CountingSort(vector<int> &nums);
+
 vector<int> sortArray(vector<int> &nums)
 {
     // quickSort(nums, 0, nums.size() - 1);
     // HeapSort(nums);
 
-    vector<int> temp(nums.size(), 0);
-    MergeSort(nums, temp, 0, nums.size() - 1);
+    // vector<int> temp(nums.size(), 0);
+    // MergeSort(nums, temp, 0, nums.size() - 1);
 
+    CountingSort(nums);
     return nums;
 }
 
@@ -103,26 +106,53 @@ vector<int> sortArray(vector<int> &nums)
 //     }
 // }
 
-// Version: merge sort
-void MergeSort(vector<int> &nums, vector<int> &temp, int left, int right)
+// // Version: merge sort
+// void MergeSort(vector<int> &nums, vector<int> &temp, int left, int right)
+// {
+//     if (left >= right)
+//         return;
+
+//     int middle = (left + right) / 2;
+//     // sort left and right part
+//     MergeSort(nums, temp, left, middle);
+//     MergeSort(nums, temp, middle + 1, right);
+
+//     // Merge
+//     int leftBegin = left, rightBegin = middle + 1, toInsert = 0;
+//     while (leftBegin <= middle && rightBegin <= right)
+//         temp[toInsert++] = nums[leftBegin] < nums[rightBegin] ? nums[leftBegin++] : nums[rightBegin++];
+//     while (leftBegin <= middle)
+//         temp[toInsert++] = nums[leftBegin++];
+//     while (rightBegin <= right)
+//         temp[toInsert++] = nums[rightBegin++];
+
+//     for (int i = 0; i != right - left + 1; ++i)
+//         nums[left + i] = temp[i];
+// }
+
+// Version: counting sort
+void CountingSort(vector<int> &nums)
 {
-    if (left >= right)
-        return;
+    int minVal = INT_MAX, maxVal = INT_MIN;
+    for (const int &i : nums)
+    {
+        minVal = min(i, minVal);
+        maxVal = max(i, maxVal);
+    }
 
-    int middle = (left + right) / 2;
-    // sort left and right part
-    MergeSort(nums, temp, left, middle);
-    MergeSort(nums, temp, middle + 1, right);
+    vector<int> counter(maxVal - minVal + 1);
+    for (const int &i : nums)
+    {
+        counter[i - minVal]++;
+    }
 
-    // Merge
-    int leftBegin = left, rightBegin = middle + 1, toInsert = 0;
-    while (leftBegin <= middle && rightBegin <= right)
-        temp[toInsert++] = nums[leftBegin] < nums[rightBegin] ? nums[leftBegin++] : nums[rightBegin++];
-    while (leftBegin <= middle)
-        temp[toInsert++] = nums[leftBegin++];
-    while (rightBegin <= right)
-        temp[toInsert++] = nums[rightBegin++];
-
-    for (int i = 0; i != right - left + 1; ++i)
-        nums[left + i] = temp[i];
+    int toInsertIndex = 0;
+    for (int i = 0; i != counter.size(); ++i)
+    {
+        while (counter[i] != 0 && toInsertIndex < nums.size())
+        {
+            nums[toInsertIndex++] = minVal + i;
+            counter[i]--;
+        }
+    }
 }

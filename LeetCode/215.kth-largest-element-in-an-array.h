@@ -21,6 +21,7 @@
 #include <iostream>
 #include <algorithm>
 #include <stack>
+#include "debug.h"
 
 using namespace std;
 
@@ -28,8 +29,8 @@ int findKthLargest(vector<int> &nums, int k);
 
 void TestFindKthLargest()
 {
-    vector<int> nums{3, 2, 1, 5, 6, 4};
-    int result = findKthLargest(nums, 2);
+    vector<int> nums{3, 2, 3, 1, 2, 4, 5, 5, 6};
+    int result = findKthLargest(nums, 4);
     // vector<int> nums{3, 2, 3, 1, 2, 4, 5, 5, 6};
     // int result = findKthLargest(nums, 4);
     // vector<int> nums{-1, 2, 0};
@@ -80,15 +81,47 @@ void TestFindKthLargest()
 //     return mainStack.top();
 // }
 
-// Version: priority_queue
+// // Version: priority_queue
+// int findKthLargest(vector<int> &nums, int k)
+// {
+//     priority_queue<int, vector<int>, greater<int>> minHeap;
+//     for (const int &i : nums)
+//     {
+//         minHeap.push(i);
+//         if (minHeap.size() > k)
+//             minHeap.pop();
+//     }
+//     return minHeap.top();
+// }
+
+// Version: like quick sort
+int quickSelect(vector<int> &nums, int left, int right, int targetIndex)
+{
+    int randVal = rand() % (right - left + 1) + left;
+    swap(nums[randVal], nums[right]);
+
+    int refVal = nums[right], i = left, j = right;
+    while (i < j)
+    {
+        while (i < j && nums[i] <= refVal)
+            i++;
+        nums[j] = nums[i];
+        while (i < j && nums[j] >= refVal)
+            j--;
+        nums[i] = nums[j];
+    }
+    nums[i] = refVal;
+
+    if (i == targetIndex)
+        return nums[i];
+    else if (i < targetIndex)
+        return quickSelect(nums, i + 1, right, targetIndex);
+    else
+        return quickSelect(nums, left, i - 1, targetIndex);
+}
+
 int findKthLargest(vector<int> &nums, int k)
 {
-    priority_queue<int, vector<int>, greater<int>> minHeap;
-    for (const int &i : nums)
-    {
-        minHeap.push(i);
-        if (minHeap.size() > k)
-            minHeap.pop();
-    }
-    return minHeap.top();
+    int target = nums.size() - k;
+    return quickSelect(nums, 0, nums.size() - 1, target);
 }

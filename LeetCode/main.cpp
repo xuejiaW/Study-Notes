@@ -103,7 +103,7 @@ int main()
     // TestReconstructQueue();
     // TestMeetingRoom();
     // TestFindDuplicate();
-    // TestSortArray();
+    TestSortArray();
     // TestReverseBits();
     // TestIsCompleteTree();
     // TestLFUCache();
@@ -111,5 +111,5 @@ int main()
     // TestStrStr();
     // TestFindDisappearNumbers();
     // TestFindAllDuplicates();
-    TestFirstMissing();
+    // TestFirstMissing();
 }
