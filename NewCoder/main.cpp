@@ -2,5 +2,6 @@
 
 int main()
 {
-    TestGetMinDistance();
+    // TestGetMinDistance();
+    TestOriginCardOrder();
 }
