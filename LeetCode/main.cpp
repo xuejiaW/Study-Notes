@@ -113,5 +113,7 @@ int main()
     // TestFindAllDuplicates();
     // TestFirstMissing();
     // TestMaximumGap();
-    TestPathCrossing();
+    // TestPathCrossing();
+    // TestRangeBitWiseAnd();
+    TestPartition();
 }
