@@ -116,5 +116,6 @@ int main()
     // TestPathCrossing();
     // TestRangeBitWiseAnd();
     // TestPartition();
-    TestCalculate();
+    // TestCalculate();
+    TestIsInterleave();
 }
