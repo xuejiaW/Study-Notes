@@ -115,5 +115,6 @@ int main()
     // TestMaximumGap();
     // TestPathCrossing();
     // TestRangeBitWiseAnd();
-    TestPartition();
+    // TestPartition();
+    TestCalculate();
 }
