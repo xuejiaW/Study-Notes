@@ -117,5 +117,7 @@ int main()
     // TestRangeBitWiseAnd();
     // TestPartition();
     // TestCalculate();
-    TestIsInterleave();
+    // TestIsInterleave();
+    // TestRand10();
+    TestShuffle();
 }
