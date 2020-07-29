@@ -119,5 +119,10 @@ int main()
     // TestCalculate();
     // TestIsInterleave();
     // TestRand10();
-    TestShuffle();
+    // TestShuffle();
+    // TestQueue();
+    // TestRemoveElements();
+    // TestContainsDeplicate();
+    // TestContainsNearByDuplicate();
+    TestMedianFinder();
 }

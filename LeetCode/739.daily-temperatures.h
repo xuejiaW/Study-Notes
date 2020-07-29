@@ -99,35 +99,22 @@ void TestDailyTemperature()
 //     return result;
 // }
 
-// // Version: using stack
+// Version：using stack
 vector<int> dailyTemperatures(vector<int> &T)
 {
-    int tSize = T.size();
-    vector<int> result(tSize, 0);
-    stack<pair<int, int>> value2MovingDaysStack; // need to move how many days to larger value
-    value2MovingDaysStack.push({T[tSize - 1], 0});
+    vector<int> result = vector<int>(T.size());
 
-    int movingDays = 1;
-    for (int i = tSize - 2; i >= 0; i--)
+    stack<int> indexStack;
+    indexStack.push(0);
+
+    for (int i = 1; i != T.size(); ++i)
     {
-        movingDays = 1;
-        // the remaining elements in stack must larger than T[i]
-        while (!value2MovingDaysStack.empty() && T[i] >= value2MovingDaysStack.top().first)
+        while (!indexStack.empty() && T[i] > T[indexStack.top()]) //Keep the stack is descending
         {
-            movingDays += value2MovingDaysStack.top().second;
-            value2MovingDaysStack.pop();
+            result[indexStack.top()] = i - indexStack.top();
+            indexStack.pop();
         }
-
-        if (value2MovingDaysStack.empty()) // no one larger then T[i]
-        {
-            value2MovingDaysStack.push({T[i], 0});
-        }
-        else
-        {
-            value2MovingDaysStack.push({T[i], movingDays});
-            result[i] = movingDays;
-        }
+        indexStack.push(i);
     }
-
     return result;
 }
