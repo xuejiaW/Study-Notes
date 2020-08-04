@@ -108,12 +108,14 @@ void TestAddTwoNumbers()
 // Version: optimism, more concise
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
 {
-    ListNode *resultPrev = new ListNode(-1);
-    ListNode *temp = resultPrev;
+    ListNode *dummyHead = new ListNode(-1);
+    ListNode *temp = dummyHead;
     int over = 0;
-    while (l1 || l2)
+
+    while (l1 || l2 || over)
     {
-        int sum = over + (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
+        int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + over;
+
         over = sum / 10;
 
         temp->next = new ListNode(sum % 10);
@@ -124,7 +126,6 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
         if (l2)
             l2 = l2->next;
     }
-    if (over)
-        temp->next = new ListNode(1);
-    return resultPrev->next;
+
+    return dummyHead->next;
 }
