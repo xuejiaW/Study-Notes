@@ -127,9 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera_1.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Camera_1.frag" />
     <None Include="Camera_1.vert" />
   </ItemGroup>
