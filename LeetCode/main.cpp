@@ -126,5 +126,6 @@ int main()
     // TestContainsNearByDuplicate();
     // TestMedianFinder();
     // TestFourSum();
-    TestTwoSum_II();
+    // TestTwoSum_II();
+    TestTwoSum();
 }
