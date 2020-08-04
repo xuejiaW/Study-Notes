@@ -124,5 +124,6 @@ int main()
     // TestRemoveElements();
     // TestContainsDeplicate();
     // TestContainsNearByDuplicate();
-    TestMedianFinder();
+    // TestMedianFinder();
+    TestFourSum();
 }

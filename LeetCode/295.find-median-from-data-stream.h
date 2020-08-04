@@ -22,61 +22,62 @@
 // addNum(1)
 // addNum(2)
 // findMedian() -> 1.5
-// addNum(3) 
+// addNum(3)
 // findMedian() -> 2
 
 #include "parser.h"
 #include "debug.h"
 #include <queue>
 #include <algorithm>
+#include <string.h>
 
-// Version: binary search
-class MedianFinder
-{
-public:
-    /** initialize your data structure here. */
-    MedianFinder()
-    {
-    }
+// // Version: binary search
+// class MedianFinder
+// {
+// public:
+//     /** initialize your data structure here. */
+//     MedianFinder()
+//     {
+//     }
 
-    void addNum(int num)
-    {
-        int begin = 0, end = nums.size() - 1, middle = 0, pos = nums.size();
-        while (begin <= end)
-        {
-            middle = (begin + end) / 2;
-            if (nums[middle] >= num)
-            {
-                pos = middle;
-                end = middle - 1;
-            }
-            else
-            {
-                begin = middle + 1;
-            }
-        }
-        // cout << "lower bound is " << lower_bound(nums.begin(), nums.end(), num) - nums.begin() << endl;
-        // cout << "pos is " << pos << endl;
+//     void addNum(int num)
+//     {
+//         int begin = 0, end = nums.size() - 1, middle = 0, pos = nums.size();
+//         while (begin <= end)
+//         {
+//             middle = (begin + end) / 2;
+//             if (nums[middle] >= num)
+//             {
+//                 pos = middle;
+//                 end = middle - 1;
+//             }
+//             else
+//             {
+//                 begin = middle + 1;
+//             }
+//         }
+//         // cout << "lower bound is " << lower_bound(nums.begin(), nums.end(), num) - nums.begin() << endl;
+//         // cout << "pos is " << pos << endl;
 
-        nums.insert(nums.begin() + pos, num);
-    }
+//         nums.insert(nums.begin() + pos, num);
+//     }
 
-    double findMedian()
-    {
-        int size = nums.size();
-        if (size % 2 == 0)
-        {
-            return (nums[size / 2] + nums[size / 2 - 1]) / 2.0;
-        }
-        else
-        {
-            return nums[size / 2];
-        }
-    }
+//     double findMedian()
+//     {
+//         int size = nums.size();
+//         if (size % 2 == 0)
+//         {
+//             return (nums[size / 2] + nums[size / 2 - 1]) / 2.0;
+//         }
+//         else
+//         {
+//             return nums[size / 2];
+//         }
+//     }
 
-private:
-    vector<int> nums;
-};
+// private:
+//     vector<int> nums;
+// };
 
 // Version: two stack
 class MedianFinder
@@ -94,7 +95,7 @@ public:
         else
             minHeap.push(num);
 
-        if (maxHeap.size() - minHeap.size() == 2)// can not use 1, for maxHeap might be 0, and will be the signed compare to unsigned
+        if (maxHeap.size() - minHeap.size() == 2) // can not use 1, for maxHeap might be 0, and will be the signed compare to unsigned
         {
             minHeap.push(maxHeap.top());
             maxHeap.pop();
@@ -136,4 +137,6 @@ void TestMedianFinder()
     mf.addNum(3);
     mf.addNum(6);
     cout << mf.findMedian() << endl;
+    cout <<sizeof("xyz") << endl;
+    cout << strlen("xyz") << endl;
 }
