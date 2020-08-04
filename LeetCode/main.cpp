@@ -127,5 +127,6 @@ int main()
     // TestMedianFinder();
     // TestFourSum();
     // TestTwoSum_II();
-    TestTwoSum();
+    // TestTwoSum();
+    TestThreeSumClosest();
 }
