@@ -128,5 +128,7 @@ int main()
     // TestFourSum();
     // TestTwoSum_II();
     // TestTwoSum();
-    TestThreeSumClosest();
+    // TestThreeSumClosest();
+    // TestSearchInsert();
+    // TestFindMedianSortedArrays();
 }
