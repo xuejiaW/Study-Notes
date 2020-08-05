@@ -131,4 +131,5 @@ int main()
     // TestThreeSumClosest();
     // TestSearchInsert();
     // TestFindMedianSortedArrays();
+    TestKthSmallest();
 }
