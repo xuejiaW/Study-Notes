@@ -131,5 +131,6 @@ int main()
     // TestThreeSumClosest();
     // TestSearchInsert();
     // TestFindMedianSortedArrays();
-    TestKthSmallest();
+    // TestKthSmallest();
+    TestRomanToInt();
 }
