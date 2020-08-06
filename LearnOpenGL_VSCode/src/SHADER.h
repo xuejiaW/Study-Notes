@@ -5,14 +5,8 @@
 #include <sstream>
 #include <iostream>
 #include <glad/glad.h>
-
 #include <iostream>
 using namespace std;
-
-using namespace std;
-void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType);
-void CreateShaderProgram(GLuint shaders[], int shadersCount, GLuint &program);
-void CheckShaderProgram(GLuint shaderProgram);
 
 class Shader
 {
@@ -22,7 +16,13 @@ public:
 	Shader(const GLchar *vertexPath, const GLchar *fragmentPath, const GLchar *geometryPath);
 
 	void Use();
+
+private:
+	void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType);
+	void CreateShaderProgram(GLuint shaders[], int shadersCount, GLuint &program);
+	void CheckShaderProgram(GLuint shaderProgram);
 };
+
 
 Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath, const GLchar *geometryPath)
 {
@@ -48,7 +48,7 @@ void Shader::Use()
 	glUseProgram(this->Program);
 }
 
-void CreateShaderProgram(GLuint shaders[], int shadersCount, GLuint &program)
+void Shader::CreateShaderProgram(GLuint shaders[], int shadersCount, GLuint &program)
 {
 	program = glCreateProgram();
 
@@ -58,7 +58,7 @@ void CreateShaderProgram(GLuint shaders[], int shadersCount, GLuint &program)
 	glLinkProgram(program);
 }
 
-void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType)
+void Shader::CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType)
 {
 	string Code;
 	ifstream File;
@@ -70,7 +70,7 @@ void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType)
 		File.close();
 		Code = shaderStream.str();
 	}
-	catch (ifstream::failure e) //TODO: warning
+	catch (const ifstream::failure &e) //TODO: warning
 	{
 		std::cout << "ERROR_SHADER_NOT_SUCCESSFULLY_READ" << endl;
 	}
@@ -92,7 +92,7 @@ void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType)
 	}
 }
 
-void CheckShaderProgram(GLuint shaderProgram)
+void Shader::CheckShaderProgram(GLuint shaderProgram)
 {
 	GLint success;
 	GLchar infoLog[512];

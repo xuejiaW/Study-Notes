@@ -14,7 +14,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, false);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Triangle_1", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(1858, 1092, "Triangle_1", nullptr, nullptr);
 	if ((window == nullptr)) 
 	{
 		std::cout << "glfw fail";

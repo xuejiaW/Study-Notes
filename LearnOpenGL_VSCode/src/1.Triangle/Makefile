@@ -1,10 +1,10 @@
 CC		:= g++
 CFLAGS	:= -std=c++17 -Wall -Wextra -g
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
+BIN		:= ../..//bin
+SRC		:= ./
+INCLUDE	:= ../../include
+LIB		:= ../../lib
 
 LIBRARIES	:= -lglad -lglfw3dll # Add Lib file
 
