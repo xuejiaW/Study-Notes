@@ -134,5 +134,6 @@ int main()
     // TestKthSmallest();
     // TestRomanToInt();
     // TestDivideTwoIntegers();
-    TEstValidSudoku();
+    // TestValidSudoku();
+    TestCountAndSay();
 }
