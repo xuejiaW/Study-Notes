@@ -135,5 +135,6 @@ int main()
     // TestRomanToInt();
     // TestDivideTwoIntegers();
     // TestValidSudoku();
-    TestCountAndSay();
+    // TestCountAndSay();
+    TestTrappingRainWater();
 }
