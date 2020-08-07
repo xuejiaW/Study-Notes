@@ -136,5 +136,6 @@ int main()
     // TestDivideTwoIntegers();
     // TestValidSudoku();
     // TestCountAndSay();
-    TestTrappingRainWater();
+    // TestTrappingRainWater();
+    TestIsMatch();
 }
