@@ -78,18 +78,20 @@ int getMaxCrossArray(vector<int> &nums, int begin, int end)
 }
 
 // // Version: dynamic programmming
-// int maxSubArray(vector<int> &nums)
-// {
-//     if (nums.empty())
-//         return 0;
-//     vector<int> temp = nums;
+int maxSubArray(vector<int> &nums)
+{
+    int numsSize = nums.size();
+    if (numsSize == 0)
+        return 0;
 
-//     int result = nums[0];
+    int result = nums[0];
+    int prevVal = nums[0];
 
-//     for (int i = 1; i != nums.size(); ++i)
-//     {
-//         temp[i] += max(temp[i - 1], 0);
-//         result = max(temp[i], result);
-//     }
-//     return result;
-// }
+    for (int i = 1; i != numsSize; ++i)
+    {
+        prevVal = prevVal > 0 ? (prevVal + nums[i]) : nums[i];
+        result = max(result, prevVal);
+    }
+
+    return result;
+}

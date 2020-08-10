@@ -34,23 +34,41 @@ void TestPow()
 }
 
 // Version: Divide and Conquer
+// double myPow(double x, int n)
+// {
+//     if (x == 0)
+//         return 0.0;
+//     if (n == 0)
+//         return 1.0;
+//     if (n == 1)
+//         return x;
+//     if (n == -1)
+//         return 1.0 / x;
 
-double myPow(double x, int n)
-{
-    if (x == 0)
-        return 0.0;
-    if (n == 0)
-        return 1.0;
-    if (n == 1)
-        return x;
-    if (n == -1)
-        return 1.0 / x;
+//     double result = myPow(x, n / 2);
+//     int remainder = n % 2;
 
-    double result = myPow(x, n / 2);
-    int remainder = n % 2;
-
-    return result * result * (remainder == 0 ? 1 : (remainder == 1 ? x : 1.0 / x));
-}
+//     return result * result * (remainder == 0 ? 1 : (remainder == 1 ? x : 1.0 / x));
+// }
 
 // Version: Math
-// https://leetcode-cn.com/problems/powx-n/solution/powx-n-by-leetcode-solution/
+double myPow(double x, int n)
+{
+    //make n to be positive
+    int flag = n > 0 ? 1 : -1;
+    long long times = abs(n);
+
+    double result = 1;
+    double contribution = x;
+
+    while (times)
+    {
+        if (times % 2 == 1)
+            result *= contribution;
+        contribution *= contribution;
+
+        times >>= 1;
+    }
+
+    return flag == 1 ? result : 1 / result;
+}

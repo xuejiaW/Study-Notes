@@ -137,5 +137,6 @@ int main()
     // TestValidSudoku();
     // TestCountAndSay();
     // TestTrappingRainWater();
-    TestIsMatch();
+    // TestIsMatch();
+    TestPlusOne();
 }

@@ -19,7 +19,6 @@
 // 输出: [[1,5]]
 // 解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
 
-
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -46,27 +45,23 @@ void TestMerge()
 // Version: using sort
 vector<vector<int>> merge(vector<vector<int>> &intervals)
 {
-    if (intervals.empty())
-        return vector<vector<int>>();
+    vector<vector<int>> result;
+
+    int intervalsSize = intervals.size();
+    if (intervalsSize == 0)
+        return result;
 
     sort(intervals.begin(), intervals.end());
-
-    vector<vector<int>> result;
-    vector<int> solution = intervals[0];
-
-    for (int i = 1; i != intervals.size(); ++i)
+    result.push_back(intervals[0]);
+    for (int i = 1; i != intervalsSize; ++i)
     {
-        if (intervals[i][0] <= solution[1])
-        {
-            solution[1] = max(intervals[i][1], solution[1]);
-        }
-        else
-        {
-            result.push_back(solution);
-            solution = intervals[i];
-        }
-    }
-    result.push_back(solution);
+        vector<int> &curr = intervals[i];
+        vector<int> &prev = result[result.size() - 1];
 
+        if (curr[0] <= prev[1])
+            prev[1] = max(curr[1], prev[1]);
+        else
+            result.push_back(curr);
+    }
     return result;
 }
