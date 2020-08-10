@@ -138,5 +138,6 @@ int main()
     // TestCountAndSay();
     // TestTrappingRainWater();
     // TestIsMatch();
-    TestPlusOne();
+    // TestPlusOne();
+    TestSetZeroes();
 }
