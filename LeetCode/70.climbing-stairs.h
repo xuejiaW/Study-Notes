@@ -2,7 +2,7 @@
 
 // 难度：简单
 
-// Tags: 
+// Tags:
 // dynamic-programming
 
 // 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
@@ -40,16 +40,33 @@ void TestClimbStairs()
     cout << "result is " << result << endl;
 }
 
+// int climbStairs(int n)
+// {
+//     if (n == 1)
+//         return 1;
+//     vector<int> solutionVec(n);
+//     solutionVec[0] = 1; // one step
+//     solutionVec[1] = 2; // two step
+//     for (int i = 2; i != n; ++i)
+//     {
+//         solutionVec[i] = solutionVec[i - 1] + solutionVec[i - 2];
+//     }
+//     return solutionVec[n - 1];
+// }
+
+// Version：optimization，only use two int
 int climbStairs(int n)
 {
-    if (n == 1)
-        return 1;
-    vector<int> solutionVec(n);
-    solutionVec[0] = 1; // one step
-    solutionVec[1] = 2; // two step
-    for (int i = 2; i != n; ++i)
+    if (n == 2 || n == 1)
+        return n;
+    int minusOneStep = 2;
+    int minusTwoStep = 1;
+    int result = 0;
+    while (n-- >= 3)
     {
-        solutionVec[i] = solutionVec[i - 1] + solutionVec[i - 2];
+        result = minusOneStep + minusTwoStep;
+        minusTwoStep = minusOneStep;
+        minusOneStep = result;
     }
-    return solutionVec[n - 1];
+    return result;
 }
