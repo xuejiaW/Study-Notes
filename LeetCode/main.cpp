@@ -139,5 +139,6 @@ int main()
     // TestTrappingRainWater();
     // TestIsMatch();
     // TestPlusOne();
-    TestSetZeroes();
+    // TestSetZeroes();
+    TestMinWindow();
 }
