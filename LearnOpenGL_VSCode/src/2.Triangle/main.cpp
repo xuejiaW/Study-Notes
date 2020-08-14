@@ -48,6 +48,7 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     Shader shader("triangle.vert", "triangle.frag");
+    shader.Use();
 
     while (!glfwWindowShouldClose(window))
     {
@@ -56,7 +57,6 @@ int main()
         glClearColor(0.0f, 0.f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        shader.Use();
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
