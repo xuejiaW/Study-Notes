@@ -128,11 +128,11 @@ int main()
     // Camera rotation
     glm::vec3 cameraFront = glm::vec3(0, 0, -1.0f);
 
-    GLfloat yaw = -90.0f;  // to the -z axis
+    GLfloat yaw = 90.0f;   // to the -z axis
     GLfloat pitch = 10.0f; // toward up
     cameraFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     cameraFront.y = sin(glm::radians(pitch));
-    cameraFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront.z = -sin(glm::radians(yaw)) * cos(glm::radians(pitch)); // using -sin to match opengl Rotate
     cameraFront = glm::normalize(cameraFront);
 
     glm::vec3 cameraUp = glm::vec3(0, 1, 0);
@@ -150,9 +150,10 @@ int main()
 
     glm::mat4 trans;
     // trans = glm::translate(trans, glm::vec3(-0.5f, -0.5f, 0.0f));
-    trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(1, 0, 0));
-    trans = glm::rotate(trans, glm::radians(60.0f), glm::vec3(0, 1, 0));
-    trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(0, 0, 1));
+    trans = glm::translate(trans, glm::vec3(-1.0f, 0.0f, 0.0f));
+    trans = glm::rotate(trans, glm::radians(0.0f), glm::vec3(1, 0, 0));
+    trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(0, 1, 0));
+    trans = glm::rotate(trans, glm::radians(00.0f), glm::vec3(0, 0, 1));
     trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
 
     glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(trans));
