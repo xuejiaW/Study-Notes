@@ -64,15 +64,14 @@ void TestCanJump()
 // version: greedy, from begin to end
 bool canJump(vector<int> &nums)
 {
-    int size = nums.size();
-    int maxPos = 0;
-    for (int i = 0; i != size; ++i)
+    int currMax = 0, numsSize = nums.size();
+
+    for (int i = 0; i != numsSize; ++i)
     {
-        if (i > maxPos)
-            break;
-        maxPos = max(maxPos, i + nums[i]);
-        if (maxPos >= size - 1)
-            return true;
+        if (i > currMax)
+            return false;
+        currMax = max(currMax, i + nums[i]);
     }
-    return false;
+
+    return true;
 }
