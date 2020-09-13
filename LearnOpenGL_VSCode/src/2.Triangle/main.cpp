@@ -7,7 +7,6 @@ using namespace std;
 
 static int windowWidth = 800;
 static int windowHeight = 800;
-
 int main()
 {
     glfwInit();
@@ -22,9 +21,9 @@ int main()
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
     GLfloat vertices[] = {
-        -0.5f, -0.5f, 0.0f, 1.0f,0.0f,0.0f,
-        0.5f, -0.5f, 0.0f, 0.0f,1.0f,0.0f,
-        0.0f, 0.5f, 0.0f, 0.0f,0.0f,1.0f};
+        -0.75f, -0.50f, 0.00f,1.00f,1.00f,0.00f,
+        0.50f, -0.24f, 0.00f,0.50f,1.00f,0.00f,
+        0.00f, 0.50f,  0.00f,0.0f,0.0f,1.0f};
     GLuint index[] = {0, 1, 2};
 
     GLuint VAO, VBO, EBO;
@@ -50,15 +49,14 @@ int main()
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    Shader shader("triangle.vert", "triangle.frag");
+    Shader shader("Vertex.vert", "Fragment.frag");
     shader.Use();
 
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
 
-        glClearColor(0.0f, 0.f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glBindVertexArray(VAO);
@@ -70,3 +68,4 @@ int main()
 
     return 0;
 }
+

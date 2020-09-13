@@ -7,12 +7,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 using namespace std;
-
 static int windowWidth = 800;
 static int windowHeight = 800;
-
 int main()
 {
     glfwInit();
@@ -25,7 +22,6 @@ int main()
     glfwMakeContextCurrent(window);
 
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
     GLfloat vertices[] =
         {
             -0.5f, -0.5f, 0, 0, 0,
@@ -37,7 +33,6 @@ int main()
         {
             0, 1, 2,
             0, 2, 3};
-
     GLuint VAO, VBO, EBO;
 
     // Generate buffer
@@ -60,9 +55,7 @@ int main()
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    Shader shader("transformation.vert", "transformation.frag");
-
+    Shader shader("Vertex.vert", "Fragment.frag");
     GLuint texture1;
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
@@ -77,24 +70,23 @@ int main()
     glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     stbi_image_free(image);
-
     shader.Use();
     glActiveTexture(GL_TEXTURE0);                                       // active 0(id) texture sampler
     glUniform1i(glGetUniformLocation(shader.Program, "ourTexture"), 0); // bind outTexture to 0(id) texture sampler
-
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-
         glClearColor(0.0f, 0.f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glm::mat4 trans;
-
+        glm::mat4 trans, xRot, yRot, zRot;
         trans = glm::translate(trans, glm::vec3(-0.5f, -0.5f, 0.0f));
-        trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(1, 0, 0));
-        trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(0, 1, 0));
-        trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(0, 0, 1));
+        xRot = glm::rotate(xRot, glm::radians(30.0f), glm::vec3(1, 0, 0));
+        yRot = glm::rotate(yRot, glm::radians(30.0f), glm::vec3(0, 1, 0));
+        zRot = glm::rotate(zRot, glm::radians(30.0f), glm::vec3(0, 0, 1));
+        trans *= yRot;
+        trans *= xRot;
+        trans *= zRot;
         trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
 
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "transform"), 1, GL_FALSE, glm::value_ptr(trans));

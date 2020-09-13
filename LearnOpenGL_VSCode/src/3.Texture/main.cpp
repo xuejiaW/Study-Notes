@@ -25,10 +25,10 @@ int main()
 
     GLfloat vertices[] =
         {
-            -0.5f, -0.5f, 0, 0, 0,
-            0.5f, -0.5f, 0, 1, 0,
-            0.5f, 0.5f, 0, 1, 1,
-            -0.5f, 0.5f, 0, 0, 1};
+            -0.50f,-0.50f,0.00f, 0.0f,0.0f,
+            0.78f, -0.19f,0.00f, 1.0f,0.0f,
+            0.50f, 0.50f, 0.00f, 1.0f,1.0f,
+            -0.76f,0.50f, 0.00f, 0.0f,1.0f};
 
     GLuint index[] =
         {
@@ -58,7 +58,7 @@ int main()
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    Shader shader("texture.vert", "texture.frag");
+    Shader shader("Vertex.vert", "Fragment.frag");
 
     GLuint texture1;
     glGenTextures(1, &texture1);

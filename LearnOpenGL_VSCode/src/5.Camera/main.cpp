@@ -7,11 +7,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 using namespace std;
-
-static int windowWidth = 800;
-static int windowHeight = 800;
+static int windowWidth = 960;
+static int windowHeight = 540;
 
 int main()
 {
@@ -27,7 +25,6 @@ int main()
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
     glEnable(GL_DEPTH_TEST); //to enable depth test
-
     GLfloat vertices[] = {
         // front face
         -0.5f, -0.5f, -0.5f, 0, 0,
@@ -79,7 +76,6 @@ int main()
             16, 18, 19,
             20, 21, 22,
             20, 22, 23};
-
     GLuint VAO, VBO, EBO;
 
     // Generate buffer
@@ -102,9 +98,7 @@ int main()
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    Shader shader("coordinateSystem.vert", "coordinateSystem.frag");
-
+    Shader shader("Vertex.vert", "Fragment.frag");
     GLuint texture1;
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
@@ -122,18 +116,41 @@ int main()
 
     shader.Use();
 
+    // Camera pos
+    glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, -3.0f);
+
+    // Camera rotation
+    glm::vec3 cameraFront = glm::vec3(0.0f, 0.0, 1.0f);
+
+    GLfloat pitch =0.0f; // toward up
+    GLfloat yaw = 90.0f;  // to the -z axis
+    cameraFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront.y = sin(glm::radians(pitch));
+    cameraFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(cameraFront);
+
+    glm::vec3 cameraUp = glm::vec3(0, 1, 0);
+    GLfloat roll =  90.0f; // to +y axis
+    cameraUp.x = cos(glm::radians(roll));
+    cameraUp.y = sin(glm::radians(roll));
+    cameraUp = glm::normalize(cameraUp);
+
     glm::mat4 view;
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
     glm::mat4 projection;
     glfwGetFramebufferSize(window, &width, &height);
-    projection = glm::perspective(glm::radians(45.0f), (GLfloat)width / height, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), (GLfloat)width / height,0.1f,100.0f);
 
-    glm::mat4 trans;
-    trans = glm::translate(trans, glm::vec3(-0.5f, -0.5f, 0.0f));
-    trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(1, 0, 0));
-    trans = glm::rotate(trans, glm::radians(60.0f), glm::vec3(0, 1, 0));
-    trans = glm::rotate(trans, glm::radians(30.0f), glm::vec3(0, 0, 1));
+    glm::mat4 trans, xRot, yRot, zRot;
+
+    trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, 0.0f));
+    xRot = glm::rotate(xRot, glm::radians(30.0f), glm::vec3(1, 0, 0));
+    yRot = glm::rotate(yRot, glm::radians(30.0f), glm::vec3(0, 1, 0));
+    zRot = glm::rotate(zRot, glm::radians(30.0f), glm::vec3(0, 0, 1));
+    trans *= yRot;
+    trans *= xRot;
+    trans *= zRot;
     trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
 
     glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(trans));
@@ -147,7 +164,7 @@ int main()
     {
         glfwPollEvents();
 
-        glClearColor(1.0f, 0.f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glBindVertexArray(VAO);
@@ -165,3 +182,4 @@ int main()
 
     return 0;
 }
+

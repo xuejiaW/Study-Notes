@@ -3,5 +3,8 @@
         "OPENGL",
         "Wwindow",
         "glfw"
-    ]
+    ],
+    "files.associations": {
+        "cmath": "cpp"
+    }
 }
