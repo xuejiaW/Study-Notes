@@ -141,5 +141,6 @@ int main()
     // TestPlusOne();
     // TestSetZeroes();
     // TestMinWindow();
-    TestlargestRectangleArea();
+    // TestlargestRectangleArea();
+    TestDecodeWays();
 }
