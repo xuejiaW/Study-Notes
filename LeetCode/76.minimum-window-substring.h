@@ -1,64 +1,118 @@
+// 76. 最小覆盖子串
+
+// 难度：困难
+
+// Tags: hash-table, two-pointer, string, sliding-window
+
+// 给你一个字符串 S、一个字符串 T 。请你设计一种算法，可以在 O(n) 的时间复杂度内，从字符串 S 里面找出：包含 T 所有字符的最小子串。
+
+// 示例：
+
+// 输入：S = "ADOBECODEBANC", T = "ABC"
+// 输出："BANC"
+//  
+
+// 提示：
+
+// 如果 S 中不存这样的子串，则返回空字符串 ""。
+// 如果 S 中存在这样的子串，我们保证它是唯一的答案。
+
 #include "parser.h"
 #include "debug.h"
+#include <unordered_map>
+#include <climits>
+using namespace std;
 
 // #include <string>
 // #include <iostream>
 // #include <vector>
 
-using namespace std;
-
 string minWindow(string s, string t);
 
 void TestMinWindow()
 {
-    // string result = minWindow("ADOBECODEBANC", "ABC");
-    string result = minWindow("cabwefgewcwaefgcf", "cae");
-    cout << "after function" << endl;
-    cout << "result2 is " << result << endl;
+    string result = minWindow("ADOBECODEBANC", "ABC");
+    // string result = minWindow("a", "c");
+    // string result = minWindow("cabwefgewcwaefgcf", "cae");
+    cout << "result is " << result << endl;
 }
 
-// Version: violence
-string minWindow(string s, string t)
+//
+bool contains(vector<int> &target, vector<int> &container)
 {
-    string result = "";
-
-    int sSize = s.size(), tSize = t.size();
-    if (sSize < tSize)
-        return result;
-
-    vector<int> auxiliaryVec = vector<int>(58, 0);
-    vector<int> tVec = vector<int>(58, 0);
-
-    for (int i = 0; i != tSize; ++i)
-        tVec[t[i] - 'A']++;
-
-    for (int length = tSize; length <= sSize; ++length)
+    int baseSize = target.size();
+    for (int i = 0; i != baseSize; ++i)
     {
-        for (int i = 0; (i + length - 1) < sSize; ++i)
-        {
-            for (int &count : auxiliaryVec)
-                count = 0;
-
-            for (int j = 0; j != length; ++j)
-                auxiliaryVec[s[i + j] - 'A']++;
-
-            bool found = true;
-            for (int j = 0; j != 58; ++j)
-            {
-                if (tVec[j] != 0 && tVec[j] > auxiliaryVec[j])
-                {
-                    found = false;
-                    break;
-                }
-            }
-
-            if (found)
-            {
-                result = s.substr(i, length);
-                return result;
-            }
-        }
+        if (target[i] != 0 && target[i] > container[i])
+            return false;
     }
 
-    return result;
+    return true;
+}
+
+string minWindow(string s, string t)
+{
+    int sSize = s.size(), tSize = t.size();
+    if (sSize == 0 || sSize < tSize)
+        return "";
+
+    vector<int> tMap(58, 0);
+    vector<int> windowMap(58, 0);
+
+    for (const char &ch : t)
+        tMap[ch - 'A']++;
+
+    int minLength = INT_MAX, start = 0;
+
+    int left = 0, right = 0;
+    while (right != sSize)
+    {
+        windowMap[s[right] - 'A']++;
+
+        while (left <= right && contains(tMap, windowMap))
+        {
+            if ((right - left + 1) < minLength)
+            {
+                minLength = right - left + 1;
+                start = left;
+            }
+
+            windowMap[s[left] - 'A']--;
+            left++;
+        }
+        right++;
+    }
+
+    return minLength == INT_MAX ? "" : s.substr(start, minLength);
+}
+
+// Version: optimization
+string minWindow(string s, string t)
+{
+    vector<int> tMap(58, 0);
+    for (const char &c : t)
+        tMap[c - 'A']++;
+
+    int matchedCount = 0;
+    int minLength = INT_MAX;
+    int left = 0, right = 0, begin = 0;
+    while (right != s.size())
+    {
+        if (--tMap[s[right] - 'A'] >= 0)
+            matchedCount++;
+        while (left <= right && matchedCount == t.size())
+        {
+            if (minLength > (right - left + 1))
+            {
+                begin = left;
+                minLength = right - left + 1;
+            }
+            if (++tMap[s[left] - 'A'] > 0)
+                matchedCount--;
+            left++;
+        }
+        right++;
+    }
+
+    return minLength == INT_MAX ? "" : s.substr(begin, minLength);
 }

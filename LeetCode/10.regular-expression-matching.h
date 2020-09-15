@@ -53,41 +53,25 @@
 #include "parser.h"
 #include "debug.h"
 
-inline int matches(string &s, string &p, int sIndex, int pIndex)
-{
-    if (sIndex < 0)
-        return false;
-    if (p[pIndex] == '.')
-        return true;
-    return s[sIndex] == p[pIndex];
-}
-
 bool isMatch(string s, string p)
 {
-    int sSize = s.size();
-    int pSize = p.size();
+    int sSize = s.size(), pSize = p.size();
 
-    vector<vector<int>> dpArr(sSize + 1, vector<int>(pSize + 1));
-    dpArr[0][0] = true;
-
-    // the cases i==0 means s is empty
+    vector<vector<int>> dp(sSize + 1, vector<int>(pSize + 1, 0));
+    dp[0][0] = 1;
     for (int i = 0; i <= sSize; ++i)
     {
         for (int j = 1; j <= pSize; ++j)
         {
-            if (p[j - 1] != '*')
-            {
-                if (matches(s, p, i - 1, j - 1))
-                    dpArr[i][j] = dpArr[i - 1][j - 1];
-            }
+            if (p[j - 1] == '.')
+                dp[i][j] = i != 0 && dp[i - 1][j - 1];
+            else if (p[j - 1] == '*')
+                // match zero || (match one)
+                dp[i][j] = dp[i][j - 2] || (i != 0 && (dp[i - 1][j]) && (p[j - 2] == '.' || s[i - 1] == p[j - 2]));
             else
-            {
-                dpArr[i][j] = dpArr[i][j - 2]; // match zero
-
-                if (matches(s, p, i - 1, j - 2))
-                    dpArr[i][j] |= dpArr[i - 1][j];
-            }
+                dp[i][j] = i != 0 && dp[i - 1][j - 1] && s[i - 1] == p[j - 1];
         }
     }
-    return dpArr[sSize][pSize];
+
+    return dp[sSize][pSize];
 }
