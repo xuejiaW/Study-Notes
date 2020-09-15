@@ -140,5 +140,6 @@ int main()
     // TestIsMatch();
     // TestPlusOne();
     // TestSetZeroes();
-    TestMinWindow();
+    // TestMinWindow();
+    TestlargestRectangleArea();
 }

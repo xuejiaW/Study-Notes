@@ -3,6 +3,7 @@
         "algorithm": "cpp",
         "xfacet": "cpp",
         "xlocale": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "utility": "cpp"
     }
 }
