@@ -143,5 +143,7 @@ int main()
     // TestMinWindow();
     // TestlargestRectangleArea();
     // TestDecodeWays();
-    TestSortedArrayToBST();
+    // TestSortedArrayToBST();
+    // TestGenerate();
+    TestMaxPathSum();
 }
