@@ -142,5 +142,6 @@ int main()
     // TestSetZeroes();
     // TestMinWindow();
     // TestlargestRectangleArea();
-    TestDecodeWays();
+    // TestDecodeWays();
+    TestSortedArrayToBST();
 }
