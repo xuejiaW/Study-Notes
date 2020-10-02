@@ -86,7 +86,6 @@ int main()
     Shader shader("./vertex.vert", "./fragment.frag");
     shader.Use();
 
-    int vertexColorLocation = glGetUniformLocation(shader.Program, "ourColor");
     glUniform1i(glGetUniformLocation(shader.Program, "outTexture"), 0);
     // Main Loop
     while (!glfwWindowShouldClose(window))
@@ -95,10 +94,6 @@ int main()
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        float timeValue = glfwGetTime();
-        float greenValue = sin(timeValue) / 2.0f + 0.5f;
-        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
