@@ -2,40 +2,32 @@ CC		:= g++
 CFLAGS	:= -std=c++17 -Wall -Wextra -g
 
 BIN		:= ../..//bin
-SRC		:= ./
-INCLUDE	:= ../../include
-LIB		:= ../../lib
 
 LIBRARIES	:= -lglad -lglfw3dll # Add Lib file
 
-ifeq ($(OS),Windows_NT)
 EXECUTABLE	:= main.exe
-SOURCEDIRS	:= $(SRC)
-INCLUDEDIRS	:= $(INCLUDE)
-LIBDIRS		:= $(LIB)
-else
-EXECUTABLE	:= main
-SOURCEDIRS	:= $(shell find $(SRC) -type d)
-INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
-LIBDIRS		:= $(shell find $(LIB) -type d)
-endif
+SOURCEDIRS	:= ./
+INCLUDEDIRS	:= ../../include
+LIBDIRS		:= ../../lib
 
-CINCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS:%/=%))
-CLIBS		:= $(patsubst %,-L%, $(LIBDIRS:%/=%))
+CINCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS))
+CLIBS		:= $(patsubst %,-L%, $(LIBDIRS))
 
-SOURCES		:= $(wildcard $(patsubst %,%/*.cpp, $(SOURCEDIRS)))
-OBJECTS		:= $(SOURCES:.cpp=.o)
+SOURCES		:= $(wildcard  $(SOURCEDIRS)*.cpp)
 
-all: $(BIN)/$(EXECUTABLE)
+
+$(BIN)/$(EXECUTABLE): $(SOURCES)
+	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
+
+all: clean run
+
+run: $(BIN)/$(EXECUTABLE)
+	./$(BIN)/$(EXECUTABLE)
 
 .PHONY: clean
 clean:
 	-$(RM) $(BIN)/$(EXECUTABLE)
 	-$(RM) $(OBJECTS)
 
-
-run: all
-	./$(BIN)/$(EXECUTABLE)
-
-$(BIN)/$(EXECUTABLE): $(SOURCES) # Use SOURCES instead of OBJECTS to avoid complile without include/lib
-	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
+test:
+	@echo $(wildcard  $(SOURCEDIRS)*.cpp)
