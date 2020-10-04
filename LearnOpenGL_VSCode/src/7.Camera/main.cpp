@@ -123,6 +123,7 @@ int main()
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); // must set after unbind vertex array
 
     int width, height, nrChannels;
     unsigned char *data = stbi_load("../container.jpg", &width, &height, &nrChannels, 0);

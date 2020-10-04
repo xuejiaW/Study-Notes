@@ -5,6 +5,12 @@
         "glfw"
     ],
     "files.associations": {
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "xutility": "cpp",
+        "algorithm": "cpp",
+        "fstream": "cpp",
+        "iterator": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp"
     }
 }
