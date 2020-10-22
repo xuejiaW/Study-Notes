@@ -13,7 +13,12 @@ SOURCEDIRS	:= ./
 CINCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS))
 CLIBS		:= $(patsubst %,-L%, $(LIBDIRS))
 
-SOURCES		:= $(wildcard  $(SOURCEDIRS)*.cpp ../Framework/*.cpp ../Framework/Components/*.cpp ../Framework/GameObjects/*.cpp ../Framework/Mesh/*.cpp ../Framework/Shaders/*.cpp)
+
+SOURCES := $(SOURCEDIRS)*.cpp
+SOURCES += ../Framework/*.cpp
+SOURCES += $(addsuffix *.cpp, $(shell ls -d ../Framework/*/)) # Get the source files from sub folders of the ../Frameword/
+
+SOURCES		:= $(wildcard  $(SOURCES))
 
 
 $(BIN)/$(EXECUTABLE): $(SOURCES)
@@ -29,5 +34,6 @@ clean:
 	-$(RM) $(BIN)/$(EXECUTABLE)
 	-$(RM) $(OBJECTS)
 
+.PHONY: test
 test:
 	@echo $(SOURCES)
