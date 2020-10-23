@@ -10,7 +10,7 @@ public:
     std::string name;
     GameObject *gameObject;
     Component(/* args */);
-    void SetAttachGameObject(GameObject *attachedGO);
+    virtual void SetAttachGameObject(GameObject *attachedGO);
     virtual void Update();
     ~Component();
 };

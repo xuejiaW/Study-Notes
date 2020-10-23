@@ -1,5 +1,8 @@
 #include "Camera.h"
 #include "Transform.h"
+#include <iostream>
+
+using namespace std;
 
 Camera::Camera()
 {
@@ -28,9 +31,16 @@ vec3 Camera::GetUp() { return up; }
 vec3 Camera::GetPosition() { return GetTransform()->GetPosition(); }
 vec3 Camera::GetEulerAngle() { return GetTransform()->GetEulerAngle(); }
 
+void Camera::SetAttachGameObject(GameObject *attachedGO)
+{
+    Component::SetAttachGameObject(attachedGO);
+    UpdateCameraProjectionMatrix();
+    UpdateCameraViewMatrix();
+}
+
 void Camera::UpdateCameraProjectionMatrix()
 {
-    projectionMatrix = glm::perspective(fieldOfView, ratio, nearClipping, farClipping);
+    projectionMatrix = glm::perspective(45.0f, ratio, nearClipping, farClipping);
 }
 
 void Camera::UpdateCameraViewMatrix()
@@ -38,10 +48,9 @@ void Camera::UpdateCameraViewMatrix()
     GetTransform();
 
     vec3 euler = transform->GetEulerAngle();
-    forward.x = cos(euler.x) * cos(euler.y);
-    forward.y = sin(euler.y);
-    forward.z = cos(euler.x) * sin(euler.y);
-
+    forward.x = cos(radians(euler.x)) * cos(radians(euler.y));
+    forward.y = sin(radians(euler.x));
+    forward.z = sin(radians(euler.y)) * cos(radians(euler.x));
     forward = glm::normalize(forward);
     right = glm::cross(forward, worldUp);
     up = glm::cross(forward, right);
@@ -52,9 +61,8 @@ void Camera::UpdateCameraViewMatrix()
 Transform *Camera::GetTransform()
 {
     if (!transform)
-    {
         transform = dynamic_cast<Transform *>(gameObject->GetComponent("Transform"));
-    }
+    return transform;
 }
 
 void Camera::SetFOV(float fov) { this->fieldOfView = fov; }

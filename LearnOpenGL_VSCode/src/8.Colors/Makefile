@@ -16,7 +16,7 @@ CLIBS		:= $(patsubst %,-L%, $(LIBDIRS))
 
 SOURCES := $(SOURCEDIRS)*.cpp
 SOURCES += ../Framework/*.cpp
-SOURCES += $(addsuffix *.cpp, $(shell ls -d ../Framework/*/)) # Get the source files from sub folders of the ../Frameword/
+SOURCES += $(addsuffix *.cpp, $(shell ls -d ../Framework/*/)) # Get the source files from sub folders of the ../Framework/
 
 SOURCES		:= $(wildcard  $(SOURCES))
 

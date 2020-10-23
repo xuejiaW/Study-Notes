@@ -17,7 +17,7 @@ class Camera : public Component
 public:
     Camera();
 
-    Camera(float ratio, float fov = 60.0f, float nearClipping = 0.1f, float farClipping = 100.0f);
+    Camera(float ratio, float fov = 45.0f, float nearClipping = 0.1f, float farClipping = 100.0f);
 
     mat4 GetViewMatrix();
     mat4 GetProjectionMatrix();
@@ -33,6 +33,7 @@ public:
     void SetFarClipping(float);
     void SetPosition(vec3);
 
+    void SetAttachGameObject(GameObject *attachedGO);
     void UpdateCameraViewMatrix();
     void UpdateCameraProjectionMatrix();
     ~Camera();
