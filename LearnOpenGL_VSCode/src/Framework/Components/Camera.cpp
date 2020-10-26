@@ -45,7 +45,8 @@ void Camera::UpdateCameraProjectionMatrix()
 
 void Camera::UpdateCameraViewMatrix()
 {
-    GetTransform();
+    if (GetTransform() == nullptr)
+        return;
 
     vec3 euler = transform->GetEulerAngle();
     forward.x = cos(radians(euler.x)) * cos(radians(euler.y));
@@ -53,14 +54,14 @@ void Camera::UpdateCameraViewMatrix()
     forward.z = sin(radians(euler.y)) * cos(radians(euler.x));
     forward = glm::normalize(forward);
     right = glm::cross(forward, worldUp);
-    up = glm::cross(forward, right);
+    up = glm::cross(right, forward);
 
     viewMatrix = glm::lookAt(transform->GetPosition(), transform->GetPosition() + forward, up);
 }
 
 Transform *Camera::GetTransform()
 {
-    if (!transform)
+    if (transform == nullptr)
         transform = dynamic_cast<Transform *>(gameObject->GetComponent("Transform"));
     return transform;
 }

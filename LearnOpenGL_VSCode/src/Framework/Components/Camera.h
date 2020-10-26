@@ -39,7 +39,7 @@ public:
     ~Camera();
 
 private:
-    Transform *transform;
+    Transform *transform = nullptr;
     Transform *GetTransform();
 
     float fieldOfView;
