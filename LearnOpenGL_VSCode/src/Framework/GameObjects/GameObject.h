@@ -24,7 +24,7 @@ public:
     ~GameObject();
 
 protected:
-    Scene *scene;
+    Scene *scene = nullptr;
 
 private:
     Transform *transform = nullptr;
