@@ -1,3 +1,7 @@
+/bin/glfw3.dll
 /bin/main.exe
+/lib/glfw3.dll
+/lib/libglad.a
+/lib/libglfw3dll.a
 *.o
 *.d
