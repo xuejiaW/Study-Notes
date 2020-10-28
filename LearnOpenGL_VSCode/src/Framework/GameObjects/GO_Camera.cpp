@@ -4,7 +4,6 @@
 GO_Camera::GO_Camera()
 {
     name = "GO_Camera";
-
     this->transform = new Transform();
     AddComponent(transform);
 

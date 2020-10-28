@@ -49,7 +49,7 @@ void MeshRender::Update()
 
     if (!transform || !camera)
     {
-        cout << "Lack of Transform or Camera";
+        cout << "Lack of Transform or Camera" << endl;
         return;
     }
 

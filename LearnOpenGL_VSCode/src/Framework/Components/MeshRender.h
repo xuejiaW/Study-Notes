@@ -15,7 +15,7 @@ public:
     ~MeshRender();
 
 private:
-    Mesh *mesh;
+    Mesh *mesh = nullptr;
     Transform *transform = nullptr;
     Camera *camera = nullptr;
     unsigned int VBO = 0, VAO = 0, EBO = 0;

@@ -72,7 +72,7 @@ GameObject *Scene::GetGameObject(string name)
 {
     vector<GameObject *>::iterator result = find_if(gameObjectsList.begin(), gameObjectsList.end(),
                                                     [name](GameObject *GO) { return GO->name == name; });
-    return *result;
+    return result == gameObjectsList.end() ? nullptr : *result;
 }
 
 Camera *Scene::GetMainCamera()
@@ -80,9 +80,12 @@ Camera *Scene::GetMainCamera()
     if (!mainCamera)
     {
         GameObject *cameraGO = GetGameObject("GO_Camera");
-        if (!cameraGO)
+        if (cameraGO)
+        {
+            mainCamera = dynamic_cast<Camera *>(cameraGO->GetComponent("Camera"));
+        }
+        else
             cout << "There is no cameraGO" << endl;
-        mainCamera = dynamic_cast<Camera *>(cameraGO->GetComponent("Camera"));
     }
 
     return mainCamera ? mainCamera : nullptr;

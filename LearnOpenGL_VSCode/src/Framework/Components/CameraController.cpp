@@ -13,6 +13,9 @@ CameraController::CameraController(Camera *target) : targetCamera(target)
 
 void CameraController::Update()
 {
+    if (targetCamera == nullptr)
+        return;
+
     glm::vec3 cameraPos = targetCamera->GetPosition();
     glm::vec3 forward = targetCamera->GetForward();
     glm::vec3 right = targetCamera->GetRight();

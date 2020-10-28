@@ -5,6 +5,7 @@
 int main()
 {
     Scene scene(800, 600, "Color");
+
     GO_Camera *camera = new GO_Camera();
     scene.AddGameObject(camera);
 
