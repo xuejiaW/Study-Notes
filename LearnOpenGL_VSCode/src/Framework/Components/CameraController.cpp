@@ -21,21 +21,13 @@ void CameraController::Update()
     glm::vec3 right = targetCamera->GetRight();
     float speed = 2.5f * Scene::GetInstance()->GetFrameTime();
     if (Input::GetInstance()->GetKey(GLFW_KEY_W))
-    {
         cameraPos += speed * forward;
-    }
     if (Input::GetInstance()->GetKey(GLFW_KEY_A))
-    {
         cameraPos -= speed * right;
-    }
     if (Input::GetInstance()->GetKey(GLFW_KEY_S))
-    {
         cameraPos -= speed * forward;
-    }
     if (Input::GetInstance()->GetKey(GLFW_KEY_D))
-    {
         cameraPos += speed * right;
-    }
 
     targetCamera->SetPosition(cameraPos);
 }

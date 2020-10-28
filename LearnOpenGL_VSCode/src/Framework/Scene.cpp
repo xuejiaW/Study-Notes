@@ -5,6 +5,7 @@
 
 void HandleMouseButton(GLFWwindow *window, int button, int action, int modes);
 void HandleKey(GLFWwindow *window, int key, int scanCode, int action, int mods);
+void HandleCursorPos(GLFWwindow *window, double xPos, double yPos);
 
 Scene *Scene::instance = nullptr;
 float lastFrameTime = 0.0f;
@@ -32,6 +33,7 @@ Scene::Scene(unsigned int width, unsigned int height, const char *name)
 
     glfwSetMouseButtonCallback(window, HandleMouseButton);
     glfwSetKeyCallback(window, HandleKey);
+    glfwSetCursorPosCallback(window, HandleCursorPos);
 
     Init();
 }
@@ -120,4 +122,9 @@ void HandleKey(GLFWwindow *window, int key, int scanCode, int action, int mods)
 void HandleMouseButton(GLFWwindow *window, int button, int action, int modes)
 {
     Input::GetInstance()->HandleMouseButton(button, action, modes);
+}
+
+void HandleCursorPos(GLFWwindow *window, double xPos, double yPos)
+{
+    Input::GetInstance()->HandleCursorPos(xPos, yPos);
 }

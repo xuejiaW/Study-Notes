@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "Input.h"
+#include "Debug.h"
 
 using namespace std;
 

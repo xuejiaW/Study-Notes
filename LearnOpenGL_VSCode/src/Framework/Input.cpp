@@ -9,7 +9,7 @@ Input::Input()
         key = false;
 }
 
-Input::~Input() { }
+Input::~Input() {}
 
 Input *Input::GetInstance()
 {
@@ -46,6 +46,12 @@ void Input::HandleKey(int key, int scanCode, int action, int mods)
     }
 }
 
+void Input::HandleCursorPos(double xPos, double yPos)
+{
+    mousePos[0] = xPos;
+    mousePos[1] = yPos;
+}
+
 bool Input::GetKeyDown(int key)
 {
     return keysDown[key];
@@ -61,10 +67,31 @@ bool Input::GetKey(int key)
     return keys[key];
 }
 
+bool Input::GetMouseButtonDown(int key)
+{
+    return mouseButtonDown[key];
+}
+bool Input::GetMouseButtonUp(int key)
+{
+    return mouseButtonUp[key];
+}
+bool Input::GetMouseButton(int key)
+{
+    return mouseButton[key];
+}
+glm::vec3 Input::GetMousePosition()
+{
+    return mousePos;
+}
+
 void Input::ClearInputState()
 {
     for (bool &key : keysDown)
         key = false;
     for (bool &key : keysUp)
+        key = false;
+    for (bool &key : mouseButtonDown)
+        key = false;
+    for (bool &key : mouseButtonUp)
         key = false;
 }
