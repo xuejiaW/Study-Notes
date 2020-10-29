@@ -70,9 +70,16 @@ void Camera::SetFOV(float fov) { this->fieldOfView = fov; }
 void Camera::SetRatio(float ratio) { this->ratio = ratio; }
 void Camera::SetNearClipping(float clipping) { this->nearClipping = clipping; }
 void Camera::SetFarClipping(float clipping) { this->farClipping = clipping; }
+
 void Camera::SetPosition(vec3 position)
 {
     GetTransform()->SetPosition(position);
+    UpdateCameraViewMatrix();
+}
+
+void Camera::SetEulerAngle(vec3 eulerAngle)
+{
+    GetTransform()->SetEulerAngle(eulerAngle);
     UpdateCameraViewMatrix();
 }
 

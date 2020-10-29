@@ -1,5 +1,10 @@
 #include "Debug.h"
 
+void Debug::Log(string description)
+{
+    cout << description << endl;
+}
+
 void Debug::Log(string description, int value)
 {
     cout << description << ": " << value << endl;

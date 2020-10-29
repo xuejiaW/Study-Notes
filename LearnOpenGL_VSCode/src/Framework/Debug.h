@@ -20,6 +20,7 @@ private:
     ~Debug();
 
 public:
+    static void Log(string);
     static void Log(string, int);
     static void Log(string, float);
     static void Log(string, vec3);

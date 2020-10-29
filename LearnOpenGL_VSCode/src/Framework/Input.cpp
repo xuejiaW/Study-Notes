@@ -7,6 +7,7 @@ Input::Input()
     ClearInputState();
     for (bool &key : keys)
         key = false;
+    anyKey = false;
 }
 
 Input::~Input() {}
@@ -36,11 +37,15 @@ void Input::HandleKey(int key, int scanCode, int action, int mods)
 {
     if (action == GLFW_PRESS)
     {
+        anyKeyDown = true;
+        anyKey = true;
         keysDown[key] = true;
         keys[key] = true;
     }
     else if (action == GLFW_RELEASE)
     {
+        anyKeyUp = true;
+        anyKey = false;
         keysUp[key] = true;
         keys[key] = false;
     }
@@ -50,6 +55,11 @@ void Input::HandleCursorPos(double xPos, double yPos)
 {
     mousePos[0] = xPos;
     mousePos[1] = yPos;
+}
+
+bool Input::GetKey()
+{
+    return anyKey;
 }
 
 bool Input::GetKeyDown(int key)
@@ -94,4 +104,7 @@ void Input::ClearInputState()
         key = false;
     for (bool &key : mouseButtonUp)
         key = false;
+
+    anyKeyDown = false;
+    anyKeyUp = false;
 }

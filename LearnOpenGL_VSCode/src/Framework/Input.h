@@ -11,8 +11,9 @@ public:
 
     void HandleMouseButton(int button, int action, int mods);
     void HandleKey(int key, int scanCode, int action, int mods);
-    void HandleCursorPos(double xPos,double yPos);
+    void HandleCursorPos(double xPos, double yPos);
     void ClearInputState();
+    bool GetKey();
     bool GetKeyDown(int key);
     bool GetKeyUp(int key);
     bool GetKey(int key);
@@ -26,6 +27,9 @@ public:
 private:
     static Input *instance;
     glm::vec3 mousePos;
+    bool anyKey;
+    bool anyKeyDown;
+    bool anyKeyUp;
     bool keys[1024];
     bool keysDown[1024];
     bool keysUp[1024];

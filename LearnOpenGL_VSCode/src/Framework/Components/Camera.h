@@ -32,6 +32,7 @@ public:
     void SetNearClipping(float);
     void SetFarClipping(float);
     void SetPosition(vec3);
+    void SetEulerAngle(vec3);
 
     void SetAttachGameObject(GameObject *attachedGO);
     void UpdateCameraViewMatrix();
