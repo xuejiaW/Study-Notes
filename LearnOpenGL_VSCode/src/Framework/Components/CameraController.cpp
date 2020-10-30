@@ -7,6 +7,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+double lastX = 0.0f;
+double lastY = 0.0f;
+bool waitingFirstClick = true;
+double mouseSensitivity = 0.1;
+
 CameraController::CameraController(Camera *target) : targetCamera(target)
 {
     input = Input::GetInstance();
@@ -17,15 +22,13 @@ void CameraController::Update()
     if (targetCamera == nullptr)
         return;
 
-    if (Input::GetInstance()->GetKey())
-    {
+    if (input->GetKey())
         HandleKeyboardEvent();
-    }
 
-    if (Input::GetInstance()->GetMouseButton(1))
-    {
+    if (input->GetMouseButtonUp(1))
+        waitingFirstClick = true;
+    if (input->GetMouseButton(1))
         HandleMouseEvent();
-    }
 }
 
 void CameraController::HandleKeyboardEvent()
@@ -46,21 +49,16 @@ void CameraController::HandleKeyboardEvent()
     targetCamera->SetPosition(cameraPos);
 }
 
-double lastX = 0.0f;
-double lastY = 0.0f;
-bool firstMouseClick = true;
-double mouseSensitivity = 0.1;
-
 void CameraController::HandleMouseEvent()
 {
     glm::vec3 mousePos = input->GetMousePosition();
     glm::vec3 eulerAngle = targetCamera->GetEulerAngle();
 
-    if (firstMouseClick)
+    if (waitingFirstClick)
     {
         lastX = mousePos[0];
         lastY = mousePos[1];
-        firstMouseClick = false;
+        waitingFirstClick = false;
     }
 
     float xOffset = (mousePos[0] - lastX) * mouseSensitivity;

@@ -2,12 +2,13 @@
 
 Input *Input::instance = nullptr;
 
-Input::Input()
+Input::Input() : anyKey(0)
 {
     ClearInputState();
     for (bool &key : keys)
         key = false;
-    anyKey = false;
+    for (bool &key : mouseButton)
+        key = false;
 }
 
 Input::~Input() {}
@@ -38,14 +39,14 @@ void Input::HandleKey(int key, int scanCode, int action, int mods)
     if (action == GLFW_PRESS)
     {
         anyKeyDown = true;
-        anyKey = true;
+        anyKey++;
         keysDown[key] = true;
         keys[key] = true;
     }
     else if (action == GLFW_RELEASE)
     {
         anyKeyUp = true;
-        anyKey = false;
+        anyKey--;
         keysUp[key] = true;
         keys[key] = false;
     }
@@ -59,7 +60,7 @@ void Input::HandleCursorPos(double xPos, double yPos)
 
 bool Input::GetKey()
 {
-    return anyKey;
+    return anyKey > 0;
 }
 
 bool Input::GetKeyDown(int key)

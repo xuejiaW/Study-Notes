@@ -27,7 +27,7 @@ public:
 private:
     static Input *instance;
     glm::vec3 mousePos;
-    bool anyKey;
+    int anyKey;
     bool anyKeyDown;
     bool anyKeyUp;
     bool keys[1024];
