@@ -4,7 +4,6 @@
 GO_Cube::GO_Cube() : transform(new Transform()), meshRender(new MeshRender()), texture(new Texture("../container.jpg"))
 {
     name = "GO_Cube";
-
     meshRender->SetMesh(new Mesh_Cube());
 
     AddComponent(transform);
@@ -12,8 +11,19 @@ GO_Cube::GO_Cube() : transform(new Transform()), meshRender(new MeshRender()), t
     AddComponent(texture);
 }
 
+GO_Cube::GO_Cube(MeshRender *meshRender) : transform(new Transform())
+{
+    name = "GO_Cube";
+    this->meshRender = meshRender;
+    this->meshRender->SetMesh(new Mesh_Cube());
+
+    AddComponent(transform);
+    AddComponent(meshRender);
+}
+
 GO_Cube::~GO_Cube()
 {
     delete transform;
     delete meshRender;
+    delete texture;
 }

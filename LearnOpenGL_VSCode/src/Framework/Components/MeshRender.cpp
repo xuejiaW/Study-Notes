@@ -11,12 +11,16 @@
 using std::cout;
 using std::endl;
 
-MeshRender::MeshRender() : shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment")
+MeshRender::MeshRender(string vertex, string frag) : shader(vertex.c_str(), frag.c_str())
 {
     name = "MeshRender";
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
     glGenVertexArrays(1, &VAO);
+}
+
+MeshRender::MeshRender() : MeshRender("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment")
+{
 }
 
 void MeshRender::SetMesh(Mesh *mesh)
@@ -37,6 +41,11 @@ void MeshRender::SetMesh(Mesh *mesh)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+Shader &MeshRender::GetShader()
+{
+    return shader;
 }
 
 void MeshRender::Update()

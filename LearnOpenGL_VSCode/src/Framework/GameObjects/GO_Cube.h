@@ -8,7 +8,8 @@
 class GO_Cube : public GameObject
 {
 public:
-    GO_Cube(/* args */);
+    GO_Cube(MeshRender* meshRender);
+    GO_Cube();
     ~GO_Cube();
 
 private:

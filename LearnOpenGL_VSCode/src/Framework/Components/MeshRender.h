@@ -9,9 +9,11 @@
 class MeshRender : public Component
 {
 public:
+    MeshRender(string vertex, string frag);
     MeshRender();
     virtual void Update();
     void SetMesh(Mesh *);
+    Shader &GetShader();
     ~MeshRender();
 
 private:

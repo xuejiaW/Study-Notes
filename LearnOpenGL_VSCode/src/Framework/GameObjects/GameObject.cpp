@@ -23,7 +23,6 @@ Component *GameObject::GetComponent(std::string name)
     if (resultIterator != componentsList.end())
         return *resultIterator;
 
-    std::cout << "Does not find component named " << name << std::endl;
     return nullptr;
 }
 

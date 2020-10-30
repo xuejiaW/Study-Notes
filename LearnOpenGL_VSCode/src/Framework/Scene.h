@@ -21,15 +21,14 @@ class Scene
 public:
     Scene(unsigned int screenWidth, unsigned int screenHeight, const char *windowName);
     ~Scene();
-    void Init();
+    virtual void Init();
     void MainLoop();
     void AddGameObject(GameObject *GO);
     GameObject *GetGameObject(string name);
 
     Camera *GetMainCamera();
 
-    virtual void
-    DrawFunc();
+    virtual void DrawFunc();
     float GetScreenRatio();
     float GetFrameTime();
     static Scene *GetInstance();
