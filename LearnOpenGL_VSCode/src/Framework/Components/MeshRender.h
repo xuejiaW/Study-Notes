@@ -9,17 +9,17 @@
 class MeshRender : public Component
 {
 public:
-    MeshRender(string vertex, string frag);
+    MeshRender(Shader* shader);
     MeshRender();
     virtual void Update();
     void SetMesh(Mesh *);
-    Shader &GetShader();
+    Shader *GetShader();
     ~MeshRender();
 
 private:
+    unsigned int VBO = 0, VAO = 0, EBO = 0;
     Mesh *mesh = nullptr;
     Transform *transform = nullptr;
     Camera *camera = nullptr;
-    unsigned int VBO = 0, VAO = 0, EBO = 0;
-    Shader shader;
+    Shader *shader = nullptr;
 };

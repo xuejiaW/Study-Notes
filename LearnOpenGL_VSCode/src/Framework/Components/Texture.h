@@ -7,6 +7,7 @@ class Texture : public Component
 public:
     Texture(string);
     unsigned int GetID();
+    unsigned int GetID() const;
     int GetWidth();
     int GetHeight();
     ~Texture();

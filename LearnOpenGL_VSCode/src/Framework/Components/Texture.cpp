@@ -21,6 +21,7 @@ Texture::Texture(string texturePath)
 }
 
 unsigned int Texture::GetID() { return id; }
+unsigned int Texture::GetID() const { return id; }
 int Texture::GetWidth() { return width; }
 int Texture::GetHeight() { return height; }
 

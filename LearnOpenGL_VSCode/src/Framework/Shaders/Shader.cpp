@@ -79,3 +79,10 @@ void Shader::CheckShaderProgram(GLuint shaderProgram)
         cout << "ERROE_LINK_PROGRAM" << infoLog << endl;
     }
 }
+
+Shader *Shader::SetVec3(string target, glm::vec3 value)
+{
+    glUseProgram(this->Program);
+    glUniform3fv(glGetUniformLocation(this->Program, target.c_str()), 1, value_ptr(value));
+    return this;
+}

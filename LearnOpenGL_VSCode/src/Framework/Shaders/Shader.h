@@ -6,6 +6,9 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 using namespace std;
 
 class Shader
@@ -16,6 +19,7 @@ public:
     Shader(const GLchar *vertexPath, const GLchar *fragmentPath, const GLchar *geometryPath);
 
     void Use();
+    Shader *SetVec3(string target, glm::vec3 value);
 
 private:
     void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType);

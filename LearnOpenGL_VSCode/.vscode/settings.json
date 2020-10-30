@@ -11,6 +11,11 @@
         "fstream": "cpp",
         "iterator": "cpp",
         "vector": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "functional": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "tuple": "cpp",
+        "typeinfo": "cpp"
     }
 }
