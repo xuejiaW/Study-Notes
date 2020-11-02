@@ -86,3 +86,10 @@ Shader *Shader::SetVec3(string target, glm::vec3 value)
     glUniform3fv(glGetUniformLocation(this->Program, target.c_str()), 1, value_ptr(value));
     return this;
 }
+
+Shader *Shader::SetFloat(string target, float value)
+{
+    glUseProgram(this->Program);
+    glUniform1f(glGetUniformLocation(this->Program, target.c_str()), value);
+    return this;
+}

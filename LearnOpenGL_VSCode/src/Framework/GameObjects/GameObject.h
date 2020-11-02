@@ -8,6 +8,7 @@ using std::vector;
 
 class Component;
 class Transform;
+class MeshRender;
 class Scene;
 
 class GameObject
@@ -19,6 +20,7 @@ public:
     void AddComponent(Component *component);
     Component *GetComponent(string name);
     Transform *GetTransform();
+    MeshRender *GetMeshRender();
     void (*updateOperation)() = nullptr;
     virtual void Update();
     ~GameObject();
@@ -27,6 +29,7 @@ protected:
     Scene *scene = nullptr;
 
 private:
+    MeshRender *meshRender = nullptr;
     Transform *transform = nullptr;
     vector<GameObject *> childrenList;
     vector<Component *> componentsList;

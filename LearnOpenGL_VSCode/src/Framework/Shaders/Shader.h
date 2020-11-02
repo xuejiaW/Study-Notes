@@ -20,6 +20,7 @@ public:
 
     void Use();
     Shader *SetVec3(string target, glm::vec3 value);
+    Shader *SetFloat(string target, float value);
 
 private:
     void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType);

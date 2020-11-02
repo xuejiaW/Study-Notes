@@ -4,10 +4,12 @@
 #include "GameObject.h"
 #include "../Components/Component.h"
 #include "../Components/Transform.h"
+#include "../Components/MeshRender.h"
 
 GameObject::GameObject()
 {
     componentsList = vector<Component *>();
+    childrenList = vector<GameObject *>();
     scene = Scene::GetInstance();
 }
 
@@ -37,6 +39,18 @@ Transform *GameObject::GetTransform()
     }
 
     return transform ? transform : nullptr;
+}
+
+MeshRender *GameObject::GetMeshRender()
+{
+    if (!meshRender)
+    {
+        Component *meshRenderCom = GetComponent("MeshRender");
+        if (meshRenderCom)
+            meshRender = dynamic_cast<MeshRender *>(meshRenderCom);
+    }
+
+    return meshRender ? meshRender : nullptr;
 }
 
 void GameObject::Update()

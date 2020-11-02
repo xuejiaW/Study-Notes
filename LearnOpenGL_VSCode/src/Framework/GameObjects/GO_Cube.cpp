@@ -13,12 +13,15 @@ GO_Cube::GO_Cube() : GameObject(), transform(new Transform()), meshRender(new Me
 
 GO_Cube::GO_Cube(MeshRender *meshRender) : GameObject(), transform(new Transform())
 {
+    Debug::Log("Enter Create GO_Cube");
     name = "GO_Cube";
     this->meshRender = meshRender;
     this->meshRender->SetMesh(new Mesh_Cube());
 
+    Debug::Log("Before add transform for GO_Cube");
     AddComponent(transform);
     AddComponent(meshRender);
+    Debug::Log("After add meshRender for GO_Cube");
 }
 
 GO_Cube::~GO_Cube()

@@ -16,6 +16,7 @@ public:
     void SetPosition(vec3 position);
     void SetEulerAngle(vec3 eulerAngle);
     void SetScale(vec3 scale);
+    void RotateAround(vec3 position, vec3 axis, float angle);
 
     vec3 GetPosition();
     vec3 GetEulerAngle();

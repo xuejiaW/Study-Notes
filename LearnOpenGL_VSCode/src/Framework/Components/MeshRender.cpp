@@ -22,6 +22,7 @@ MeshRender::MeshRender(Shader *shader)
 
 MeshRender::MeshRender() : MeshRender(new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment"))
 {
+    name = "MeshRender";
 }
 
 void MeshRender::SetMesh(Mesh *mesh)
@@ -34,10 +35,19 @@ void MeshRender::SetMesh(Mesh *mesh)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->mesh->GetIndicesSize(), this->mesh->indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
+    unsigned int singleDataSize = this->mesh->GetSingleDataSize();
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+    if (singleDataSize >= 3)
+    {
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+    }
+    if (singleDataSize >= 5)
+    {
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(5 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
