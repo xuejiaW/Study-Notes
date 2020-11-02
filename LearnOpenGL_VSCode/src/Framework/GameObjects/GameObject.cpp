@@ -7,6 +7,7 @@
 
 GameObject::GameObject()
 {
+    componentsList = vector<Component *>();
     scene = Scene::GetInstance();
 }
 
@@ -45,6 +46,9 @@ void GameObject::Update()
 
     for (Component *const &component : componentsList)
         component->Update();
+
+    if (updateOperation)
+        updateOperation();
 }
 
 GameObject::~GameObject()

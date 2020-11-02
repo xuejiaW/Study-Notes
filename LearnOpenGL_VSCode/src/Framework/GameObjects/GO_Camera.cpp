@@ -1,7 +1,7 @@
 #include "GO_Camera.h"
 #include "../Scene.h"
 
-GO_Camera::GO_Camera()
+GO_Camera::GO_Camera() : GameObject()
 {
     name = "GO_Camera";
     this->transform = new Transform();

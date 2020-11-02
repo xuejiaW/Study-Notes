@@ -19,8 +19,8 @@ public:
     void AddComponent(Component *component);
     Component *GetComponent(string name);
     Transform *GetTransform();
+    void (*updateOperation)() = nullptr;
     virtual void Update();
-
     ~GameObject();
 
 protected:

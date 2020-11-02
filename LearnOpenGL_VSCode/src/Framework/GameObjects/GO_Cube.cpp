@@ -1,7 +1,7 @@
 #include "GO_Cube.h"
 #include "../Mesh/Mesh_Cube.h"
 
-GO_Cube::GO_Cube() : transform(new Transform()), meshRender(new MeshRender()), texture(new Texture("../container.jpg"))
+GO_Cube::GO_Cube() : GameObject(), transform(new Transform()), meshRender(new MeshRender()), texture(new Texture("../container.jpg"))
 {
     name = "GO_Cube";
     meshRender->SetMesh(new Mesh_Cube());
@@ -11,7 +11,7 @@ GO_Cube::GO_Cube() : transform(new Transform()), meshRender(new MeshRender()), t
     AddComponent(texture);
 }
 
-GO_Cube::GO_Cube(MeshRender *meshRender) : transform(new Transform())
+GO_Cube::GO_Cube(MeshRender *meshRender) : GameObject(), transform(new Transform())
 {
     name = "GO_Cube";
     this->meshRender = meshRender;
