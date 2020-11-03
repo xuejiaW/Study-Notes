@@ -1,14 +1,13 @@
 #include "GO_Cube.h"
 #include "../Mesh/Mesh_Cube.h"
 
-GO_Cube::GO_Cube() : GameObject(), transform(new Transform()), meshRender(new MeshRender()), texture(new Texture("../container.jpg"))
+GO_Cube::GO_Cube() : GameObject(), transform(new Transform()), meshRender(new MeshRender())
 {
     name = "GO_Cube";
     meshRender->SetMesh(new Mesh_Cube());
 
     AddComponent(transform);
     AddComponent(meshRender);
-    AddComponent(texture);
 }
 
 GO_Cube::GO_Cube(MeshRender *meshRender) : GameObject(), transform(new Transform())
@@ -28,5 +27,4 @@ GO_Cube::~GO_Cube()
 {
     delete transform;
     delete meshRender;
-    delete texture;
 }

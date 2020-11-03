@@ -7,15 +7,18 @@
 
 using std::vector;
 
-class Material : public Component
+class Material
 {
 public:
     Material();
     Material(Shader *shader);
     Material(string vertexPath, string fragPath);
 
-    void AddTexture(Texture *texture);
+    void AddTexture(string target, Texture *texture);
     void RemoveTexture(unsigned int textureId);
+    unsigned int GetTextureCount();
+    Texture *GetTexture(int index);
+    Shader *GetShader();
     ~Material();
 
 private:

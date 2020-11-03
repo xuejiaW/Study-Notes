@@ -2,7 +2,7 @@
 
 #include "Component.h"
 
-class Texture : public Component
+class Texture
 {
 public:
     Texture(string);

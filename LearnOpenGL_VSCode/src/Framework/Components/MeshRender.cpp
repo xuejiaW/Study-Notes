@@ -11,18 +11,19 @@
 using std::cout;
 using std::endl;
 
-MeshRender::MeshRender(Shader *shader)
-{
-    name = "MeshRender";
-    this->shader = shader;
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-    glGenVertexArrays(1, &VAO);
-}
+MeshRender::MeshRender(Shader *shader) : MeshRender(new Material(shader)) {}
 
 MeshRender::MeshRender() : MeshRender(new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment"))
 {
+}
+
+MeshRender::MeshRender(Material *material) : Component()
+{
     name = "MeshRender";
+    this->material = material;
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+    glGenVertexArrays(1, &VAO);
 }
 
 void MeshRender::SetMesh(Mesh *mesh)
@@ -56,7 +57,12 @@ void MeshRender::SetMesh(Mesh *mesh)
 
 Shader *MeshRender::GetShader()
 {
-    return shader;
+    return material->GetShader();
+}
+
+Material *MeshRender::GetMaterial()
+{
+    return material;
 }
 
 void MeshRender::Update()
@@ -73,7 +79,8 @@ void MeshRender::Update()
         return;
     }
 
-    shader->Use();
+    material->GetShader()->Use();
+    GLuint shaderProgram = material->GetShader()->Program;
 
     glm::mat4 model, xRot, yRot, zRot;
     model = glm::translate(model, transform->GetPosition());
@@ -88,17 +95,18 @@ void MeshRender::Update()
     glm::mat4 view = camera->GetViewMatrix();
     glm::mat4 projection = camera->GetProjectionMatrix();
 
-    glUniformMatrix4fv(glGetUniformLocation(shader->Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(glGetUniformLocation(shader->Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-    if (Component *com = gameObject->GetComponent("Texture"))
-    {
-        Texture *texture = dynamic_cast<Texture *>(com);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture->GetID());
-        glUniform1i(glGetUniformLocation(shader->Program, "outTexture"), 0);
-    }
+
+    // if (Component *com = gameObject->GetComponent("Texture"))
+    // {
+    //     Texture *texture = dynamic_cast<Texture *>(com);
+    //     glActiveTexture(GL_TEXTURE0);
+    //     glBindTexture(GL_TEXTURE_2D, texture->GetID());
+    //     glUniform1i(glGetUniformLocation(shaderProgram, "outTexture"), 0);
+    // }
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);

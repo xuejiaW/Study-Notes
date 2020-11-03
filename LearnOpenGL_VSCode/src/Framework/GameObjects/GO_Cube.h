@@ -15,5 +15,4 @@ public:
 private:
     Transform *transform = nullptr;
     MeshRender *meshRender = nullptr;
-    Texture *texture = nullptr;
 };

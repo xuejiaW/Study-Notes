@@ -6,9 +6,8 @@
 
 Texture::Texture(string texturePath)
 {
-    name = "Texture";
     int nrChannels;
-    unsigned char *data = stbi_load("../container.jpg", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
 
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
@@ -18,6 +17,7 @@ Texture::Texture(string texturePath)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 unsigned int Texture::GetID() { return id; }

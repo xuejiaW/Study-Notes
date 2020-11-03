@@ -93,3 +93,10 @@ Shader *Shader::SetFloat(string target, float value)
     glUniform1f(glGetUniformLocation(this->Program, target.c_str()), value);
     return this;
 }
+
+Shader *Shader::SetInt(string target, int value)
+{
+    glUseProgram(this->Program);
+    glUniform1i(glGetUniformLocation(this->Program, target.c_str()), value);
+    return this;
+}
