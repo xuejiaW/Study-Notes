@@ -36,6 +36,7 @@ void CameraController::HandleKeyboardEvent()
     glm::vec3 cameraPos = targetCamera->GetPosition();
     glm::vec3 forward = targetCamera->GetForward();
     glm::vec3 right = targetCamera->GetRight();
+    glm::vec3 up = targetCamera->GetUp();
     float speed = 2.5f * Scene::GetInstance()->GetFrameTime();
     if (input->GetKey(GLFW_KEY_W))
         cameraPos += speed * forward;
@@ -45,6 +46,10 @@ void CameraController::HandleKeyboardEvent()
         cameraPos -= speed * forward;
     if (input->GetKey(GLFW_KEY_D))
         cameraPos += speed * right;
+    if (input->GetKey(GLFW_KEY_Q))
+        cameraPos += speed * up;
+    if (input->GetKey(GLFW_KEY_E))
+        cameraPos -= speed * up;
 
     targetCamera->SetPosition(cameraPos);
 }
