@@ -30,8 +30,8 @@ int main()
 
     // Colored Cube
     Shader *cubeShader = new Shader("./object.vert", "./object.frag");
-    Texture *diffuseMap = new Texture("./container.png");
-    Texture *specularMap = new Texture("./container_specular.png");
+    Texture *diffuseMap = new Texture("../container.png");
+    Texture *specularMap = new Texture("../container_specular.png");
     cubeShader->SetVec3("light.ambient", vec3(0.1, 0.1, 0.1));
     cubeShader->SetVec3("light.diffuse", vec3(0.5, 0.5, 0.5));
     cubeShader->SetVec3("light.specular", vec3(1.0, 1.0, 1.0));
