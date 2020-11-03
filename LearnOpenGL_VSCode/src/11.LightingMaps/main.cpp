@@ -7,7 +7,7 @@ void UpdateHandle();
 
 GO_Cube *coloredCube = nullptr;
 GO_Cube *lamp = nullptr;
-Scene scene(800, 600, "Materials");
+Scene scene(800, 600, "LightingMaps");
 GO_Camera *camera = nullptr;
 
 int main()
