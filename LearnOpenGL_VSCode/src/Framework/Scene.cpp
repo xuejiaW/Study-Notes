@@ -97,6 +97,8 @@ void Scene::DrawFunc()
 {
     for (GameObject *go : gameObjectsList)
         go->Update();
+    if (updateHandle)
+        updateHandle();
 }
 
 float Scene::GetScreenRatio()

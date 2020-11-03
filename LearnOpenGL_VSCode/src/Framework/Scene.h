@@ -32,6 +32,7 @@ public:
     float GetScreenRatio();
     float GetFrameTime();
     static Scene *GetInstance();
+    void (*updateHandle)() = nullptr;
 
 private:
     static Scene *instance;
