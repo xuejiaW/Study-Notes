@@ -66,16 +66,16 @@ int main()
     cubeMaterial->AddTexture("material.diffuse", diffuseMap);   // will set material.diffuse
     cubeMaterial->AddTexture("material.specular", specularMap); // will set material.specular
 
+    cubeShader->SetVec3("ambient", vec3(0.05, 0.05, 0.05));
+
     // Setting for directional Light
     cubeShader->SetVec3("dirLight.direction", -dirLightPos);
-    cubeShader->SetVec3("dirLight.ambient", vec3(0.05, 0.05, 0.05));
     cubeShader->SetVec3("dirLight.diffuse", vec3(0.2, 0.2, 0.2));
     cubeShader->SetVec3("dirLight.specular", vec3(0.3, 0.3, 0.3));
 
     // Setting for point Lights
     for (int i = 0; i != 2; ++i)
     {
-        cubeShader->SetVec3("pointLights[" + to_string(i) + "].ambient", vec3(0.05, 0.05, 0.05));
         cubeShader->SetVec3("pointLights[" + to_string(i) + "].diffuse", vec3(0.5, 0.5, 0.5));
         cubeShader->SetVec3("pointLights[" + to_string(i) + "].specular", vec3(1, 1, 1));
         cubeShader->SetFloat("pointLights[" + to_string(i) + "].constant", 1.0f);
@@ -83,6 +83,14 @@ int main()
         cubeShader->SetFloat("pointLights[" + to_string(i) + "].quadratic", 0.32f);
     }
 
+    // Setting for Spot Lights
+    cubeShader->SetVec3("spotLight.diffuse", vec3(1, 1, 1));
+    cubeShader->SetVec3("spotLight.specular", vec3(1, 1, 1));
+    cubeShader->SetFloat("spotLight.constant", 1.0f);
+    cubeShader->SetFloat("spotLight.linear", 0.09);
+    cubeShader->SetFloat("spotLight.quadratic", 0.032);
+    cubeShader->SetFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+    cubeShader->SetFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
 
     for (int i = 0; i != 10; ++i)
     {
@@ -107,5 +115,9 @@ void UpdateHandle()
     pointLight[1]->GetTransform()->RotateAround(cubePos, vec3(1, 0, -2), scene.GetFrameTime() * 1.0f);
     cubeShader->SetVec3("pointLights[1].position", pointLight[1]->GetTransform()->GetPosition());
 
-    cubeShader->SetVec3("viewPos", camera->GetTransform()->GetPosition());
+    Camera *camera = scene.GetMainCamera();
+
+    cubeShader->SetVec3("viewPos", camera->GetPosition());
+    cubeShader->SetVec3("spotLight.position", camera->GetPosition());
+    cubeShader->SetVec3("spotLight.direction", camera->GetForward());
 }
