@@ -11,7 +11,6 @@ struct Material
 uniform Material material;
 uniform vec3 ambient;
 
-
 struct DirLight
 {
     vec3 direction;
@@ -83,8 +82,8 @@ vec3 CalculateDirLight(DirLight light,vec3 normal,vec3 viewDir)
 vec3 CalculatePointLight(PointLight light,vec3 normal, vec3 fragPos, vec3 viewDir)
 {
     float lightDist = length(light.position - fragPos);
-    vec3 lightDir=normalize(light.position-fragPos);
     float attenuation = 1 / (light.constant + light.linear*lightDist + light.quadratic*lightDist*lightDist);
+    vec3 lightDir=normalize(light.position-fragPos);
 
     vec3 diffuseComponent=GetDiffuseValue(normal,lightDir,light.diffuse) * attenuation;
     vec3 specularComponent=GetSpecularValue(normal,lightDir,viewDir,light.specular) * attenuation;
@@ -115,7 +114,7 @@ void main()
     vec3 viewDir= normalize(viewPos-fragPos);
 
     vec3 ambientComponent = ambient * vec3(texture(material.diffuse,texcoord));
-    
+
     vec3 result = ambientComponent;
     result += CalculateDirLight(dirLight,normal,viewDir);
     for(int i=0;i!=2;++i)
