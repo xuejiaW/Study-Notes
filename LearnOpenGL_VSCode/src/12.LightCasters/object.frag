@@ -31,7 +31,7 @@ struct PointLight
     float linear;
     float quadratic;
 };
-uniform PointLight pointLight;
+uniform PointLight pointLights[2];
 
 uniform vec3 viewPos;
 
@@ -74,7 +74,10 @@ vec3 CalculatePointLight(PointLight light,vec3 normal, vec3 fragPos, vec3 viewDi
 void main()
 {
     vec3 viewDir= normalize(viewPos-fragPos);
-    vec3 result=CalculateDirLight(dirLight,normal,viewDir) + CalculatePointLight(pointLight,normal,fragPos,viewDir);
+
+    vec3 result= CalculateDirLight(dirLight,normal,viewDir);
+    for(int i=0;i!=2;++i)
+        result+=CalculatePointLight(pointLights[i],normal,fragPos,viewDir);
 
     color = vec4(result,1);
 }
