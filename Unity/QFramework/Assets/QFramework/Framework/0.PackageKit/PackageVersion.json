@@ -1,0 +1,19 @@
+{
+    "Id": "",
+    "Version": "v0.13.3",
+    "Type": 0,
+    "AccessRight": 0,
+    "DownloadUrl": "",
+    "InstallPath": "Assets/QFramework/Framework/0.PackageKit/",
+    "IncludeFileOrFolders": [
+        "Assets/QFramework/Framework/0.PackageKit"
+    ],
+    "DocUrl": "http://lianxiegame.com",
+    "Readme": {
+        "version": "v0.13.3",
+        "content": "修复 EndGUILayout 的问题",
+        "author": "liangxie",
+        "date": "2020 年 10 月 25 日 14:52",
+        "PackageId": ""
+    }
+}
