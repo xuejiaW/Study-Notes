@@ -7,7 +7,7 @@ void UpdateHandle();
 GO_Cube *coloredCube[10]{nullptr};
 GO_Cube *dirLight = nullptr;
 GO_Cube *pointLight[2]{nullptr};
-Scene scene(800, 600, "LightingMaps");
+Scene scene(800, 600, "LightCasters&&MultipleLights");
 GO_Camera *camera = nullptr;
 
 glm::vec3 cubePositions[] = {

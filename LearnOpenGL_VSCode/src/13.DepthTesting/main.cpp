@@ -2,7 +2,7 @@
 #include "../Framework/GameObjects/GO_Camera.h"
 #include "../Framework/GameObjects/GO_Cube.h"
 
-Scene scene(800, 600, "LightingMaps");
+Scene scene(800, 600, "DepthTesting");
 GO_Camera *camera = nullptr;
 
 int main()

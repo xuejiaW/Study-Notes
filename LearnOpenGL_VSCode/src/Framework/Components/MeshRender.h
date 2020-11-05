@@ -14,6 +14,8 @@ public:
     MeshRender(Shader *shader);
     MeshRender();
     virtual void Update();
+    void SetPreRenderHandle(void (*)());
+    void SetPostRenderHandle(void (*)());
     void SetMesh(Mesh *);
 
     Shader *GetShader();
@@ -23,6 +25,8 @@ public:
 
 private:
     unsigned int VBO = 0, VAO = 0, EBO = 0;
+    void (*preRenderHandle)() = nullptr;
+    void (*postRenderHandle)() = nullptr;
     Mesh *mesh = nullptr;
     Transform *transform = nullptr;
     Camera *camera = nullptr;

@@ -31,10 +31,12 @@ public:
     virtual void DrawFunc();
     float GetScreenRatio();
     float GetFrameTime();
+    int GetFrameIndex();
     static Scene *GetInstance();
     void (*updateHandle)() = nullptr;
 
 private:
+    int frameIndex = 0;
     static Scene *instance;
     Camera *mainCamera = nullptr;
     string windowName;

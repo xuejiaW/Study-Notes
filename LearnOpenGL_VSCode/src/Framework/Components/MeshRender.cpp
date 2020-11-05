@@ -79,6 +79,9 @@ void MeshRender::Update()
         return;
     }
 
+    if (preRenderHandle)
+        preRenderHandle();
+
     material->GetShader()->Use();
     GLuint shaderProgram = material->GetShader()->Program;
 
@@ -99,17 +102,21 @@ void MeshRender::Update()
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-
-    // if (Component *com = gameObject->GetComponent("Texture"))
-    // {
-    //     Texture *texture = dynamic_cast<Texture *>(com);
-    //     glActiveTexture(GL_TEXTURE0);
-    //     glBindTexture(GL_TEXTURE_2D, texture->GetID());
-    //     glUniform1i(glGetUniformLocation(shaderProgram, "outTexture"), 0);
-    // }
-
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+
+    if (postRenderHandle)
+        postRenderHandle();
+}
+
+void MeshRender::SetPreRenderHandle(void (*preRenderHandle)())
+{
+    this->preRenderHandle = preRenderHandle;
+}
+void MeshRender::SetPostRenderHandle(void (*postRenderHandle)())
+{
+    this->postRenderHandle = postRenderHandle;
 }
 
 MeshRender::~MeshRender()
