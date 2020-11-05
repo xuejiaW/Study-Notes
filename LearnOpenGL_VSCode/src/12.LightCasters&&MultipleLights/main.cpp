@@ -1,4 +1,3 @@
-
 #include "../Framework/Scene.h"
 #include "../Framework/GameObjects/GO_Camera.h"
 #include "../Framework/GameObjects/GO_Cube.h"

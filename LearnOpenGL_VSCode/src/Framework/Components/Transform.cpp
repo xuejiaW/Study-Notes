@@ -4,7 +4,7 @@ Transform::Transform()
 {
     name = "Transform";
     position = vec3(0, 0, 0);
-    eulerAngle = vec3(30, 50, 60);
+    eulerAngle = vec3(0, 0, 0);
     scale = vec3(0.5f, 0.5f, 0.5f);
 }
 

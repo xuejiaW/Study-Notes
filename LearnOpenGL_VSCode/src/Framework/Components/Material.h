@@ -14,6 +14,7 @@ public:
     Material(Shader *shader);
     Material(string vertexPath, string fragPath);
 
+    void SetColor(vec3 color);
     void AddTexture(string target, Texture *texture);
     void RemoveTexture(unsigned int textureId);
     unsigned int GetTextureCount();

@@ -29,6 +29,11 @@ void Material::RemoveTexture(unsigned int textureId)
         textureList.erase(it);
 }
 
+void Material::SetColor(vec3 color)
+{
+    shader->SetVec3("baseColor", color);
+}
+
 unsigned int Material::GetTextureCount()
 {
     return textureList.size();
