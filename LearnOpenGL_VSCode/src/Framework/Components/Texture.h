@@ -8,6 +8,7 @@ public:
     Texture(string);
     unsigned int GetID();
     unsigned int GetID() const;
+    void SetWrap(int, int);
     int GetWidth();
     int GetHeight();
     ~Texture();

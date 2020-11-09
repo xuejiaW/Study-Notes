@@ -16,6 +16,7 @@ public:
 
     void SetColor(vec3 color);
     void AddTexture(string target, Texture *texture);
+    void UdpateTexture();
     void RemoveTexture(unsigned int textureId);
     unsigned int GetTextureCount();
     Texture *GetTexture(int index);
@@ -25,4 +26,5 @@ public:
 private:
     Shader *shader = nullptr;
     vector<Texture *> textureList;
+    vector<string> targetList;
 };

@@ -87,11 +87,11 @@ void MeshRender::Update()
 
     glm::mat4 model, xRot, yRot, zRot;
     model = glm::translate(model, transform->GetPosition());
-    xRot = glm::rotate(xRot, transform->GetEulerAngle().x, glm::vec3(1, 0, 0));
-    yRot = glm::rotate(yRot, transform->GetEulerAngle().y, glm::vec3(0, 1, 0));
-    zRot = glm::rotate(zRot, transform->GetEulerAngle().z, glm::vec3(0, 0, 1));
+    xRot = glm::rotate(xRot, glm::radians(transform->GetEulerAngle().x), glm::vec3(1, 0, 0));
+    yRot = glm::rotate(yRot, glm::radians(transform->GetEulerAngle().y), glm::vec3(0, 1, 0));
+    zRot = glm::rotate(zRot, glm::radians(transform->GetEulerAngle().z), glm::vec3(0, 0, 1));
     model *= yRot;
-    model *= zRot;
+    model *= xRot;
     model *= zRot;
     model = glm::scale(model, transform->GetScale());
 
@@ -103,6 +103,7 @@ void MeshRender::Update()
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
     glBindVertexArray(VAO);
+    material->UdpateTexture();
     glDrawElements(GL_TRIANGLES, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 

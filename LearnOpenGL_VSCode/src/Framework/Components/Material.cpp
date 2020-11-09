@@ -2,6 +2,8 @@
 #include "../Debug.h"
 #include <algorithm>
 
+// vector<Texture *> Material::textureList = vector<Texture *>();
+
 Material::Material() : Material("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment")
 {
 }
@@ -15,9 +17,10 @@ Material::Material(string vertexPath, string fragPath) : Material(new Shader(ver
 
 void Material::AddTexture(string target, Texture *texture)
 {
-    glActiveTexture(GL_TEXTURE0 + GetTextureCount());
-    glBindTexture(GL_TEXTURE_2D, texture->GetID());
-    shader->SetInt(target, GetTextureCount());
+    // glActiveTexture(GL_TEXTURE0 + GetTextureCount());
+    // glBindTexture(GL_TEXTURE_2D, texture->GetID());
+    // shader->SetInt(target, GetTextureCount());
+    targetList.push_back(target);
     textureList.push_back(texture);
 }
 
@@ -27,6 +30,16 @@ void Material::RemoveTexture(unsigned int textureId)
                                                   [textureId](const Texture *texture) { return texture->GetID() == textureId; });
     if (it != textureList.end())
         textureList.erase(it);
+}
+
+void Material::UdpateTexture()
+{
+    for (int i = 0; i != GetTextureCount(); ++i)
+    {
+        glActiveTexture(GL_TEXTURE0 + i);
+        glBindTexture(GL_TEXTURE_2D, textureList[i]->GetID());
+        shader->SetInt(targetList[i], i);
+    }
 }
 
 void Material::SetColor(vec3 color)

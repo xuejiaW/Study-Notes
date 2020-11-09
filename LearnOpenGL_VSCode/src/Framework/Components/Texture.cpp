@@ -6,7 +6,8 @@
 
 Texture::Texture(string texturePath)
 {
-    int nrChannels;
+    int nrChannels = 0;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
 
     glGenTextures(1, &id);
@@ -24,6 +25,14 @@ unsigned int Texture::GetID() { return id; }
 unsigned int Texture::GetID() const { return id; }
 int Texture::GetWidth() { return width; }
 int Texture::GetHeight() { return height; }
+
+void Texture::SetWrap(int wrap_S, int wrap_T)
+{
+    glBindTexture(GL_TEXTURE_2D, id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap_S);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap_T);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
 
 Texture::~Texture()
 {
