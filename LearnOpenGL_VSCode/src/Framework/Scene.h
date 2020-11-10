@@ -34,6 +34,8 @@ public:
     int GetFrameIndex();
     static Scene *GetInstance();
     void (*updateHandle)() = nullptr;
+    void (*preRender)() = nullptr;
+    void (*postRender)() = nullptr;
 
 private:
     int frameIndex = 0;

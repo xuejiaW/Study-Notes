@@ -73,34 +73,31 @@ void MeshRender::Update()
     if (!camera)
         camera = Scene::GetInstance()->GetMainCamera();
 
-    if (!transform || !camera)
-    {
-        cout << "Lack of Transform or Camera" << endl;
-        return;
-    }
-
     if (preRenderHandle)
         preRenderHandle();
 
     material->GetShader()->Use();
     GLuint shaderProgram = material->GetShader()->Program;
 
-    glm::mat4 model, xRot, yRot, zRot;
-    model = glm::translate(model, transform->GetPosition());
-    xRot = glm::rotate(xRot, glm::radians(transform->GetEulerAngle().x), glm::vec3(1, 0, 0));
-    yRot = glm::rotate(yRot, glm::radians(transform->GetEulerAngle().y), glm::vec3(0, 1, 0));
-    zRot = glm::rotate(zRot, glm::radians(transform->GetEulerAngle().z), glm::vec3(0, 0, 1));
-    model *= yRot;
-    model *= xRot;
-    model *= zRot;
-    model = glm::scale(model, transform->GetScale());
+    if (transform && camera)
+    {
+        glm::mat4 model, xRot, yRot, zRot;
+        model = glm::translate(model, transform->GetPosition());
+        xRot = glm::rotate(xRot, glm::radians(transform->GetEulerAngle().x), glm::vec3(1, 0, 0));
+        yRot = glm::rotate(yRot, glm::radians(transform->GetEulerAngle().y), glm::vec3(0, 1, 0));
+        zRot = glm::rotate(zRot, glm::radians(transform->GetEulerAngle().z), glm::vec3(0, 0, 1));
+        model *= yRot;
+        model *= xRot;
+        model *= zRot;
+        model = glm::scale(model, transform->GetScale());
 
-    glm::mat4 view = camera->GetViewMatrix();
-    glm::mat4 projection = camera->GetProjectionMatrix();
+        glm::mat4 view = camera->GetViewMatrix();
+        glm::mat4 projection = camera->GetProjectionMatrix();
 
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    }
 
     glBindVertexArray(VAO);
     material->UdpateTexture();

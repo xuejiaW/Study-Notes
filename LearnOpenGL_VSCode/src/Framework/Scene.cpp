@@ -62,7 +62,13 @@ void Scene::MainLoop()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+        if (preRender)
+            preRender();
+
         DrawFunc();
+
+        if (postRender)
+            postRender();
 
         glfwSwapBuffers(window);
         Input::GetInstance()->ClearInputState();
@@ -103,6 +109,7 @@ void Scene::DrawFunc()
 {
     for (GameObject *go : gameObjectsList)
         go->Update();
+
     if (updateHandle)
         updateHandle();
 }
