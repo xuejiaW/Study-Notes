@@ -11,6 +11,8 @@ Scene *Scene::instance = nullptr;
 float lastFrameTime = 0.0f;
 float currentFrameTime = 0.0f;
 
+void FramebufferSizeCallback(GLFWwindow *window, int width, int height);
+
 Scene *Scene::GetInstance()
 {
     if (!instance)
@@ -34,6 +36,8 @@ Scene::Scene(unsigned int width, unsigned int height, const char *name)
     glfwSetMouseButtonCallback(window, HandleMouseButton);
     glfwSetKeyCallback(window, HandleKey);
     glfwSetCursorPosCallback(window, HandleCursorPos);
+
+    glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
 
     Init();
 }
@@ -136,4 +140,9 @@ void HandleMouseButton(GLFWwindow *window, int button, int action, int modes)
 void HandleCursorPos(GLFWwindow *window, double xPos, double yPos)
 {
     Input::GetInstance()->HandleCursorPos(xPos, yPos);
+}
+
+void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
