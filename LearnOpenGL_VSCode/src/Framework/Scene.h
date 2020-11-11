@@ -30,6 +30,8 @@ public:
 
     virtual void DrawFunc();
     float GetScreenRatio();
+    unsigned int GetWidth();
+    unsigned int GetHeight();
     float GetFrameTime();
     int GetFrameIndex();
     static Scene *GetInstance();

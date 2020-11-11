@@ -17,19 +17,22 @@ Material::Material(string vertexPath, string fragPath) : Material(new Shader(ver
 
 void Material::AddTexture(string target, Texture *texture)
 {
-    // glActiveTexture(GL_TEXTURE0 + GetTextureCount());
-    // glBindTexture(GL_TEXTURE_2D, texture->GetID());
-    // shader->SetInt(target, GetTextureCount());
     targetList.push_back(target);
-    textureList.push_back(texture);
+    textureIDList.push_back(texture->GetID());
+}
+
+void Material::AddTexture(string target, int tID)
+{
+    targetList.push_back(target);
+    textureIDList.push_back(tID);
 }
 
 void Material::RemoveTexture(unsigned int textureId)
 {
-    vector<Texture *>::iterator it = std::find_if(textureList.begin(), textureList.end(),
-                                                  [textureId](const Texture *texture) { return texture->GetID() == textureId; });
-    if (it != textureList.end())
-        textureList.erase(it);
+    vector<int>::iterator it = std::find_if(textureIDList.begin(), textureIDList.end(),
+                                            [textureId](int tid) { return tid == textureId; });
+    if (it != textureIDList.end())
+        textureIDList.erase(it);
 }
 
 void Material::UdpateTexture()
@@ -37,7 +40,7 @@ void Material::UdpateTexture()
     for (int i = 0; i != GetTextureCount(); ++i)
     {
         glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, textureList[i]->GetID());
+        glBindTexture(GL_TEXTURE_2D, textureIDList[i]);
         shader->SetInt(targetList[i], i);
     }
 }
@@ -49,14 +52,14 @@ void Material::SetColor(vec3 color)
 
 unsigned int Material::GetTextureCount()
 {
-    return textureList.size();
+    return textureIDList.size();
 }
 
-Texture *Material::GetTexture(int index)
+int Material::GetTexture(int index)
 {
-    if (index >= textureList.size())
-        return nullptr;
-    return textureList[index];
+    if (index >= textureIDList.size())
+        return -1;
+    return textureIDList[index];
 }
 
 Shader *Material::GetShader()

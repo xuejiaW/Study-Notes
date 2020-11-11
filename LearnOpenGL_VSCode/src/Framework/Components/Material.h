@@ -16,15 +16,16 @@ public:
 
     void SetColor(vec3 color);
     void AddTexture(string target, Texture *texture);
+    void AddTexture(string target, int tID);
     void UdpateTexture();
     void RemoveTexture(unsigned int textureId);
     unsigned int GetTextureCount();
-    Texture *GetTexture(int index);
+    int GetTexture(int index);
     Shader *GetShader();
     ~Material();
 
 private:
     Shader *shader = nullptr;
-    vector<Texture *> textureList;
+    vector<unsigned int> textureIDList;
     vector<string> targetList;
 };

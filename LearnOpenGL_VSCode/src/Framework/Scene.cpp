@@ -16,7 +16,9 @@ void FramebufferSizeCallback(GLFWwindow *window, int width, int height);
 Scene *Scene::GetInstance()
 {
     if (!instance)
+    {
         instance = new Scene(800, 600, "instance");
+    }
     return instance;
 }
 
@@ -117,6 +119,16 @@ void Scene::DrawFunc()
 float Scene::GetScreenRatio()
 {
     return screenWidth * 1.0f / screenHeight;
+}
+
+unsigned int Scene::GetWidth()
+{
+    return screenWidth;
+}
+
+unsigned int Scene::GetHeight()
+{
+    return screenHeight;
 }
 
 float Scene::GetFrameTime()

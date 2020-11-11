@@ -99,13 +99,18 @@ void MeshRender::Update()
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     }
 
+    DrawMesh();
+
+    if (postRenderHandle)
+        postRenderHandle();
+}
+
+void MeshRender::DrawMesh()
+{
     glBindVertexArray(VAO);
     material->UdpateTexture();
     glDrawElements(GL_TRIANGLES, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-
-    if (postRenderHandle)
-        postRenderHandle();
 }
 
 void MeshRender::SetPreRenderHandle(void (*preRenderHandle)())

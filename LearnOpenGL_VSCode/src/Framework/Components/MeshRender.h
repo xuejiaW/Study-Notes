@@ -17,6 +17,7 @@ public:
     void SetPreRenderHandle(void (*)());
     void SetPostRenderHandle(void (*)());
     void SetMesh(Mesh *);
+    void DrawMesh();
 
     Shader *GetShader();
     Material *GetMaterial();

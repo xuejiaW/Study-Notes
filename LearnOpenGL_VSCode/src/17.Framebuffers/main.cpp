@@ -2,8 +2,9 @@
 #include "../Framework/GameObjects/GO_Camera.h"
 #include "../Framework/GameObjects/GO_Cube.h"
 #include "../Framework/GameObjects/GO_Plane.h"
+#include "../Framework/Mesh/Mesh_Screen.h"
 
-Scene scene(800, 600, "StencilTesting");
+Scene scene(800, 600, "Framebuffers");
 GO_Camera *camera = nullptr;
 
 void AddContentsToScene();
@@ -11,36 +12,18 @@ void CreateFrameBuffer();
 
 GLuint framebuffer = -1;
 GLuint texColorBuffer = -1;
+GLuint texDepthStencilBuffer = -1;
 
-float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
-    // positions   // texCoords
-    -1.0f, 1.0f, 0.0f, 1.0f,
-    -1.0f, -1.0f, 0.0f, 0.0f,
-    1.0f, -1.0f, 1.0f, 0.0f,
-
-    -1.0f, 1.0f, 0.0f, 1.0f,
-    1.0f, -1.0f, 1.0f, 0.0f,
-    1.0f, 1.0f, 1.0f, 1.0f};
-
-// screen quad VAO
-unsigned int quadVAO, quadVBO;
-Shader *screenShader = new Shader("./Framebuffer.vert", "./Framebuffer.frag");
+MeshRender *screenMeshRender = new MeshRender(new Material(new Shader("./Framebuffer.vert", "./Framebuffer.frag")));
 
 int main()
 {
+    screenMeshRender->SetMesh(new Mesh_Screen());
+
     CreateFrameBuffer();
-
-    glGenVertexArrays(1, &quadVAO);
-    glGenBuffers(1, &quadVBO);
-    glBindVertexArray(quadVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)(2 * sizeof(float)));
-
     AddContentsToScene();
+
+    // Bind framebuffer before rendering the screen
     scene.preRender = []() {
         glEnable(GL_DEPTH_TEST);
         glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
@@ -48,13 +31,10 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     };
 
+    // Unbind framebuffer, and draw the framebuffer color component to default framebuffer
     scene.postRender = []() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        screenShader->Use();
-        glBindVertexArray(quadVAO);
-        glDisable(GL_DEPTH_TEST);
-        glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        screenMeshRender->DrawMesh();
     };
 
     scene.MainLoop();
@@ -65,21 +45,36 @@ void CreateFrameBuffer()
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
-    // generate texture
+    // Generate texture buffer
     glGenTextures(1, &texColorBuffer);
     glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, scene.GetWidth(), scene.GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
-    // attach it to currently bound framebuffer object
+    // attach texture buffer to currently bound framebuffer object
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
 
-    // Depth and Stencil Buffer
+    // Bind color component to meshRender
+    screenMeshRender->GetShader()->Use();
+    screenMeshRender->GetMaterial()->AddTexture("screenTexture", (unsigned int)texColorBuffer);
+
+    // Genrerate depth and stencil Buffer using texture buffer
+    // texDepthStencilBuffer = 0;
+    // glGenTextures(1, &texDepthStencilBuffer);
+    // glBindTexture(GL_TEXTURE_2D, texDepthStencilBuffer);
+    // glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, scene.GetWidth(), scene.GetHeight(), 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // glBindTexture(GL_TEXTURE_2D, 0);
+    // // attach texture buffer to currently bound framebuffer object
+    // glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, texDepthStencilBuffer, 0);
+
+    // Genrerate depth and stencil Buffer using rendering buffer object
     unsigned int rbo;
     glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, scene.GetWidth(), scene.GetHeight());
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
