@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Mesh.h"
 
 class Mesh_Plane: public Mesh

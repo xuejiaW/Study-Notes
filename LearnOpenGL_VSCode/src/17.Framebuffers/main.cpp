@@ -57,7 +57,8 @@ void CreateFrameBuffer()
 
     // Bind color component to meshRender
     screenMeshRender->GetShader()->Use();
-    screenMeshRender->GetMaterial()->AddTexture("screenTexture", (unsigned int)texColorBuffer);
+    Texture *colorComponent = new Texture(texColorBuffer, scene.GetWidth(), scene.GetHeight());
+    screenMeshRender->GetMaterial()->AddTexture("screenTexture", colorComponent);
 
     // Genrerate depth and stencil Buffer using texture buffer
     // texDepthStencilBuffer = 0;

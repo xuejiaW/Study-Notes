@@ -1,20 +1,25 @@
 #pragma once
 
-#include "Component.h"
+#include <string>
+using std::string;
 
 class Texture
 {
 public:
+    Texture();
     Texture(string);
-    unsigned int GetID();
-    unsigned int GetID() const;
+    Texture(unsigned int, int, int);
+    virtual unsigned int GetID();
+    virtual unsigned int GetID() const;
     void SetWrap(int, int);
-    int GetWidth();
-    int GetHeight();
-    ~Texture();
+    virtual int GetWidth();
+    virtual int GetHeight();
+    virtual ~Texture();
 
-private:
+protected:
     unsigned int id = 0;
     int width = 0;
     int height = 0;
+
+private:
 };

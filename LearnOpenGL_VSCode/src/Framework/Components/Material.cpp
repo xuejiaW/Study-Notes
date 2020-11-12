@@ -2,8 +2,6 @@
 #include "../Debug.h"
 #include <algorithm>
 
-// vector<Texture *> Material::textureList = vector<Texture *>();
-
 Material::Material() : Material("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment")
 {
 }
@@ -29,8 +27,8 @@ void Material::AddTexture(string target, int tID)
 
 void Material::RemoveTexture(unsigned int textureId)
 {
-    vector<int>::iterator it = std::find_if(textureIDList.begin(), textureIDList.end(),
-                                            [textureId](int tid) { return tid == textureId; });
+    vector<unsigned int>::iterator it = std::find_if(textureIDList.begin(), textureIDList.end(),
+                                                     [textureId](unsigned int tid) { return tid == textureId; });
     if (it != textureIDList.end())
         textureIDList.erase(it);
 }

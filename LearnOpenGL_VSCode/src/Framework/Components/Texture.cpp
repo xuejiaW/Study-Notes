@@ -4,6 +4,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+Texture::Texture() {}
+
 Texture::Texture(string texturePath)
 {
     int nrChannels = 0;
@@ -19,6 +21,13 @@ Texture::Texture(string texturePath)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+Texture::Texture(unsigned int tid, int width, int height)
+{
+    this->id = tid;
+    this->width = width;
+    this->height = height;
 }
 
 unsigned int Texture::GetID() { return id; }
