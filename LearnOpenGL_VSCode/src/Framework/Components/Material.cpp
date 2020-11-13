@@ -19,12 +19,6 @@ void Material::AddTexture(string target, Texture *texture)
     textureIDList.push_back(texture->GetID());
 }
 
-void Material::AddTexture(string target, int tID)
-{
-    targetList.push_back(target);
-    textureIDList.push_back(tID);
-}
-
 void Material::RemoveTexture(unsigned int textureId)
 {
     vector<unsigned int>::iterator it = std::find_if(textureIDList.begin(), textureIDList.end(),

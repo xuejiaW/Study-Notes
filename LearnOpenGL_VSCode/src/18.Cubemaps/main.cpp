@@ -2,7 +2,6 @@
 #include "../Framework/Scene.h"
 #include "../Framework/GameObjects/GO_Camera.h"
 #include "../Framework/GameObjects/GO_Cube.h"
-#include "../Framework/GameObjects/GO_Plane.h"
 #include "../Framework/Components/Cubemap.h"
 #include "../Framework/Components/Skybox.h"
 
@@ -23,6 +22,9 @@ vector<std::string> faces{
 Scene scene(800, 600, "Cubemaps");
 GO_Camera *camera = nullptr;
 
+Shader *reflectionShader = new Shader("./environmentMapping.vert", "./reflection.frag");
+Shader *refractionShader = new Shader("./environmentMapping.vert", "./refraction.frag");
+
 int main()
 {
     camera = new GO_Camera();
@@ -41,18 +43,26 @@ int main()
     // };
     // scene.AddGameObject(skybox);
 
+    // Adding reflection cube and refraction cube
     vec3 marbleCubePos[2] = {vec3{-0.3, 0, 0.5}, vec3{0.3, 0, -3}};
+    GO_Cube *marbleCubes[2]{
+        new GO_Cube(new MeshRender(reflectionShader)),
+        new GO_Cube(new MeshRender(refractionShader))};
 
-    Texture *marbleTex = new Texture("../marble.jpg");
-    Shader *marbleShader = new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Texture.frag");
+    marbleCubes[0]->GetMeshRender()->SetPreRenderHandle([]() {
+        reflectionShader->SetVec3("cameraPos", camera->GetTransform()->GetPosition());
+    });
+
+    marbleCubes[1]->GetMeshRender()->SetPreRenderHandle([]() {
+        refractionShader->SetVec3("cameraPos", camera->GetTransform()->GetPosition());
+    });
 
     for (int i = 0; i != 2; ++i)
     {
-        GO_Cube *marbleCube = new GO_Cube(new MeshRender(marbleShader));
-        marbleCube->GetTransform()->SetPosition(marbleCubePos[i]);
-        marbleCube->GetMeshRender()->GetMaterial()->AddTexture("ourTexture", marbleTex);
-        marbleCube->GetTransform()->SetScale(vec3(1, 1, 1));
-        scene.AddGameObject(marbleCube);
+        marbleCubes[i]->GetTransform()->SetPosition(marbleCubePos[i]);
+        marbleCubes[i]->GetMeshRender()->GetMaterial()->AddTexture("ourTexture", cubemap);
+        marbleCubes[i]->GetTransform()->SetScale(vec3(1, 1, 1));
+        scene.AddGameObject(marbleCubes[i]);
     }
 
     // Version: Draw skybox in the end

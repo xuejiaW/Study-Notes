@@ -16,7 +16,6 @@ public:
 
     void SetColor(vec3 color);
     void AddTexture(string target, Texture *texture);
-    void AddTexture(string target, int tID);
     void UdpateTexture();
     void RemoveTexture(unsigned int textureId);
     unsigned int GetTextureCount();
