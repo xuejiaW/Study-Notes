@@ -25,6 +25,10 @@ GO_Camera *camera = nullptr;
 Shader *reflectionShader = new Shader("./environmentMapping.vert", "./reflection.frag");
 Shader *refractionShader = new Shader("./environmentMapping.vert", "./refraction.frag");
 
+GO_Cube *marbleCubes[2]{
+    new GO_Cube(new MeshRender(reflectionShader)),
+    new GO_Cube(new MeshRender(refractionShader))};
+
 int main()
 {
     camera = new GO_Camera();
@@ -45,12 +49,17 @@ int main()
 
     // Adding reflection cube and refraction cube
     vec3 marbleCubePos[2] = {vec3{-0.3, 0, 0.5}, vec3{0.3, 0, -3}};
-    GO_Cube *marbleCubes[2]{
-        new GO_Cube(new MeshRender(reflectionShader)),
-        new GO_Cube(new MeshRender(refractionShader))};
 
     marbleCubes[0]->GetMeshRender()->SetPreRenderHandle([]() {
-        reflectionShader->SetVec3("cameraPos", camera->GetTransform()->GetPosition());
+        vec3 cameraPos = camera->GetTransform()->GetPosition();
+        reflectionShader->SetVec3("cameraPos", cameraPos);
+
+        //// Try to make the cube moving with the camera ( keep the relative position the same)
+        //// and it turns out that it will not cause any reflection effect changing, which do not meet the real situation
+        //// Imaging that someone takes a mirror and moves with it, the image in the mirror definitely will be changed
+
+        // cameraPos[2] -= 2.5;
+        // marbleCubes[0]->GetTransform()->SetPosition(cameraPos);
     });
 
     marbleCubes[1]->GetMeshRender()->SetPreRenderHandle([]() {
