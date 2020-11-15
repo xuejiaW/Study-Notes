@@ -1,8 +1,3 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include "MeshRender.h"
 #include "Texture.h"
@@ -109,8 +104,13 @@ void MeshRender::DrawMesh()
 {
     glBindVertexArray(VAO);
     material->UdpateTexture();
-    glDrawElements(GL_TRIANGLES, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
+    glDrawElements(drawingMode, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+}
+
+void MeshRender::SetDrawingMode(unsigned int mode)
+{
+    drawingMode = mode;
 }
 
 void MeshRender::SetPreRenderHandle(void (*preRenderHandle)())

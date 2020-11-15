@@ -20,8 +20,4 @@ public:
 
 private:
     vector<string> faceSources;
-
-    // unsigned int id = 0;
-    // int width = 0;
-    // int height = 0;
 };
