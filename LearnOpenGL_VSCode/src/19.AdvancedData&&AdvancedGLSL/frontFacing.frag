@@ -1,7 +1,12 @@
 #version 330 core
 
-in vec2 texcoord;
-in vec3 normal;
+
+in VS_OUT
+{
+    vec2 texcoord;
+    vec3 normal;
+}fs_in;
+
 
 uniform vec4 baseColor=vec4(1,1,1,1);
 
@@ -14,7 +19,7 @@ out vec4 FragColor;
 void main()
 {
     if(gl_FrontFacing)
-        FragColor = texture(frontTexture,texcoord);
+        FragColor = texture(frontTexture,fs_in.texcoord);
     else
-        FragColor = texture(backTexture,texcoord);
+        FragColor = texture(backTexture,fs_in.texcoord);
 }

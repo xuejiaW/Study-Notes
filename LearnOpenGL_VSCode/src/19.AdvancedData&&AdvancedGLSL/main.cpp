@@ -14,7 +14,7 @@ GO_Cube *pointCube = new GO_Cube(pointMeshRender);
 Shader *halfShader = new Shader("../Framework/Shaders/Default.vertex", "./half.frag");
 GO_Cube *halfCube = new GO_Cube(new MeshRender(halfShader));
 
-Shader *frontFacingShader = new Shader("../Framework/Shaders/Default.vertex", "./frontFacing.frag");
+Shader *frontFacingShader = new Shader("./interfaceBlock.vert", "./frontFacing.frag");
 GO_Cube *frontFacingCube = new GO_Cube(new MeshRender(frontFacingShader));
 
 Texture *frontTexture = new Texture("../marble.jpg");
