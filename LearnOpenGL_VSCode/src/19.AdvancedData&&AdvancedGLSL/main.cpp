@@ -11,11 +11,11 @@ Shader *cubePointShader = new Shader("./pointRender.vert", "../Framework/Shaders
 MeshRender *pointMeshRender = new MeshRender(cubePointShader);
 GO_Cube *pointCube = new GO_Cube(pointMeshRender);
 
-Shader *halfShader = new Shader("../Framework/Shaders/Default.vertex", "./half.frag");
-GO_Cube *halfCube = new GO_Cube(new MeshRender(halfShader));
+Shader *halfShader = new Shader("../Framework/Shaders/DefaultUBO.vert", "./half.frag");
+GO_Cube *halfCube = new GO_Cube(new MeshRender(halfShader, true));
 
-Shader *frontFacingShader = new Shader("./interfaceBlock.vert", "./frontFacing.frag");
-GO_Cube *frontFacingCube = new GO_Cube(new MeshRender(frontFacingShader));
+Shader *frontFacingShader = new Shader("../Framework/Shaders/DefaultUBO.vert", "./frontFacing.frag");
+GO_Cube *frontFacingCube = new GO_Cube(new MeshRender(frontFacingShader, true));
 
 Texture *frontTexture = new Texture("../marble.jpg");
 Texture *backTexture = new Texture("../container.jpg");

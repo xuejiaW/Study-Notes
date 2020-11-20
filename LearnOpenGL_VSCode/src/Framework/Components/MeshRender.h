@@ -15,9 +15,10 @@
 class MeshRender : public Component
 {
 public:
-    MeshRender(Material *material);
-    MeshRender(Shader *shader);
+    MeshRender(Material *material, bool usingSharedCamera = false);
+    MeshRender(Shader *shader, bool usingSharedCamera = false);
     MeshRender();
+
     virtual void Update();
     void SetPreRenderHandle(void (*)());
     void SetPostRenderHandle(void (*)());
@@ -31,8 +32,11 @@ public:
     ~MeshRender();
 
 private:
+    static bool uboDataCreated; // Ensure that the UBO only created once
+    static bool uboDataUpdated; // Ensure that the UBO only updated once
+    bool usingSharedCameraState = false;
     unsigned int drawingMode = GL_TRIANGLES;
-    unsigned int VBO = 0, VAO = 0, EBO = 0;
+    unsigned int VBO = 0, VAO = 0, EBO = 0, UBO = 0;
     void (*preRenderHandle)() = nullptr;
     void (*postRenderHandle)() = nullptr;
     Mesh *mesh = nullptr;
