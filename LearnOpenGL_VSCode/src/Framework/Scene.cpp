@@ -97,11 +97,7 @@ Camera *Scene::GetMainCamera()
     {
         GameObject *cameraGO = GetGameObject("GO_Camera");
         if (cameraGO)
-        {
             mainCamera = dynamic_cast<Camera *>(cameraGO->GetComponent("Camera"));
-        }
-        else
-            cout << "There is no cameraGO" << endl;
     }
 
     return mainCamera ? mainCamera : nullptr;
