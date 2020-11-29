@@ -20,6 +20,7 @@ public:
 
     void Use();
     Shader *SetVec3(string target, glm::vec3 value);
+    Shader *SetVec2(string target, glm::vec2 value);
     Shader *SetFloat(string target, float value);
     Shader *SetInt(string target, int value);
 

@@ -71,6 +71,9 @@ void MeshRender::SetMesh(Mesh *mesh)
         glEnableVertexAttribArray(2);
     }
 
+    if (loadingBufferData)
+        loadingBufferData();
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -100,7 +103,7 @@ void MeshRender::Update()
     material->GetShader()->Use();
     GLuint shaderProgram = material->GetShader()->Program;
 
-    if (transform && camera)
+    if (transform)
     {
         glm::mat4 model, xRot, yRot, zRot;
         model = glm::translate(model, transform->GetPosition());
@@ -111,11 +114,14 @@ void MeshRender::Update()
         model *= xRot;
         model *= zRot;
         model = glm::scale(model, transform->GetScale());
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    }
+
+    if (camera)
+    {
 
         glm::mat4 view = camera->GetViewMatrix();
         glm::mat4 projection = camera->GetProjectionMatrix();
-
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
         if (!usingSharedCameraState)
         {
@@ -124,7 +130,7 @@ void MeshRender::Update()
         }
         else
         {
-            if (!uboDataUpdated)
+            if (!uboDataUpdated) // only need to update UBO once in every frame
             {
                 glBindBuffer(GL_UNIFORM_BUFFER, UBO);
                 glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), glm::value_ptr(projection));
@@ -140,12 +146,23 @@ void MeshRender::Update()
         postRenderHandle();
 }
 
+void MeshRender::SetInstancingCount(int count)
+{
+    this->instancingCount = count;
+}
 
 void MeshRender::DrawMesh()
 {
     glBindVertexArray(VAO);
     material->UdpateTexture();
-    glDrawElements(drawingMode, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
+
+    if (instancingCount == 0)
+        glDrawElements(drawingMode, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
+    else
+    {
+        glDrawElementsInstanced(drawingMode, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0, instancingCount);
+    }
+
     glBindVertexArray(0);
 }
 
@@ -161,6 +178,11 @@ void MeshRender::SetPreRenderHandle(void (*preRenderHandle)())
 void MeshRender::SetPostRenderHandle(void (*postRenderHandle)())
 {
     this->postRenderHandle = postRenderHandle;
+}
+
+void MeshRender::SetLoadingBufferHandle(void (*loadBuffer)())
+{
+    this->loadingBufferData = loadBuffer;
 }
 
 MeshRender::~MeshRender() {}

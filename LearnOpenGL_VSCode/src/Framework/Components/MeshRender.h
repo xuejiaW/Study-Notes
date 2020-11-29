@@ -22,6 +22,8 @@ public:
     virtual void Update();
     void SetPreRenderHandle(void (*)());
     void SetPostRenderHandle(void (*)());
+    void SetLoadingBufferHandle(void (*)());
+    void SetInstancingCount(int count);
     void SetMesh(Mesh *);
     void DrawMesh();
     void SetDrawingMode(unsigned int mode);
@@ -37,10 +39,13 @@ private:
     bool usingSharedCameraState = false;
     unsigned int drawingMode = GL_TRIANGLES;
     unsigned int VBO = 0, VAO = 0, EBO = 0, UBO = 0;
+    void (*loadingBufferData)() = nullptr;
     void (*preRenderHandle)() = nullptr;
     void (*postRenderHandle)() = nullptr;
     Mesh *mesh = nullptr;
     Transform *transform = nullptr;
     Camera *camera = nullptr;
     Material *material = nullptr;
+
+    int instancingCount = 0;
 };
