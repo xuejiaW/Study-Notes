@@ -8,10 +8,13 @@ Scene scene(800, 600, "AntiAliasing");
 GO_Camera *camera = nullptr;
 
 void AddContentsToScene();
-void CreateFrameBuffer();
+void CreateMultiSampleFrameBuffer();
+void CreateIntermediateFrameBuffer();
 
-GLuint framebuffer = -1;
-GLuint texColorBuffer = -1;
+GLuint multisampledFramebuffer = -1;
+GLuint intermediateFramebuffer = -1;
+GLuint multisampledTexture = -1;
+GLuint screenTexture = -1;
 GLuint texDepthStencilBuffer = -1;
 
 MeshRender *screenMeshRender = new MeshRender(new Material(new Shader("./Framebuffer.vert", "./Framebuffer.frag")));
@@ -20,7 +23,8 @@ int main()
 {
     screenMeshRender->SetMesh(new Mesh_Screen());
 
-    CreateFrameBuffer();
+    CreateMultiSampleFrameBuffer();
+    CreateIntermediateFrameBuffer();
     AddContentsToScene();
 
     glEnable(GL_MULTISAMPLE);
@@ -28,39 +32,40 @@ int main()
     // Bind framebuffer before rendering the screen
     scene.preRender = []() {
         glEnable(GL_DEPTH_TEST);
-        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, multisampledFramebuffer);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     };
 
-    // Blit the multisample framebuffer to screen framebuffer(0)
     scene.postRender = []() {
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, multisampledFramebuffer);
+
+        // // Blit the multisample framebuffer to screen framebuffer(0)
+        // glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        // glBlitFramebuffer(0, 0, scene.GetWidth(), scene.GetHeight(), 0, 0, scene.GetWidth(), scene.GetHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+        // Blit the multiSampled framebuffer to intermediateFramebuffer
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFramebuffer);
         glBlitFramebuffer(0, 0, scene.GetWidth(), scene.GetHeight(), 0, 0, scene.GetWidth(), scene.GetHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        screenMeshRender->DrawMesh();
     };
 
     scene.MainLoop();
 }
 
-void CreateFrameBuffer()
+void CreateMultiSampleFrameBuffer()
 {
-    glGenFramebuffers(1, &framebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    glGenFramebuffers(1, &multisampledFramebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, multisampledFramebuffer);
 
     // Generate texture buffer
-    glGenTextures(1, &texColorBuffer);
-    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, texColorBuffer);
+    glGenTextures(1, &multisampledTexture);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, multisampledTexture);
     glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGB, scene.GetWidth(), scene.GetHeight(), GL_TRUE);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     // attach texture buffer to currently bound framebuffer object
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, texColorBuffer, 0);
-
-    // Bind color component to meshRender
-    screenMeshRender->GetShader()->Use();
-    Texture *colorComponent = new Texture(texColorBuffer, scene.GetWidth(), scene.GetHeight());
-    screenMeshRender->GetMaterial()->AddTexture("screenTexture", colorComponent);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, multisampledTexture, 0);
 
     // Genrerate depth and stencil Buffer using rendering buffer object
     unsigned int rbo;
@@ -73,6 +78,27 @@ void CreateFrameBuffer()
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void CreateIntermediateFrameBuffer()
+{
+    glGenFramebuffers(1, &intermediateFramebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, intermediateFramebuffer);
+
+    // Generate texture buffer
+    glGenTextures(1, &screenTexture);
+    glBindTexture(GL_TEXTURE_2D, screenTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, scene.GetWidth(), scene.GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    // attach texture buffer to currently bound framebuffer object
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screenTexture, 0);
+
+    // Bind color component to meshRender
+    screenMeshRender->GetShader()->Use();
+    Texture *colorComponent = new Texture(screenTexture, scene.GetWidth(), scene.GetHeight());
+    screenMeshRender->GetMaterial()->AddTexture("screenTexture", colorComponent);
 }
 
 void AddContentsToScene()
