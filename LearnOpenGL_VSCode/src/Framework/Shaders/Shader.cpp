@@ -64,7 +64,7 @@ void Shader::CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType)
     if (!success)
     {
         glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-        cout << "ERROE_VERTEX_SHADER_COMPILE" << infoLog << endl;
+        cout << "ERROE_SHADER_COMPILE" << infoLog << endl;
     }
 }
 
