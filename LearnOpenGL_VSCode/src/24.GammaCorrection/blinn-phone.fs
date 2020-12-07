@@ -16,6 +16,9 @@ uniform bool blinn;
 
 void main()
 {
+    // // Manually re-correct srgb texture
+    // vec3 color = pow(texture(floorTexture,fs_in.TexCoords).rgb,vec3(2.2));
+
     vec3 color = texture(floorTexture,fs_in.TexCoords).rgb;
 
     vec3 ambient= 0.05 *color;

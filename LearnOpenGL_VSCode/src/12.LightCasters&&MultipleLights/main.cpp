@@ -79,7 +79,7 @@ int main()
         cubeShader->SetVec3("pointLights[" + to_string(i) + "].specular", vec3(1, 1, 1));
         cubeShader->SetFloat("pointLights[" + to_string(i) + "].constant", 1.0f);
         cubeShader->SetFloat("pointLights[" + to_string(i) + "].linear", 0.09f);
-        cubeShader->SetFloat("pointLights[" + to_string(i) + "].quadratic", 0.32f);
+        cubeShader->SetFloat("pointLights[" + to_string(i) + "].quadratic", 0.032f);
     }
 
     // Setting for Spot Lights

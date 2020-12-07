@@ -7,7 +7,7 @@
 Scene scene(800, 600, "Gamma Correction");
 GO_Camera *camera = new GO_Camera();
 
-Texture *woodTex = new Texture("../wood.png");
+Texture *woodTex = new Texture("../wood.png",true);
 Shader *floorShader = new Shader("./blinn-phone.vs", "./blinn-phone.fs");
 Material *floorMaterial = new Material(floorShader);
 MeshRender *floorMeshRender = new MeshRender(floorMaterial);

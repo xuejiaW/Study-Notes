@@ -7,7 +7,7 @@ class Texture
 {
 public:
     Texture();
-    Texture(string);
+    Texture(string, bool = false);
     Texture(unsigned int, int, int);
     virtual unsigned int GetID();
     virtual unsigned int GetID() const;
