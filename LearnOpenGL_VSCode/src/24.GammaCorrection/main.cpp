@@ -7,7 +7,7 @@
 Scene scene(800, 600, "Gamma Correction");
 GO_Camera *camera = new GO_Camera();
 
-Texture *woodTex = new Texture("../wood.png",true);
+Texture *woodTex = new Texture("../wood.png", true);
 Shader *floorShader = new Shader("./blinn-phone.vs", "./blinn-phone.fs");
 Material *floorMaterial = new Material(floorShader);
 MeshRender *floorMeshRender = new MeshRender(floorMaterial);
@@ -34,7 +34,10 @@ int main()
     AddContent2Scene();
 
     scene.preRender = []() {
+        // // When using built-in gamma correction, should disable GL_FRAMEBUFFER_SRGB during intermediate processing
+        // // to ensure all the processing are in linear color space
         // glDisable(GL_FRAMEBUFFER_SRGB);
+
         glEnable(GL_DEPTH_TEST);
         glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -44,6 +47,7 @@ int main()
     // Unbind framebuffer, and draw the framebuffer color component to default framebuffer
     scene.postRender = []() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        // // When using built-in gamma correction, only enable GL_FRAMEBUFFER_SRGB when rendering to default framebuffer
         // glEnable(GL_FRAMEBUFFER_SRGB);
         screenMeshRender->DrawMesh();
     };
