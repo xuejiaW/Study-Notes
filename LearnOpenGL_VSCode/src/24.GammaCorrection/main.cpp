@@ -8,8 +8,8 @@ Scene scene(800, 600, "Gamma Correction");
 GO_Camera *camera = new GO_Camera();
 
 Texture *woodTex = new Texture("../wood.png", true);
-Shader *floorShader = new Shader("./blinn-phone.vs", "./blinn-phone.fs");
-Material *floorMaterial = new Material(floorShader);
+Shader *blinnphoneShader = new Shader("./blinn-phone.vs", "./blinn-phone.fs");
+Material *floorMaterial = new Material(blinnphoneShader);
 MeshRender *floorMeshRender = new MeshRender(floorMaterial);
 GO_Plane *floorObj = new GO_Plane(floorMeshRender);
 GO_Cube *lamp = new GO_Cube();
@@ -106,14 +106,15 @@ void AddContent2Scene()
 
 void UpdateHandle()
 {
-    floorShader->Use();
-    floorShader->SetVec3("lightPos", lamp->GetTransform()->GetPosition());
-    floorShader->SetVec3("viewPos", camera->GetTransform()->GetPosition());
+    Debug::Log("camera pos is ", camera->GetTransform()->GetPosition());
+    blinnphoneShader->Use();
+    blinnphoneShader->SetVec3("lightPos", lamp->GetTransform()->GetPosition());
+    blinnphoneShader->SetVec3("viewPos", camera->GetTransform()->GetPosition());
 
     if (Input::GetInstance()->GetKeyDown(GLFW_KEY_B))
     {
         usingBlinn = !usingBlinn;
         Debug::Log(usingBlinn ? "Using Blinn" : "Not Using Blinn");
-        floorShader->SetInt("blinn", usingBlinn);
+        blinnphoneShader->SetInt("blinn", usingBlinn);
     }
 }

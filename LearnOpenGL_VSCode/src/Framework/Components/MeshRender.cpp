@@ -2,6 +2,7 @@
 #include "MeshRender.h"
 #include "Texture.h"
 #include "../Scene.h"
+#include "../Utils.h"
 
 using std::cout;
 using std::endl;
@@ -100,24 +101,16 @@ void MeshRender::Update()
     if (preRenderHandle)
         preRenderHandle();
 
-    material->GetShader()->Use();
-    GLuint shaderProgram = material->GetShader()->Program;
+    Shader *shader = material->GetShader();
+    shader->Use();
 
     if (transform)
     {
-        glm::mat4 model, xRot, yRot, zRot;
-        model = glm::translate(model, transform->GetPosition());
-        xRot = glm::rotate(xRot, glm::radians(transform->GetEulerAngle().x), glm::vec3(1, 0, 0));
-        yRot = glm::rotate(yRot, glm::radians(transform->GetEulerAngle().y), glm::vec3(0, 1, 0));
-        zRot = glm::rotate(zRot, glm::radians(transform->GetEulerAngle().z), glm::vec3(0, 0, 1));
-        model *= yRot;
-        model *= xRot;
-        model *= zRot;
-        model = glm::scale(model, transform->GetScale());
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glm::mat4 model = GetModelMatrix(transform);
+        shader->SetMat4("model", model);
     }
 
-    if (camera)
+    if (camera && !Scene::GetInstance()->renderingDepthMap)
     {
 
         glm::mat4 view = camera->GetViewMatrix();
@@ -125,8 +118,8 @@ void MeshRender::Update()
 
         if (!usingSharedCameraState)
         {
-            glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
-            glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+            shader->SetMat4("view", view);
+            shader->SetMat4("projection", projection);
         }
         else
         {

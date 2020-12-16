@@ -39,6 +39,8 @@ public:
     void (*preRender)() = nullptr;
     void (*postRender)() = nullptr;
 
+    bool renderingDepthMap = false;
+
 private:
     int frameIndex = 0;
     static Scene *instance;

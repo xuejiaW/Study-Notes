@@ -107,3 +107,10 @@ Shader *Shader::SetInt(string target, int value)
     glUniform1i(glGetUniformLocation(this->Program, target.c_str()), value);
     return this;
 }
+
+Shader *Shader::SetMat4(string target, glm::mat4 value)
+{
+    glUseProgram(this->Program);
+    glUniformMatrix4fv(glGetUniformLocation(this->Program, target.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+    return this;
+}

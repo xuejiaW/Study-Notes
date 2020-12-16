@@ -23,6 +23,7 @@ public:
     Shader *SetVec2(string target, glm::vec2 value);
     Shader *SetFloat(string target, float value);
     Shader *SetInt(string target, int value);
+    Shader* SetMat4(string target, glm::mat4 value);
 
 private:
     void CreateShader(const GLchar *path, GLuint &shader, GLenum shaderType);
