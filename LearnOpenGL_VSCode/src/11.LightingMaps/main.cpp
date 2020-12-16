@@ -18,7 +18,7 @@ int main()
 
     // Lamp
     vec3 lightColor = vec3(1, 1, 1);
-    Shader *lightShader = new Shader("../Framework/Shaders/Default.vertex", "./lamp.frag");
+    Shader *lightShader = new Shader("../Framework/Shaders/Default.vs", "./lamp.frag");
     lightShader->SetVec3("lightColor", lightColor);
     Material *lightMaterial = new Material(lightShader);
     MeshRender *lightMeshRender = new MeshRender(lightMaterial);

@@ -92,7 +92,7 @@ void AddContentsToScene()
     vec3 marbleCubePos[2] = {vec3{-0.3, 0, 0.5}, vec3{0.3, 0, -3}};
 
     Texture *marbleTex = new Texture("../marble.jpg");
-    Shader *marbleShader = new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Texture.frag");
+    Shader *marbleShader = new Shader("../Framework/Shaders/Default.vs", "../Framework/Shaders/Texture.fs");
 
     // Draw Plane
     GO_Plane *marblePlane = new GO_Plane(new MeshRender(marbleShader));

@@ -2,7 +2,7 @@
 #include "../Debug.h"
 #include <algorithm>
 
-Material::Material() : Material("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment")
+Material::Material() : Material("../Framework/Shaders/Default.vs", "../Framework/Shaders/Default.fs")
 {
 }
 

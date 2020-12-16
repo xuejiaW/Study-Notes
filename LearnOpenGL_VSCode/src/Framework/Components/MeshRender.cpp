@@ -11,7 +11,7 @@ bool MeshRender::uboDataUpdated = false;
 
 MeshRender::MeshRender(Shader *shader, bool usingSharedState) : MeshRender(new Material(shader), usingSharedState) {}
 
-MeshRender::MeshRender() : MeshRender(new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Default.fragment"), false) {}
+MeshRender::MeshRender() : MeshRender(new Shader("../Framework/Shaders/Default.vs", "../Framework/Shaders/Default.fs"), false) {}
 
 MeshRender::MeshRender(Material *material, bool usingSharedState) : Component(), usingSharedCameraState(usingSharedState)
 {

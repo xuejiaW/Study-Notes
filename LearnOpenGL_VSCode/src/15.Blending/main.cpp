@@ -14,7 +14,7 @@ int main()
     vec3 marbleCubePos[2] = {vec3{-0.3, 0, 0.5}, vec3{0.3, 0, -3}};
 
     Texture *marbleTex = new Texture("../marble.jpg");
-    Shader *marbleShader = new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Texture.frag");
+    Shader *marbleShader = new Shader("../Framework/Shaders/Default.vs", "../Framework/Shaders/Texture.fs");
 
     for (int i = 0; i != 2; ++i)
     {
@@ -38,7 +38,7 @@ int main()
     vec3 grassPos[2] = {vec3{-0.5, 0, 2}, {0.7, 0, -2.5}};
     Texture *grassTex = new Texture("../grass.png");
     grassTex->SetWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-    Shader *grassShader = new Shader("../Framework/Shaders/Default.vertex", "./Grass.frag");
+    Shader *grassShader = new Shader("../Framework/Shaders/Default.vs", "./Grass.frag");
 
     for (int i = 0; i != 2; ++i)
     {
@@ -49,7 +49,7 @@ int main()
         scene.AddGameObject(grass);
     }
 
-    Shader *windowShader = new Shader("../Framework/Shaders/Default.vertex", "../Framework/Shaders/Texture.frag");
+    Shader *windowShader = new Shader("../Framework/Shaders/Default.vs", "../Framework/Shaders/Texture.fs");
     Texture *windowTex = new Texture("../blending_transparent_window.png");
     vec3 windowPos[3] = {{1.5, 0, -2}, {-1.0, 0, 1}, {-1.5, 0, 1.5}};
     for (int i = 0; i != 3; ++i)

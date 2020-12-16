@@ -35,7 +35,7 @@ int main()
     // directional Light
     vec3 dirLightColor = vec3(1, 1, 1);
     vec3 dirLightPos = vec3(1.0f, 0.0f, 0.3f);
-    Shader *lightShader = new Shader("../Framework/Shaders/Default.vertex", "./lamp.frag");
+    Shader *lightShader = new Shader("../Framework/Shaders/Default.vs", "./lamp.frag");
     lightShader->SetVec3("lightColor", dirLightColor);
     Material *lightMaterial = new Material(lightShader);
     MeshRender *dirLightMeshRender = new MeshRender(lightMaterial);

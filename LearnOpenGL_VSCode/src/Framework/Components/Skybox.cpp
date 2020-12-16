@@ -10,7 +10,7 @@
 Skybox::Skybox(Cubemap *cubemap)
 {
     this->cubemap = cubemap;
-    skyboxShader = new Shader("../Framework/Shaders/Skybox.vert", "../Framework/Shaders/Skybox.frag");
+    skyboxShader = new Shader("../Framework/Shaders/Skybox.vs", "../Framework/Shaders/Skybox.fs");
 
     SetSkyboxMesh(new Mesh_Skybox());
 }

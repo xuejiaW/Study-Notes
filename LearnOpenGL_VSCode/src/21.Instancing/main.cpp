@@ -22,14 +22,14 @@ int main()
     }
 
     // // instancing Uniform Data
-    // Shader *instanceUnifromShader = new Shader("./instancingUniform.vert", "../Framework/Shaders/Default.fragment");
+    // Shader *instanceUnifromShader = new Shader("./instancingUniform.vert", "../Framework/Shaders/Default.fs");
     // GO_Plane *go_plane = new GO_Plane(new MeshRender(instanceUnifromShader));
     // instanceUnifromShader->Use();
     // for (int i = 0; i != 100; ++i)
     //     instanceUnifromShader->SetVec2("offsets[" + std::to_string(i) + "]", translations[i]);
 
     //instancing layout Data
-    Shader *instanceLayoutShader = new Shader("./instancingLayout.vert", "../Framework/Shaders/Default.fragment");
+    Shader *instanceLayoutShader = new Shader("./instancingLayout.vert", "../Framework/Shaders/Default.fs");
     MeshRender *instanceLayoutMeshRender = new MeshRender(instanceLayoutShader);
     instanceLayoutMeshRender->SetLoadingBufferHandle(BindInstanceVBO);
     GO_Plane *go_plane = new GO_Plane(instanceLayoutMeshRender);

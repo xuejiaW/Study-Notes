@@ -7,14 +7,14 @@ Scene scene(800, 600, "AdvancedData&&AdvancedGLSL");
 
 GO_Camera *camera = new GO_Camera();
 
-Shader *cubePointShader = new Shader("./pointRender.vert", "../Framework/Shaders/Default.fragment");
+Shader *cubePointShader = new Shader("./pointRender.vert", "../Framework/Shaders/Default.fs");
 MeshRender *pointMeshRender = new MeshRender(cubePointShader);
 GO_Cube *pointCube = new GO_Cube(pointMeshRender);
 
-Shader *halfShader = new Shader("../Framework/Shaders/DefaultUBO.vert", "./half.frag");
+Shader *halfShader = new Shader("../Framework/Shaders/DefaultUBO.vs", "./half.frag");
 GO_Cube *halfCube = new GO_Cube(new MeshRender(halfShader, true));
 
-Shader *frontFacingShader = new Shader("../Framework/Shaders/DefaultUBO.vert", "./frontFacing.frag");
+Shader *frontFacingShader = new Shader("../Framework/Shaders/DefaultUBO.vs", "./frontFacing.frag");
 GO_Cube *frontFacingCube = new GO_Cube(new MeshRender(frontFacingShader, true));
 
 Texture *frontTexture = new Texture("../marble.jpg");

@@ -21,7 +21,7 @@ int main()
     greenCube->GetMeshRender()->GetMaterial()->SetColor(vec3(0, 1, 0));
     scene.AddGameObject(greenCube);
 
-    Shader *depthShader = new Shader("../Framework/Shaders/Default.vertex", "./depthValue.frag");
+    Shader *depthShader = new Shader("../Framework/Shaders/Default.vs", "./depthValue.frag");
     MeshRender *depthMeshRender = new MeshRender(depthShader);
     GO_Cube *depthCube = new GO_Cube(depthMeshRender);
     depthCube->GetTransform()->SetScale(vec3(2, 2, 2));
