@@ -85,6 +85,11 @@ Shader *MeshRender::GetShader()
     return material->GetShader();
 }
 
+void MeshRender::SwitchMaterial(Material *material)
+{
+    this->material = material;
+}
+
 Material *MeshRender::GetMaterial()
 {
     return material;
@@ -112,7 +117,6 @@ void MeshRender::Update()
 
     if (camera && !Scene::GetInstance()->renderingDepthMap)
     {
-
         glm::mat4 view = camera->GetViewMatrix();
         glm::mat4 projection = camera->GetProjectionMatrix();
 

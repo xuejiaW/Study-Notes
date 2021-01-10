@@ -20,6 +20,7 @@ public:
     MeshRender();
 
     virtual void Update();
+    void SwitchMaterial(Material *material);
     void SetPreRenderHandle(void (*)());
     void SetPostRenderHandle(void (*)());
     void SetLoadingBufferHandle(void (*)());

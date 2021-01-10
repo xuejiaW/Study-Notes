@@ -8,13 +8,13 @@ Scene scene(1024, 1024, "Shadow Mapping");
 GO_Camera *camera = new GO_Camera();
 
 Shader *screenQuad = new Shader("../Framework/Shaders/Framebuffer.vs", "./debugDepth.fs"); // Used for render framebuffer to screen
-Shader *drawDepthMapping = new Shader("../Framework/Shaders/DrawDepthMapping.vs", "../Framework/Shaders/DrawDepthMapping.fs");
+Shader *drawDepthMapShader = new Shader("../Framework/Shaders/DrawDepthMapping.vs", "../Framework/Shaders/DrawDepthMapping.fs");
+Shader *blinnShadowShader = new Shader("../Framework/Shaders/shadow.vs", "../Framework/Shaders/shadow.fs");
 
 Texture *woodTex = new Texture("../wood.png", true);
 
-Material *woodMaterial = new Material(drawDepthMapping);
-GO_Plane *floorObj = new GO_Plane(new MeshRender(woodMaterial));
-GO_Cube *lamp = new GO_Cube();
+Material *drawDepthMaterial = new Material(drawDepthMapShader);
+Material *blinnShadowMaterial = new Material(blinnShadowShader);
 
 bool usingBlinn = false;
 
@@ -24,8 +24,13 @@ GLuint texDepthStencilBuffer = -1;
 
 GLuint depthMapFBO = -1;
 GLuint texDepthMapDepthBuffer = -1;
+Texture *depthMapTexture = nullptr;
 
-MeshRender *depthMappingRender = new MeshRender(new Material(screenQuad));
+MeshRender *depthQuadRender = new MeshRender(new Material(screenQuad));
+
+GO_Cube *lamp = new GO_Cube();
+GO_Plane *floorObj = new GO_Plane(new MeshRender(drawDepthMaterial));
+GO_Cube *go = new GO_Cube(new MeshRender(drawDepthMaterial));
 
 void AddContent2Scene();
 void CreateDepthMap();
@@ -33,32 +38,47 @@ void RenderDepthMap();
 
 int main()
 {
-    depthMappingRender->SetMesh(new Mesh_Screen());
+    depthQuadRender->SetMesh(new Mesh_Screen());
 
-    CreateDepthMap();
     AddContent2Scene();
+    CreateDepthMap();
 
     scene.preRender = []() {
         glEnable(GL_DEPTH_TEST);
         scene.renderingDepthMap = true;
+        go->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
+        floorObj->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
 
-        drawDepthMapping->Use();
+        drawDepthMapShader->Use();
         // The model is setting by MeshRender
         glm::mat4 projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 7.5f);
         glm::mat4 view = glm::lookAt(lamp->GetTransform()->GetPosition(), glm::vec3(0.0f), glm::vec3(0, 1, 0));
-        drawDepthMapping->SetMat4("projection", projection)->SetMat4("view", view);
+
+        drawDepthMapShader->SetMat4("projection", projection)->SetMat4("view", view);
 
         glViewport(0, 0, 512, 512);
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
         glClear(GL_DEPTH_BUFFER_BIT);
+
+        scene.DrawFunc(); // To Generate Depth Map
+        glFlush();
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glViewport(0, 0, 1024, 1024);
+        scene.renderingDepthMap = false;
+
+        blinnShadowShader->Use();
+        blinnShadowShader->SetMat4("lightSpaceMatrix", projection * view);
+        blinnShadowShader->SetVec3("lightPos", lamp->GetTransform()->GetPosition());
+        blinnShadowShader->SetVec3("viewPos", camera->GetTransform()->GetPosition());
+        // 不能在此处修改材质，不然画深度贴图的时候是以切换后的材质进行绘制的
+        go->GetMeshRender()->SwitchMaterial(blinnShadowMaterial);
+        floorObj->GetMeshRender()->SwitchMaterial(blinnShadowMaterial);
     };
 
     scene.postRender = []() {
-        glDisable(GL_DEPTH_TEST);
-        scene.renderingDepthMap = false;
-        glViewport(0, 0, 1024, 1024);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        depthMappingRender->DrawMesh();
+        // glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        // depthQuadRender->DrawMesh();
     };
     scene.MainLoop();
 }
@@ -79,23 +99,24 @@ void CreateDepthMap()
     glReadBuffer(GL_NONE);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    depthMappingRender->GetShader()->Use();
-    Texture *colorComponent = new Texture(texDepthMapDepthBuffer, scene.GetWidth(), scene.GetHeight());
-    depthMappingRender->GetMaterial()->AddTexture("screenTexture", colorComponent);
+    depthMapTexture = new Texture(texDepthMapDepthBuffer, scene.GetWidth(), scene.GetHeight());
+    depthQuadRender->GetShader()->Use();
+    depthQuadRender->GetMaterial()->AddTexture("screenTexture", depthMapTexture);
+
+    blinnShadowShader->Use();
+    blinnShadowMaterial->AddTexture("diffuseTexture", woodTex);
+    blinnShadowMaterial->AddTexture("depthMap", depthMapTexture);
 }
 
 void AddContent2Scene()
 {
     scene.AddGameObject(camera);
 
-    woodMaterial->AddTexture("floorTexture", woodTex);
-
     floorObj->GetTransform()->SetPosition(vec3(0, -3, 0));
     floorObj->GetTransform()->SetEulerAngle(vec3(-90, 0, 0));
     floorObj->GetTransform()->SetScale(vec3(5, 5, 5));
     scene.AddGameObject(floorObj);
 
-    GO_Cube *go = new GO_Cube(new MeshRender(woodMaterial));
     scene.AddGameObject(go);
 
     lamp->GetTransform()->SetScale(vec3(0.1, 0.1, 0.1));
