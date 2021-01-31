@@ -39,13 +39,15 @@ void RenderDepthMap();
 int main()
 {
     depthQuadRender->SetMesh(new Mesh_Screen());
-
+    glEnable(GL_CULL_FACE);
     AddContent2Scene();
     CreateDepthMap();
 
     scene.preRender = []() {
         glEnable(GL_DEPTH_TEST);
         scene.renderingDepthMap = true;
+        glCullFace(GL_FRONT);
+        // Switch to the drawDepthMaterial to render depth
         go->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
         floorObj->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
 
@@ -61,21 +63,26 @@ int main()
         glClear(GL_DEPTH_BUFFER_BIT);
 
         scene.DrawFunc(); // To Generate Depth Map
+
+        // Normally render the scene
         glFlush();
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glViewport(0, 0, 1024, 1024);
+        glCullFace(GL_BACK);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
         scene.renderingDepthMap = false;
 
         blinnShadowShader->Use();
         blinnShadowShader->SetMat4("lightSpaceMatrix", projection * view);
         blinnShadowShader->SetVec3("lightPos", lamp->GetTransform()->GetPosition());
         blinnShadowShader->SetVec3("viewPos", camera->GetTransform()->GetPosition());
-        // 不能在此处修改材质，不然画深度贴图的时候是以切换后的材质进行绘制的
+        // Switch to the normal material to render the scene
         go->GetMeshRender()->SwitchMaterial(blinnShadowMaterial);
         floorObj->GetMeshRender()->SwitchMaterial(blinnShadowMaterial);
     };
 
     scene.postRender = []() {
+        // glViewport(0, 0, 1024, 1024);
+        // glCullFace(GL_BACK);
         // glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         // depthQuadRender->DrawMesh();
