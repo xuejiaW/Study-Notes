@@ -5,3 +5,4 @@
 /lib/libglfw3dll.a
 *.o
 *.d
+*.d*
