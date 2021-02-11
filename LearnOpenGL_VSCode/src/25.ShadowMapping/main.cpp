@@ -44,16 +44,16 @@ int main()
     CreateDepthMap();
 
     scene.preRender = []() {
-        glEnable(GL_DEPTH_TEST);
+        // glEnable(GL_DEPTH_TEST);
         scene.renderingDepthMap = true;
-        glCullFace(GL_FRONT);
+        // glCullFace(GL_FRONT);
         // Switch to the drawDepthMaterial to render depth
         go->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
         floorObj->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
 
         drawDepthMapShader->Use();
         // The model is setting by MeshRender
-        glm::mat4 projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 7.5f);
+        glm::mat4 projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 7.5f);
         glm::mat4 view = glm::lookAt(lamp->GetTransform()->GetPosition(), glm::vec3(0.0f), glm::vec3(0, 1, 0));
 
         drawDepthMapShader->SetMat4("projection", projection)->SetMat4("view", view);
@@ -67,7 +67,7 @@ int main()
         // Normally render the scene
         glFlush();
         glViewport(0, 0, 1024, 1024);
-        glCullFace(GL_BACK);
+        // glCullFace(GL_BACK);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         scene.renderingDepthMap = false;
 
@@ -98,8 +98,13 @@ void CreateDepthMap()
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 512, 512, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    float borderColor[]{1.0f, 1.0f, 1.0f, 1.0f};
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, texDepthMapDepthBuffer, 0);
     glDrawBuffer(GL_NONE); // As the depth map framebuffer do not have color attachment, thus it is required to set draw/read buffer to null
@@ -121,12 +126,12 @@ void AddContent2Scene()
 
     floorObj->GetTransform()->SetPosition(vec3(0, -3, 0));
     floorObj->GetTransform()->SetEulerAngle(vec3(-90, 0, 0));
-    floorObj->GetTransform()->SetScale(vec3(5, 5, 5));
+    floorObj->GetTransform()->SetScale(vec3(20, 20, 5));
     scene.AddGameObject(floorObj);
 
     scene.AddGameObject(go);
 
     lamp->GetTransform()->SetScale(vec3(0.1, 0.1, 0.1));
-    lamp->GetTransform()->SetPosition(vec3(3, 1.2, 2));
+    lamp->GetTransform()->SetPosition(vec3(3, 5, 2));
     scene.AddGameObject(lamp);
 }

@@ -24,13 +24,14 @@ float ShaderCalculation(vec4 FragPosLightSpace, vec3 normal, vec3 lightDir)
     // The ProjectCoords is in NDC space which value range is [-1,1]
     // change the value range to [0,1] which is equal to the texture coordinate ranges
     projCoords = projCoords * 0.5 + 0.5;
+
+    if (projCoords.z > 1.0) // larger than the far clipping
+        return 0.0f; 
     float closetDepth = texture(depthMap, projCoords.xy).r;
 
-    // float bias = max(0.05 * (1 - dot(normal, lightDir)), 0.01);
-    // float currentDepth = projCoords.z;
-    // return currentDepth > closetDepth + bias ? 1.0 : 0.0;
+    float bias = max(0.05 * (1 - dot(normal, lightDir)), 0.01);
     float currentDepth = projCoords.z;
-    return currentDepth > closetDepth ? 1.0 : 0.0;
+    return currentDepth > closetDepth + bias ? 1.0 : 0.0;
 }
 
 void main()
