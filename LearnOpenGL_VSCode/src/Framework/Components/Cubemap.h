@@ -11,11 +11,13 @@ class Cubemap : public Texture
 {
 public:
     Cubemap(vector<string> facesSources);
+    Cubemap(int id);
     unsigned int GetID();
     unsigned int GetID() const;
     int GetWidth();
     int GetHeight();
     void SetWrap(int, int, int);
+    void BindTexture();
     ~Cubemap();
 
 private:

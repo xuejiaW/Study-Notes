@@ -31,6 +31,11 @@ Cubemap::Cubemap(vector<string> facesSource)
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
+Cubemap::Cubemap(int id)
+{
+    this->id = id;
+}
+
 unsigned int Cubemap::GetID()
 {
     return id;
@@ -58,6 +63,11 @@ void Cubemap::SetWrap(int wrap_S, int wrap_T, int wrap_R)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, wrap_T);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, wrap_R);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+void Cubemap::BindTexture()
+{
+    glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 }
 
 Cubemap::~Cubemap() {}

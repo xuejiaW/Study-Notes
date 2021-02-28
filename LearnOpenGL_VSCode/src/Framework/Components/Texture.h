@@ -12,6 +12,7 @@ public:
     virtual unsigned int GetID();
     virtual unsigned int GetID() const;
     void SetWrap(int, int);
+    virtual void BindTexture();
     virtual int GetWidth();
     virtual int GetHeight();
     virtual ~Texture();

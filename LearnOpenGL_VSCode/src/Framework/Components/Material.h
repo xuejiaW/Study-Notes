@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "Texture.h"
+#include "Cubemap.h"
 #include "../Shaders/Shader.h"
 
 #include <vector>
@@ -25,6 +26,6 @@ public:
 
 private:
     Shader *shader = nullptr;
-    vector<unsigned int> textureIDList;
+    vector<Texture *> textureList;
     vector<string> targetList;
 };

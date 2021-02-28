@@ -44,6 +44,11 @@ void Texture::SetWrap(int wrap_S, int wrap_T)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void Texture::BindTexture()
+{
+    glBindTexture(GL_TEXTURE_2D, id);
+}
+
 Texture::~Texture()
 {
     glDeleteTextures(1, &id);
