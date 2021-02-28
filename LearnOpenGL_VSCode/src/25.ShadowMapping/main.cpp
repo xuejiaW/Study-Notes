@@ -8,15 +8,11 @@ Scene scene(1024, 1024, "Shadow Mapping");
 GO_Camera *camera = new GO_Camera();
 
 Shader *screenQuad = new Shader("../Framework/Shaders/Framebuffer.vs", "./debugDepth.fs"); // Used for render framebuffer to screen
-Shader *drawDepthMapShader = new Shader("../Framework/Shaders/DrawDepthMapping.vs", "../Framework/Shaders/DrawDepthMapping.fs");
-Shader *blinnShadowShader = new Shader("../Framework/Shaders/shadow.vs", "../Framework/Shaders/shadow.fs");
 
 Texture *woodTex = new Texture("../wood.png", true);
 
-Material *drawDepthMaterial = new Material(drawDepthMapShader);
-Material *blinnShadowMaterial = new Material(blinnShadowShader);
-
-bool usingBlinn = false;
+Material *drawDepthMaterial = new Material(new Shader("./DrawDepthMapping.vs", "./DrawDepthMapping.fs"));
+Material *blinnShadowMaterial = new Material(new Shader("./shadow.vs", "./shadow.fs"));
 
 GLuint framebuffer = -1;
 GLuint texColorBuffer = -1;
@@ -51,12 +47,12 @@ int main()
         go->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
         floorObj->GetMeshRender()->SwitchMaterial(drawDepthMaterial);
 
-        drawDepthMapShader->Use();
+        drawDepthMaterial->GetShader()->Use();
         // The model is setting by MeshRender
         glm::mat4 projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 7.5f);
         glm::mat4 view = glm::lookAt(lamp->GetTransform()->GetPosition(), glm::vec3(0.0f), glm::vec3(0, 1, 0));
 
-        drawDepthMapShader->SetMat4("projection", projection)->SetMat4("view", view);
+        drawDepthMaterial->GetShader()->SetMat4("projection", projection)->SetMat4("view", view);
 
         glViewport(0, 0, 512, 512);
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
@@ -71,10 +67,10 @@ int main()
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         scene.renderingDepthMap = false;
 
-        blinnShadowShader->Use();
-        blinnShadowShader->SetMat4("lightSpaceMatrix", projection * view);
-        blinnShadowShader->SetVec3("lightPos", lamp->GetTransform()->GetPosition());
-        blinnShadowShader->SetVec3("viewPos", camera->GetTransform()->GetPosition());
+        blinnShadowMaterial->GetShader()->Use();
+        blinnShadowMaterial->GetShader()->SetMat4("lightSpaceMatrix", projection * view);
+        blinnShadowMaterial->GetShader()->SetVec3("lightPos", lamp->GetTransform()->GetPosition());
+        blinnShadowMaterial->GetShader()->SetVec3("viewPos", camera->GetTransform()->GetPosition());
         // Switch to the normal material to render the scene
         go->GetMeshRender()->SwitchMaterial(blinnShadowMaterial);
         floorObj->GetMeshRender()->SwitchMaterial(blinnShadowMaterial);
@@ -115,7 +111,7 @@ void CreateDepthMap()
     depthQuadRender->GetShader()->Use();
     depthQuadRender->GetMaterial()->AddTexture("screenTexture", depthMapTexture);
 
-    blinnShadowShader->Use();
+    blinnShadowMaterial->GetShader()->Use();
     blinnShadowMaterial->AddTexture("diffuseTexture", woodTex);
     blinnShadowMaterial->AddTexture("depthMap", depthMapTexture);
 }
