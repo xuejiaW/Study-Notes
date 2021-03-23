@@ -15,12 +15,11 @@ float far = 25.0f;
 glm::mat4 shadowProject = glm::perspective(glm::radians(90.0f), aspect, near, far);
 std::vector<glm::mat4> shadowTransforms;
 
-Scene scene(screen_width, screen_height, "Shadow Mapping");
+Scene scene(screen_width, screen_height, "Point Shadows");
 GO_Camera *camera = new GO_Camera();
 
 Texture *woodTex = new Texture("../wood.png");
 
-// Material *blinnShadowMaterial = new Material(new Shader("../Framework/Shaders/shadow.vs", "../Framework/Shaders/shadow.fs"));
 Material *blinnShadowMaterial = new Material(new Shader("./PointShadow.vs", "./PointShadow.fs"));
 Material *drawDepthMaterial = new Material(new Shader("./DrawDepthCubemap.vs", "./DrawDepthCubemap.fs", "./DrawDepthCubemap.gs"));
 
@@ -36,6 +35,7 @@ void AddContent2Scene();
 void CreateDepthMap();
 void RenderDepthMap();
 
+
 int main()
 {
 
@@ -43,12 +43,12 @@ int main()
     CreateDepthMap();
 
     glm::vec3 lightPos = lamp->GetTransform()->GetPosition();
-    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(1, 0, 0), glm::vec3(0, -1, 0)));
-    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(-1, 0, 0), glm::vec3(0, -1, 0)));
-    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, 1, 0), glm::vec3(0, 0, 1)));
-    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, -1, 0), glm::vec3(0, 0, 1)));
-    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, 0, 1), glm::vec3(0, -1, 0)));
-    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, 0, -1), glm::vec3(0, -1, 0)));
+    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(1, 0, 0), glm::vec3(0, -1, 0)));  // Right
+    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(-1, 0, 0), glm::vec3(0, -1, 0))); // Left
+    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, 1, 0), glm::vec3(0, 0, 1)));   // Top
+    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, -1, 0), glm::vec3(0, 0, 1)));  // Bottom
+    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, 0, 1), glm::vec3(0, -1, 0)));  // Back
+    shadowTransforms.push_back(shadowProject * glm::lookAt(lightPos, lightPos + glm::vec3(0, 0, -1), glm::vec3(0, -1, 0))); // Front
 
     scene.preRender = []() {
         scene.renderingDepthMap = true;

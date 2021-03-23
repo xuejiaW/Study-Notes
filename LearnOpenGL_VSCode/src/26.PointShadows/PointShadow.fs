@@ -1,4 +1,3 @@
-
 #version 330 core
 
 in VS_OUT
@@ -23,15 +22,16 @@ float ShaderCalculation(vec3 fragPos, vec3 normal, vec3 lightDir)
     vec3 fragToLight = fragPos - lightPos;
     float currentDepth = length(fragToLight);
 
-    // Without PCF
+    // // Without PCF
     // float closestDepth = texture(depthMap,fragToLight).r;
     // closestDepth *= far_plane;
 
+    // float bias = max(0.1 * (1 - dot(normal, lightDir)), 0.05);
     // float shadow =(currentDepth>closestDepth + bias ? 1.0 : 0.0);
     // return shadow;
 
-    // Complete PCF
-    // float bias = max(0.05 * (1 - dot(normal, lightDir)), 0.01);
+    // // Complete PCF
+    // float bias = max(0.1 * (1 - dot(normal, lightDir)), 0.05);
     // float shadow = 0.0;
     // float offset = 0.1;
     // float samples = 4.0;
@@ -49,9 +49,10 @@ float ShaderCalculation(vec3 fragPos, vec3 normal, vec3 lightDir)
     //         }
     // }
     // shadow /= (samples * samples *samples);
+    // return shadow;
 
     // Simplified PCF
-    float bias = max(0.1 * (1 - dot(normal, lightDir)), 0.1);
+    float bias = max(0.1 * (1 - dot(normal, lightDir)), 0.05);
     float shadow = 0.0;
     float diskRadius = 0.05;
     vec3 sampleOffsetDirections[20] = vec3[]

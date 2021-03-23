@@ -18,9 +18,6 @@ void main()
             gl_Position = shadowMatrices[face] * FragPos;
             EmitVertex();
         }
-        EndPrimitive();
+        EndPrimitive(); // Output a triangle
     }
 }
-
-
-
