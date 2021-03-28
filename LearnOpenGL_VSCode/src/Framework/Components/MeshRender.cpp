@@ -61,15 +61,25 @@ void MeshRender::SetMesh(Mesh *mesh)
     unsigned int singleDataSize = this->mesh->GetSingleDataSize();
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
-    if (singleDataSize >= 3)
+    if (singleDataSize >= 3) // For texture coordinate
     {
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
     }
-    if (singleDataSize >= 5)
+    if (singleDataSize >= 5) // For normal
     {
         glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(5 * sizeof(float)));
         glEnableVertexAttribArray(2);
+    }
+    if (singleDataSize >= 8) // For Tangent
+    {
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(8 * sizeof(float)));
+        glEnableVertexAttribArray(3);
+    }
+    if (singleDataSize >= 11) // For BitTangent
+    {
+        glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(11 * sizeof(float)));
+        glEnableVertexAttribArray(4);
     }
 
     if (loadingBufferData)

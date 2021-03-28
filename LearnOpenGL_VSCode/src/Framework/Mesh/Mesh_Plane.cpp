@@ -15,6 +15,7 @@ Mesh_Plane::Mesh_Plane()
     singleDataSize = 8;
     vertexNum = 6;
     dataSize_byte = 32 * sizeof(float);
+
     indicesSize_byte = 6 * sizeof(unsigned int);
 }
 
