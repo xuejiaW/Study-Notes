@@ -1,84 +1,27 @@
 {
     "version": "2.0.0",
+    "options": {
+        "shell": {
+            "executable": "C:/Program Files/powershell/7/pwsh.exe",
+            "args": ["-c"]
+        },
+        "cwd": "${workspaceFolder}"
+    },
+    "problemMatcher": ["$gcc"],
     "tasks": [
         {
-            "label": "build",
+            "label": "All",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "windows": {
-                "command": "powershell",
-                "args": [
-                    "-c",
-                    "mingw32-make"
-                ]
+            "presentation": {
+                "reveal": "silent",
+                "focus": false,
+                "showReuseMessage": false
             },
-            "linux": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "make"
-                ]
-            },
-            "osx": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "make"
-                ]
-            }
-        },
-        {
-            "label": "build & run",
-            "type": "shell",
-            "windows": {
-                "command": "powershell",
-                "args": [
-                    "-c",
-                    "'mingw32-make run'"
-                ]
-            },
-            "linux": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make run'"
-                ]
-            },
-            "osx": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make run'"
-                ]
-            }
-        },
-        {
-            "label": "clean",
-            "type": "shell",
-            "windows": {
-                "command": "powershell",
-                "args": [
-                    "-c",
-                    "'mingw32-make clean'"
-                ]
-            },
-            "linux": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make clean'"
-                ]
-            },
-            "osx": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make clean'"
-                ]
-            }
+            "command": "./Build.bat ${fileDirname} build"
         }
-    ]
+    ],
 }

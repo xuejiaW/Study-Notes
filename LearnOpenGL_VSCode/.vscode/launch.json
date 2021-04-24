@@ -7,25 +7,20 @@
             "request": "launch",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": false,
-            "linux": {
-                "MIMode": "gdb",
-                "miDebuggerPath": "gdb",
-                "program": "${workspaceFolder}/bin/main"
-            },
-            "osx": {
-                "MIMode": "lldb",
-                "miDebuggerPath": "lldb-mi",
-                "program": "${workspaceFolder}/bin/main"
-            },
+            "externalConsole": true,
             "windows": {
                 "MIMode": "gdb",
                 "miDebuggerPath": "gdb.exe",
                 "program": "${workspaceFolder}/bin/main.exe"
             },
-            "preLaunchTask": "build"
+            "preLaunchTask": "All",
+            "presentation": {
+                "reveal": "silent",
+                "focus": false,
+                "showReuseMessage": false
+            }
         }
     ]
 }

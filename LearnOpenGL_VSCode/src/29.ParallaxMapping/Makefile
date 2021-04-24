@@ -37,6 +37,8 @@ $(BIN)/$(EXECUTABLE): $(OBJECTS)
 
 all: clean run
 
+build: $(BIN)/$(EXECUTABLE)
+
 run: $(BIN)/$(EXECUTABLE)
 	$(BIN)/$(EXECUTABLE)
 

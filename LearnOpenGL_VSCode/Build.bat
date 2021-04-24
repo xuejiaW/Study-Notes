@@ -16,6 +16,11 @@ IF "%2" == "clean" (
     goto end
 )
 
+IF "%2" == "build" ( 
+    "C:\Program Files\Git\bin\sh.exe" --login -i -c "mingw32-make build"
+    goto end
+)
+
 "C:\Program Files\Git\bin\sh.exe" --login -i -c "mingw32-make run"
 
 :end
