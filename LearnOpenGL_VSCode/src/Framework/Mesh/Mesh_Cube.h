@@ -5,8 +5,7 @@
 class Mesh_Cube : public Mesh
 {
 private:
-    /* data */
 public:
-    Mesh_Cube(/* args */);
+    Mesh_Cube();
     ~Mesh_Cube();
 };

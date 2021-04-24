@@ -1,16 +1,11 @@
 #include "Mesh.h"
 
-Mesh::Mesh() : singleDataSize(0), vertexNum(0), dataSize_byte(0), indicesSize_byte(0) {}
+Mesh::Mesh() : verticesList(std::vector<Vertex>()), indicesList(std::vector<unsigned int>()) { }
 
-unsigned int Mesh::GetDataSize() { return dataSize_byte; }
-unsigned int Mesh::GetIndicesSize() { return indicesSize_byte; }
-unsigned int Mesh::GetVertexNum() { return vertexNum; }
-unsigned int Mesh::GetSingleDataSize() { return singleDataSize; }
-
-Mesh::~Mesh()
+Mesh::Mesh(std::vector<Vertex> verticesList, std::vector<unsigned int> indicesList)
 {
-    if (vertices)
-        delete vertices;
-    if (indices)
-        delete indices;
+    this->verticesList = verticesList;
+    this->indicesList = indicesList;
 }
+
+Mesh::~Mesh() { }

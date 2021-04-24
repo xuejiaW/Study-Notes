@@ -53,34 +53,26 @@ void MeshRender::SetMesh(Mesh *mesh)
     this->mesh = mesh;
     GetShader()->Use();
     glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, this->mesh->GetDataSize(), this->mesh->vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->mesh->GetIndicesSize(), this->mesh->indices, GL_STATIC_DRAW);
 
-    unsigned int singleDataSize = this->mesh->GetSingleDataSize();
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)0);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, this->mesh->verticesList.size() * sizeof(Vertex), &this->mesh->verticesList[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->mesh->indicesList.size() * sizeof(unsigned int), &this->mesh->indicesList[0], GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
     glEnableVertexAttribArray(0);
-    if (singleDataSize >= 3) // For texture coordinate
-    {
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(3 * sizeof(float)));
-        glEnableVertexAttribArray(1);
-    }
-    if (singleDataSize >= 5) // For normal
-    {
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(5 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-    }
-    if (singleDataSize >= 8) // For Tangent
-    {
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(8 * sizeof(float)));
-        glEnableVertexAttribArray(3);
-    }
-    if (singleDataSize >= 11) // For BitTangent
-    {
-        glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)(11 * sizeof(float)));
-        glEnableVertexAttribArray(4);
-    }
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(offsetof(Vertex, TexCoord)));
+    glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, Normal));
+    glEnableVertexAttribArray(2);
+
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, Tangent));
+    glEnableVertexAttribArray(3);
+
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, Bitangent));
+    glEnableVertexAttribArray(4);
 
     if (loadingBufferData)
         loadingBufferData();
@@ -164,10 +156,10 @@ void MeshRender::DrawMesh()
     material->UdpateTexture();
 
     if (instancingCount == 0)
-        glDrawElements(drawingMode, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
+        glDrawElements(drawingMode, mesh->indicesList.size(), GL_UNSIGNED_INT, 0);
     else
     {
-        glDrawElementsInstanced(drawingMode, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0, instancingCount);
+        glDrawElementsInstanced(drawingMode, mesh->indicesList.size(), GL_UNSIGNED_INT, 0, instancingCount);
     }
 
     glBindVertexArray(0);

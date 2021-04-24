@@ -27,12 +27,11 @@ void Skybox::SetSkyboxMesh(Mesh *mesh)
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, this->mesh->GetDataSize(), this->mesh->vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->mesh->verticesList.size() * sizeof(Vertex), &this->mesh->verticesList[0], GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->mesh->GetIndicesSize(), this->mesh->indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->mesh->indicesList.size() * sizeof(unsigned int), &this->mesh->indicesList[0], GL_STATIC_DRAW);
 
-    unsigned int singleDataSize = this->mesh->GetSingleDataSize();
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, singleDataSize * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,sizeof(Vertex), (void *)0);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -62,7 +61,7 @@ void Skybox::Update()
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap->GetID());
 
-    glDrawElements(GL_TRIANGLES, mesh->GetVertexNum(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, mesh->indicesList.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 
     if (postRender)

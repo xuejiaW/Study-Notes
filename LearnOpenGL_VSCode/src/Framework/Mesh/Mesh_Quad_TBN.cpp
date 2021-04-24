@@ -56,20 +56,15 @@ Mesh_Quad_TBN::Mesh_Quad_TBN()
     bitangent2.y = (-edge2UV.x * edge1.y + edge1UV.x * edge2.y) * determinant;
     bitangent2.z = (-edge2UV.x * edge1.z + edge1UV.x * edge2.z) * determinant;
 
-    vertices = new float[84]{
-        pos0.x, pos0.y, pos0.z, uv0.x, uv0.y, nm.x, nm.y, nm.z, tangent1.x, tangent1.y, tangent1.z, bitangent1.x, bitangent1.y, bitangent1.z,
-        pos1.x, pos1.y, pos1.z, uv1.x, uv1.y, nm.x, nm.y, nm.z, tangent1.x, tangent1.y, tangent1.z, bitangent1.x, bitangent1.y, bitangent1.z,
-        pos2.x, pos2.y, pos2.z, uv2.x, uv2.y, nm.x, nm.y, nm.z, tangent1.x, tangent1.y, tangent1.z, bitangent1.x, bitangent1.y, bitangent1.z,
+    verticesList.push_back(Vertex(pos0, uv0, nm, tangent1, bitangent1));
+    verticesList.push_back(Vertex(pos1, uv1, nm, tangent1, bitangent1));
+    verticesList.push_back(Vertex(pos2, uv2, nm, tangent1, bitangent1));
 
-        pos0.x, pos0.y, pos0.z, uv0.x, uv0.y, nm.x, nm.y, nm.z, tangent2.x, tangent2.y, tangent2.z, bitangent2.x, bitangent2.y, bitangent2.z,
-        pos2.x, pos2.y, pos2.z, uv2.x, uv2.y, nm.x, nm.y, nm.z, tangent2.x, tangent2.y, tangent2.z, bitangent2.x, bitangent2.y, bitangent2.z,
-        pos3.x, pos3.y, pos3.z, uv3.x, uv3.y, nm.x, nm.y, nm.z, tangent2.x, tangent2.y, tangent2.z, bitangent2.x, bitangent2.y, bitangent2.z};
+    verticesList.push_back(Vertex(pos0, uv0, nm, tangent2, bitangent2));
+    verticesList.push_back(Vertex(pos2, uv2, nm, tangent2, bitangent2));
+    verticesList.push_back(Vertex(pos3, uv3, nm, tangent2, bitangent2));
 
-    indices = new unsigned int[6]{0, 1, 2, 3, 4, 5};
-    singleDataSize = 14;
-    vertexNum = 6;
-    dataSize_byte = 84 * sizeof(float);
-    indicesSize_byte = 6 * sizeof(unsigned int);
+    indicesList.insert(indicesList.end(), {0, 1, 2, 3, 4, 5});
 }
 
 Mesh_Quad_TBN::~Mesh_Quad_TBN() {}

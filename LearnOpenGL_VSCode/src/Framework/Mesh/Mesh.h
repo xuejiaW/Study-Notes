@@ -1,21 +1,17 @@
 #pragma once
 
+#include <vector>
+#include "../Data/Vertex.h"
+
 class Mesh
 {
 public:
-    float *vertices;
-    unsigned int *indices;
+    std::vector<Vertex> verticesList;
+    std::vector<unsigned int> indicesList;
 
     Mesh();
-    unsigned int GetSingleDataSize();
-    unsigned int GetDataSize();
-    unsigned int GetIndicesSize();
-    unsigned int GetVertexNum();
+    Mesh(std::vector<Vertex> verticesList, std::vector<unsigned int> indicesList);
     virtual ~Mesh();
 
 protected:
-    unsigned int singleDataSize;
-    unsigned int vertexNum;
-    unsigned int dataSize_byte;
-    unsigned int indicesSize_byte;
 };
