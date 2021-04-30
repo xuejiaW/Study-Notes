@@ -7,8 +7,9 @@ class Texture
 {
 public:
     Texture();
-    Texture(string, bool = false);
-    Texture(unsigned int, int, int);
+    Texture(const char *path, bool sRGB = false);
+    Texture(string path, bool sRGB = false);
+    Texture(unsigned int tid, int width, int height);
     virtual unsigned int GetID();
     virtual unsigned int GetID() const;
     void SetWrap(int, int);

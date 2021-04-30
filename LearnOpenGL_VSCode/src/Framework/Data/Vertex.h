@@ -14,5 +14,5 @@ struct Vertex
     static const glm::vec3 zero;
 
     Vertex();
-    Vertex(glm::vec3 position = zero, glm::vec2 texCoord = zero, glm::vec3 normal = zero, glm::vec3 tangent = zero, glm::vec3 bitangent = zero);
+    Vertex(glm::vec3 position, glm::vec2 texCoord = zero, glm::vec3 normal = zero, glm::vec3 tangent = zero, glm::vec3 bitangent = zero);
 };

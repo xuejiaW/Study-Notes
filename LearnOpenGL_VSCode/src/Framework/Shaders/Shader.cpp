@@ -2,6 +2,10 @@
 
 Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath, const GLchar *geometryPath)
 {
+    this->vertexPath = vertexPath;
+    this->fragmentPath = fragmentPath;
+    this->geometryPath = geometryPath;
+
     GLuint vertex, fragment, geometry;
     CreateShader(vertexPath, vertex, GL_VERTEX_SHADER);
     CreateShader(fragmentPath, fragment, GL_FRAGMENT_SHADER);
@@ -12,6 +16,9 @@ Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath, const GLcha
 
 Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath)
 {
+    this->vertexPath = vertexPath;
+    this->fragmentPath = fragmentPath;
+
     GLuint vertex, fragment;
     CreateShader(vertexPath, vertex, GL_VERTEX_SHADER);
     CreateShader(fragmentPath, fragment, GL_FRAGMENT_SHADER);

@@ -6,11 +6,11 @@
 
 Texture::Texture() {}
 
-Texture::Texture(string texturePath, bool sRGB)
+Texture::Texture(const char *texturePath, bool sRGB)
 {
     int nrChannels = 0;
     stbi_set_flip_vertically_on_load(true);
-    unsigned char *data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(texturePath, &width, &height, &nrChannels, 0);
 
     GLuint texType = sRGB ? (nrChannels == 3 ? GL_SRGB : GL_SRGB_ALPHA) : (nrChannels == 3 ? GL_RGB : GL_RGBA);
     glGenTextures(1, &id);
@@ -23,6 +23,8 @@ Texture::Texture(string texturePath, bool sRGB)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+Texture::Texture(string texturePath, bool sRGB) : Texture(texturePath.c_str(), sRGB) {}
 
 Texture::Texture(unsigned int tid, int width, int height)
 {
