@@ -16,6 +16,7 @@ public:
     Material(string vertexPath, string fragPath);
 
     void SetColor(vec3 color);
+    vec3 GetColor();
     void AddTexture(string target, Texture *texture);
     void UdpateTexture();
     void RemoveTexture(unsigned int textureId);
@@ -25,6 +26,7 @@ public:
     ~Material();
 
 private:
+    vec3 baseColor;
     Shader *shader = nullptr;
     vector<Texture *> textureList;
     vector<string> targetList;

@@ -40,8 +40,11 @@ void Material::UdpateTexture()
 
 void Material::SetColor(vec3 color)
 {
+    baseColor = color;
     shader->SetVec3("baseColor", color);
 }
+
+vec3 Material::GetColor() { return baseColor; }
 
 unsigned int Material::GetTextureCount()
 {
