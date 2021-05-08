@@ -58,6 +58,13 @@ int Material::GetTexture(int index)
     return textureList[index]->GetID();
 }
 
+void Material::SetTexture(int index, Texture *texture)
+{
+    if (index >= textureList.size())
+        return;
+    textureList[index] = texture;
+}
+
 Shader *Material::GetShader()
 {
     return shader;

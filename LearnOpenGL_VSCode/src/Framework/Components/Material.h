@@ -22,6 +22,7 @@ public:
     void RemoveTexture(unsigned int textureId);
     unsigned int GetTextureCount();
     int GetTexture(int index);
+    void SetTexture(int index, Texture* texture);
     Shader *GetShader();
     ~Material();
 
