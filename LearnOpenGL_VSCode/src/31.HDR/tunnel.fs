@@ -15,7 +15,6 @@ struct Light
 
 uniform sampler2D diffuseTexture;
 uniform Light lights[16];
-uniform vec3 viewPos;
 
 out vec4 FragColor;
 
