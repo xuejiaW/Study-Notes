@@ -916,7 +916,7 @@ MonoBehaviour:
   transitionMode: 0
   resolution: 70
   computeShader: {fileID: 7200000, guid: e9409d62e5597f74fbcbf5d32776a085, type: 3}
-  material: {fileID: 2100000, guid: 2add0df863c6b7a4ab07347230f484c8, type: 2}
+  material: {fileID: 2100000, guid: fd6de064f6c046e4595f32da39d3d72d, type: 2}
   mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   targetFunction: 0
   functionDuration: 1
